@@ -1,0 +1,1912 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forfaits Roaming OneAirtel - Airtel Congo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Styles de la navbar du premier fichier */
+        .header-top {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 10px 0;
+        }
+
+        .header-top-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 30px;
+        }
+
+        .header-top-content a {
+            color: #666;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+
+        .header-top-content a:hover {
+            color: #d32f2f;
+        }
+
+        nav {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #e30613;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .nav-links > li {
+            position: relative;
+        }
+
+        .nav-links > li > a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            padding: 25px 0;
+            display: block;
+            transition: color 0.3s;
+            white-space: nowrap;
+        }
+
+        .nav-links > li > a:hover,
+        .nav-links > li > a.active {
+            color: #d32f2f;
+        }
+
+        .nav-links > li > a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #d32f2f;
+        }
+
+        /* Styles pour les menus déroulants de la nouvelle navigation */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            min-width: 240px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            margin-top: 10px;
+            padding: 8px 0;
+            z-index: 1001;
+        }
+
+        .nav-links > li:hover > .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            margin-top: 0;
+        }
+
+        .dropdown-menu a {
+            padding: 12px 20px;
+            border-bottom: none;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .dropdown-menu a:hover {
+            background: rgba(211, 47, 47, 0.05);
+            color: #d32f2f;
+        }
+
+        .dropdown-menu .arrow {
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        /* Sous-menu de second niveau */
+        .sub-dropdown {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            margin-left: 10px;
+            padding: 8px 0;
+            z-index: 1002;
+        }
+
+        .dropdown-menu li:hover > .sub-dropdown {
+            opacity: 1;
+            visibility: visible;
+            margin-left: 5px;
+        }
+
+        .sub-dropdown a {
+            padding: 10px 20px;
+            font-size: 13px;
+            display: block;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .sub-dropdown a:hover {
+            background: rgba(211, 47, 47, 0.05);
+            color: #d32f2f;
+        }
+
+        /* Menu à 3 niveaux */
+        .sub-dropdown li {
+            position: relative;
+        }
+
+        .third-level {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            margin-left: 10px;
+            padding: 8px 0;
+            z-index: 1003;
+        }
+
+        .sub-dropdown li:hover > .third-level {
+            opacity: 1;
+            visibility: visible;
+            margin-left: 5px;
+        }
+
+        .third-level a {
+            padding: 10px 20px;
+            font-size: 13px;
+            display: block;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .third-level a:hover {
+            background: rgba(211, 47, 47, 0.05);
+            color: #d32f2f;
+        }
+
+        /* Styles pour les éléments spéciaux en rouge */
+        .services-internet {
+            color: #d32f2f !important;
+            font-weight: bold;
+        }
+
+        .roaming {
+            color: #d32f2f !important;
+            font-weight: bold;
+        }
+
+        /* Styles pour les sous-menus supplémentaires */
+        .dropdown-menu .has-submenu {
+            position: relative;
+        }
+
+        .dropdown-menu .has-submenu > a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dropdown-menu .sub-level {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background: white;
+            min-width: 220px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 0.5rem 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-menu .has-submenu:hover .sub-level {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        /* Animation pour l'indicateur de sous-menu */
+        .arrow {
+            font-size: 0.875rem;
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .has-submenu:hover .arrow {
+            transform: rotate(90deg);
+        }
+
+        /* Mobile menu button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                padding-left: 1rem;
+            }
+
+            .sub-dropdown,
+            .third-level {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                padding-left: 1rem;
+            }
+        }
+
+        /* Styles du contenu existant (conservés) */
+        .tariffs-selector {
+            padding: 25px 30px;
+            background: #e60000;
+            color: white;
+        }
+
+        .tariffs-label {
+            font-size: 16px;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .table-container {
+            padding: 0;
+            overflow-x: auto;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+        }
+
+        .data-table thead {
+            background: #f8f9fa;
+        }
+
+        .data-table th {
+            padding: 16px 12px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+            position: relative;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .data-table th:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 12px;
+            right: 12px;
+            height: 2px;
+            background: #e60000;
+        }
+
+        .data-table th:first-child {
+            text-align: left;
+            min-width: 100px;
+        }
+
+        .data-table tbody tr {
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .data-table tbody tr:nth-child(even) {
+            background: #fafafa;
+        }
+
+        .data-table tbody tr:hover {
+            background: #f0f7ff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .data-table td {
+            padding: 16px 12px;
+            font-size: 14px;
+            color: #555;
+            border: none;
+            position: relative;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            text-align: center;
+        }
+
+        .data-table td:first-child {
+            font-weight: 600;
+            color: #333;
+            font-size: 15px;
+            text-align: left;
+        }
+
+        .tariffs-section {
+            padding: 25px 30px;
+            background: #f8f9fa;
+            border-top: 1px solid #eee;
+        }
+
+        .tariffs-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #e60000;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .tariffs-toggle:hover {
+            background: #cc0000;
+        }
+
+        .toggle-icon {
+            font-size: 18px;
+            transition: transform 0.3s;
+        }
+
+        .tariffs-toggle.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .tariffs-list-container {
+            display: none;
+            margin-top: 20px;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+
+        .tariffs-list-container.active {
+            display: block;
+        }
+
+        .tariffs-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+
+        .tariffs-table th {
+            background: #e60000;
+            color: white;
+            padding: 12px 10px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .tariffs-table td {
+            padding: 12px 10px;
+            font-size: 11px;
+            text-align: center;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .tariffs-table tr:nth-child(even) {
+            background: #fafafa;
+        }
+
+        .tariffs-table tr:hover {
+            background: #f0f7ff;
+        }
+
+        .country-highlight {
+            font-weight: 600;
+            color: #333;
+            text-align: left !important;
+        }
+
+        /* NOUVEAUX STYLES POUR LA SECTION FORFAITS MASQUÉS */
+        .plans-section {
+            padding: 25px 30px;
+            background: #f8f9fa;
+            border-top: 1px solid #eee;
+        }
+
+        .plans-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #e60000;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .plans-toggle:hover {
+            background: #cc0000;
+        }
+
+        .plans-toggle-icon {
+            font-size: 18px;
+            transition: transform 0.3s;
+        }
+
+        .plans-toggle.active .plans-toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .plans-list-container {
+            display: none;
+            margin-top: 20px;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .plans-list-container.active {
+            display: block;
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .plan-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 4px solid #e60000;
+            transition: transform 0.2s;
+        }
+
+        .plan-item:hover {
+            transform: translateX(5px);
+            background: #f0f7ff;
+        }
+
+        .plan-name {
+            font-weight: 500;
+            color: #333;
+            font-family: 'Inter', sans-serif;
+            flex: 2;
+        }
+
+        .plan-benefit {
+            font-weight: 400;
+            color: #666;
+            font-family: 'Inter', sans-serif;
+            flex: 1;
+            text-align: center;
+        }
+
+        .plan-price {
+            background: #e60000;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            flex: 1;
+            text-align: center;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .country-selector {
+            padding: 25px 30px;
+            background: #e60000;
+            color: white;
+        }
+
+        .country-label {
+            font-size: 16px;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .country-select {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 14px;
+            border: none;
+            border-radius: 2px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            padding-right: 45px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .country-select:hover {
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+        }
+
+        .data-table th:last-child {
+            text-align: right;
+        }
+
+        .data-table td:last-child {
+            text-align: right;
+            font-weight: 700;
+            color: black;
+            font-size: 16px;
+        }
+
+        .benefit-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .benefit-icon {
+            width: 22px;
+            height: 22px;
+            margin-right: 8px;
+            background: #e60000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .benefit-label {
+            font-size: 13px;
+            color: #666;
+            margin-right: 5px;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .benefit-value {
+            font-weight: 600;
+            color: #333;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .countries-list {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+        }
+
+        /* NOUVEAUX STYLES POUR LA SECTION PAYS */
+        .countries-section {
+            padding: 25px 30px;
+            background: #f8f9fa;
+            border-top: 1px solid #eee;
+        }
+
+        .countries-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #e60000;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .countries-toggle:hover {
+            background: #cc0000;
+        }
+
+        .countries-toggle.active .countries-toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .countries-list-container {
+            display: none;
+            margin-top: 20px;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .countries-list-container.active {
+            display: block;
+        }
+
+        .countries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .country-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 4px solid #e60000;
+            transition: transform 0.2s;
+        }
+
+        .country-item:hover {
+            transform: translateX(5px);
+            background: #f0f7ff;
+        }
+
+        .country-name {
+            font-weight: 500;
+            color: #333;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .country-code {
+            background: #e60000;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .table-footer {
+            padding: 25px 30px;
+            background: #f8f9fa;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .footer-link {
+            color: #e60000;
+            text-decoration: none;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px;
+                border-radius: 8px;
+            }
+
+            .country-selector {
+                padding: 20px;
+            }
+
+            .data-table th,
+            .data-table td {
+                padding: 12px 8px;
+                font-size: 12px;
+            }
+
+            .data-table td:last-child {
+                font-size: 14px;
+            }
+
+            .table-footer {
+                padding: 20px;
+            }
+
+            .countries-section {
+                padding: 20px;
+            }
+
+            .countries-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Styles pour le reste de votre page (conservés) */
+        .hero-container {
+            width: 100%;
+            height: 400px;
+            display: flex;
+            background-color: #e60000;
+        }
+
+        .hero-content {
+            flex: 1;
+            background: linear-gradient(135deg, #e60000 0%, #b30000 100%);
+            padding: 40px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            width: fit-content;
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1 {
+            color: white;
+            font-size: 36px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 12px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .subtitle {
+            color: whitesmoke;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 24px;
+            max-width: 500px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .hero-image {
+            flex: 1;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        @media (max-width: 768px) {
+            .hero-container {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .hero-content {
+                padding: 30px 24px;
+                height: auto;
+            }
+
+            .hero-image {
+                height: 300px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .subtitle {
+                font-size: 14px;
+            }
+        }
+
+        /* NOUVEAU FOOTER STYLES */
+        footer {
+            background: white;
+            color: white;
+            padding: 60px 80px 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #333;
+        }
+
+        .footer-brand p {
+            color: black;
+            font-size: 14px;
+            line-height: 1.8;
+            margin: 20px 0 25px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .social-link:hover {
+            background: rgba(226, 12, 24);
+        }
+
+        .footer-column h4 {
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            color: black;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul li a {
+            color: #999;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: rgba(226, 12, 24);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 30px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+
+        .footer-bottom p {
+            color: #666;
+            font-size: 13px;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .footer-bottom-links a {
+            color: #666;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+
+        .footer-bottom-links a:hover {
+            color: #e60000;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #e60000;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 20px;
+            box-shadow: 0 5px 20px rgba(230,0,0,0.4);
+            transition: transform 0.3s;
+            z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Styles spécifiques pour le footer selon l'image */
+        .footer-logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: rgba(226, 12, 24);
+            margin-bottom: 15px;
+        }
+
+        .footer-contact-info {
+            color: black;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        .copyright-section {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: black;
+            font-size: 13px;
+        }
+
+        .footer-grid-section {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-grid-column h5 {
+            color: black;
+            font-size: 14px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .footer-grid-column ul {
+            list-style: none;
+        }
+
+        .footer-grid-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-grid-column ul li a {
+            color: black;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+
+        .footer-grid-column ul li a:hover {
+            color: rgba(226, 12, 24);
+        }
+
+        .footer-bottom-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-bottom-links-extended {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .footer-bottom-links-extended a {
+            color: black;
+            text-decoration: none;
+            font-size: 12px;
+            transition: color 0.3s;
+        }
+
+        .footer-bottom-links-extended a:hover {
+            color: rgba(226, 12, 24);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Barre de navigation globale - NOUVELLE VERSION -->
+    <div class="header-top">
+        <div class="header-top-content">
+            <a href="index.html">INDIVIDUEL</a>
+            <a href="entreprise.html">ENTREPRISE</a>
+            <a href="broadband.html">BROADBAND</a>
+            <a href="airtel-money.html">AIRTEL MONEY PORTAL</a>
+            <a href="about.html">À PROPOS DE NOUS</a>
+        </div>
+    </div>
+
+   <!-- Navigation Principale -->
+    <nav class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="image/Airtel_Logo.jpg" alt="Airtel Congo" class="logo-img">
+                airtel
+            </a>
+
+            <button class="mobile-menu-btn" id="mobile-menu-toggle">
+                <i data-lucide="menu"></i>
+            </button>
+
+            <ul class="nav-links" id="nav-links">
+                <!-- PAYEZ ET RECHARGEZ -->
+                <li>
+                    <a href="paiement-recharge.html" class="active">PAYEZ ET RECHARGEZ</a>
+                    <ul class="dropdown-menu">
+                        <!-- Postpayé avec sous-menu -->
+                        <li class="has-submenu">
+                            <a href="#" data-section="postpaye">Postpayé <span class="arrow">›</span></a>
+                            <ul class="sub-level">
+                                <li><a href="#" data-section="postpaye" data-subsection="postpaye-payment">Paiement de
+                                        facture en ligne</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Prépayé avec sous-menu -->
+                        <li class="has-submenu">
+                            <a href="#" data-section="prepaye">Prépayé <span class="arrow">›</span></a>
+                            <ul class="sub-level">
+                                <li><a href="#" data-section="prepaye" data-subsection="prepaye-recharge">Rechargez un
+                                        compte prépayé</a></li>
+                                <li><a href="#" data-section="prepaye" data-subsection="prepaye-forfait">Activez un
+                                        forfait Internet</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Broadband (sans sous-menu) -->
+                        <li><a href="#" data-section="broadband">Broadband</a></li>
+                    </ul>
+                </li>
+
+                <!-- SERVICES -->
+                <li>
+                    <a href="services.html">SERVICES</a>
+                    <ul class="dropdown-menu">
+                        <!-- PREPAYÉ - Niveau 1 -->
+                        <li>
+                            <a href="#">Prepayé <span class="arrow">›</span></a>
+                            <ul class="sub-dropdown">
+                                <!-- Appels & SMS - Niveau 2 -->
+                                <li>
+                                    <a href="#">Appels & SMS <span class="arrow">›</span></a>
+                                    <ul class="third-level">
+                                        <li><a href="appels-locaux.html">Appels locaux</a></li>
+                                        <li><a href="appels-internationaux.html">Appels internationaux</a></li>
+                                        <li><a href="sms.html">SMS</a></li>
+                                    </ul>
+                                </li>
+                                <!-- Services Internet - Niveau 2 -->
+                                <li>
+                                    <a href="#" class="services-internet">Services Internet <span
+                                            class="arrow">›</span></a>
+                                    <ul class="third-level">
+                                        <li><a href="forfaits-internet.html">Forfaits internet</a></li>
+                                        <li><a href="faq-internet.html">Foire aux questions</a></li>
+                                    </ul>
+                                </li>
+                                <!-- Roaming - Niveau 2 -->
+                                <li>
+                                    <a href="#" class="roaming">Roaming <span class="arrow">›</span></a>
+                                    <ul class="third-level">
+                                        <li><a href="airtel-world.html">Airtel world</a></li>
+                                        <li><a href="reseau-unique.html">Réseau Unique</a></li>
+                                        <li><a href="free-roaming.html">Free Roaming</a></li>
+                                    </ul>
+                                </li>
+                                <!-- Services à valeur ajoutée - Niveau 2 -->
+                                <li>
+                                    <a href="#">Services à valeur ajoutée <span class="arrow">›</span></a>
+                                    <ul class="third-level">
+                                        <li><a href="musique.html">Musique</a></li>
+                                        <li><a href="divertissement.html">Divertissement</a></li>
+                                    </ul>
+                                </li>
+                                <!-- Taxi Connect - Niveau 2 -->
+                                <li><a href="taxi-connect.html">Taxi Connect</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- NOS AGENCES -->
+                <li>
+                    <a href="Nos Agences.html">NOS AGENCES</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="airtel-shop.html">Airtel Shop</a></li>
+                        <li><a href="distributeurs.html">Distributeurs</a></li>
+                        <li><a href="couverture-reseau.html">Couverture réseau</a></li>
+                    </ul>
+                </li>
+
+                <!-- AIRTEL MONEY -->
+                <li>
+                    <a href="airtel-money.html">AIRTEL MONEY</a>
+                </li>
+
+                <!-- BESOIN D'AIDE -->
+                <li>
+                    <a href="aide.html">BESOIN D'AIDE</a>    
+                </li>
+
+                <!-- E-SIM -->
+                <li><a href="esim.html">E-SIM</a></li>
+
+                <!-- PROMOTIONS -->
+                <li>
+                    <a href="promotions.html">PROMO KELASI</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="hero-container">
+        <!-- CONTENU GAUCHE -->
+        <div class="hero-content">
+            <span class="badge">ROAMING ONEAIRTEL</span>
+
+            <h1>Forfaits Roaming OneAirtel</h1>
+
+            <p class="subtitle">
+                Profitez de nos tarifs spéciaux lors de vos déplacements dans les pays Airtel. Restez connecté avec vos
+                proches où que vous soyez.
+            </p>
+
+        </div>
+
+        <!-- IMAGE DROITE -->
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
+                alt="Voyageur utilisant son téléphone">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="country-selector">
+            <div class="country-label">One Airtel</div>
+
+        </div>
+
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Validité</th>
+                        <th>Bénéfices</th>
+                        <th>Prix</th>
+                        <th>Liste Pays</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>7 Jours</td>
+                        <td>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">→</div>
+                                <span class="benefit-label">Appel sortant:</span>
+                                <span class="benefit-value">10 min</span>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">←</div>
+                                <span class="benefit-label">Appel entrant:</span>
+                                <span class="benefit-value">10 min</span>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">D</div>
+                                <span class="benefit-label">Data:</span>
+                                <span class="benefit-value">150 MB</span>
+                            </div>
+                        </td>
+                        <td>3 105 FCFA</td>
+                        <td class="countries-list">
+                            Nigeria, Kenya, Rwanda, Uganda, Tanzania, Congo RDC, Zambie, Tchad, Madagascar, Seychelles,
+                            Inde, Gabon, Malawi
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3 Jours</td>
+                        <td>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">→</div>
+                                <span class="benefit-label">Appel sortant:</span>
+                                <span class="benefit-value">5 min</span>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">←</div>
+                                <span class="benefit-label">Appel entrant:</span>
+                                <span class="benefit-value">5 min</span>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">D</div>
+                                <span class="benefit-label">Data:</span>
+                                <span class="benefit-value">50 MB</span>
+                            </div>
+                        </td>
+                        <td>1 600 FCFA</td>
+                        <td class="countries-list">
+                            Nigeria, Kenya, Rwanda, Uganda, Tanzania, Congo RDC, Zambie, Tchad, Madagascar, Seychelles,
+                            Inde, Gabon, Malawi
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1 Jour</td>
+                        <td>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">→</div>
+                                <span class="benefit-label">Appel sortant:</span>
+                                <span class="benefit-value">0 min</span>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">←</div>
+                                <span class="benefit-label">Appel entrant:</span>
+                                <span class="benefit-value">0 min</span>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">D</div>
+                                <span class="benefit-label">Data:</span>
+                                <span class="benefit-value">75 MB</span>
+                            </div>
+                        </td>
+                        <td>520 FCFA</td>
+                        <td class="countries-list">
+                            Nigeria, Kenya, Rwanda, Uganda, Tanzania, Congo RDC, Zambie, Tchad, Madagascar, Seychelles,
+                            Inde, Gabon, Malawi
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- NOUVELLE SECTION PAYS ONE AIRTEL -->
+        <div class="countries-section">
+            <div class="countries-toggle" id="countriesToggle">
+                <span>Liste des pays One Airtel</span>
+                <span class="countries-toggle-icon">▼</span>
+            </div>
+
+            <div class="countries-list-container" id="countriesList">
+                <h3 style="margin-bottom: 20px; color: #333; font-family: 'Inter', sans-serif;">Pays inclus dans le
+                    réseau One Airtel</h3>
+                <div class="countries-grid">
+                    <div class="country-item">
+                        <span class="country-name">Gabon</span>
+                        <span class="country-code">+241</span>
+                    </div>
+                    <div class="country-item">
+                        <span class="country-name">Kenya</span>
+                        <span class="country-code">+254</span>
+                    </div>
+                    <div class="country-item">
+                        <span class="country-name">Tanzania</span>
+                        <span class="country-code">+255</span>
+                    </div>
+                    <div class="country-item">
+                        <span class="country-name">Zambie</span>
+                        <span class="country-code">+260</span>
+                    </div>
+                    <div class="country-item">
+                        <span class="country-name">Malawi</span>
+                        <span class="country-code">+265</span>
+                    </div>
+                    <div class="country-item">
+                        <span class="country-name">Nigeria</span>
+                        <span class="country-code">+234</span>
+                    </div>
+                    
+                    <div class="country-item">
+                        <span class="country-name">Congo Brazzaville</span>
+                        <span class="country-code">+242</span>
+                    </div>
+                    <div class="country-item">
+                        <span class="country-name">Tchad</span>
+                        <span class="country-code">+235</span>
+                    </div>
+                    <div class="country-item">
+                        <span class="country-name">Madagascar</span>
+                        <span class="country-code">+261</span>
+                    </div>
+                    <div class="country-item">
+                        <span class="country-name">Rwanda</span>
+                        <span class="country-code">+250</span>
+                    </div>
+                    <div class="country-item">
+                        <span class="country-name">Seychelles</span>
+                        <span class="country-code">+248</span>
+                    </div>
+                    <div class="country-item">
+                        <span class="country-name">République Démocratique du Congo</span>
+                        <span class="country-code">+243</span>
+                    </div>
+                    <div class="country-item">
+                        <span class="country-name">Uganda</span>
+                        <span class="country-code">+256</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       
+
+        
+    <!-- NOUVELLE SECTION FORFAITS MASQUÉS -->
+    <div class="plans-section">
+        <div class="plans-toggle" id="plansToggle">
+            <span>Voir tous les forfaits Internet One Airtel</span>
+            <span class="plans-toggle-icon">▼</span>
+        </div>
+
+        <div class="plans-list-container" id="plansList">
+            <h3 style="margin-bottom: 20px; color: #333; font-family: 'Inter', sans-serif;">Tous les forfaits Internet
+                One Airtel disponibles</h3>
+            <div class="plans-grid">
+                <div class="plan-item">
+                    <span class="plan-name">One Airtel Internet 20480MB</span>
+                    <span class="plan-benefit">20480 MB</span>
+                    <span class="plan-price">34 999 FCFA</span>
+                </div>
+                <div class="plan-item">
+                    <span class="plan-name">One Airtel Internet 400MB</span>
+                    <span class="plan-benefit">400 MB</span>
+                    <span class="plan-price">1 099 FCFA</span>
+                </div>
+                <div class="plan-item">
+                    <span class="plan-name">One Airtel Internet 2560MB</span>
+                    <span class="plan-benefit">2560 MB</span>
+                    <span class="plan-price">10 999 FCFA</span>
+                </div>
+                <div class="plan-item">
+                    <span class="plan-name">One Airtel Internet 5120MB</span>
+                    <span class="plan-benefit">5120 MB</span>
+                    <span class="plan-price">15 999 FCFA</span>
+                </div>
+                <div class="plan-item">
+                    <span class="plan-name">Internet 30B-One Airtel</span>
+                    <span class="plan-benefit">30 MB</span>
+                    <span class="plan-price">134 FCFA</span>
+                </div>
+                <div class="plan-item">
+                    <span class="plan-name">One Airtel Internet 30MB</span>
+                    <span class="plan-benefit">30 MB</span>
+                    <span class="plan-price">134 FCFA</span>
+                </div>
+                <div class="plan-item">
+                    <span class="plan-name">One Airtel Internet 1536 MB</span>
+                    <span class="plan-benefit">1536 MB</span>
+                    <span class="plan-price">2 499 FCFA</span>
+                </div>
+                <div class="plan-item">
+                    <span class="plan-name">One Airtel Internet 150MB</span>
+                    <span class="plan-benefit">150 MB</span>
+                    <span class="plan-price">524 FCFA</span>
+                </div>
+                <div class="plan-item">
+                    <span class="plan-name">One Airtel Internet 60MB</span>
+                    <span class="plan-benefit">60 MB</span>
+                    <span class="plan-price">249 FCFA</span>
+                </div>
+                <div class="plan-item">
+                    <span class="plan-name">One Airtel Internet 100MB</span>
+                    <span class="plan-benefit">100 MB</span>
+                    <span class="plan-price">499 FCFA</span>
+                </div>
+                <div class="plan-item">
+                    <span class="plan-name">One Airtel Internet 175MB</span>
+                    <span class="plan-benefit">175 MB</span>
+                    <span class="plan-price">749 FCFA</span>
+                </div>
+                <div class="plan-item">
+                    <span class="plan-name">One Airtel Internet 6144 MB</span>
+                    <span class="plan-benefit">6144 MB</span>
+                    <span class="plan-price">8 999 FCFA</span>
+                </div>
+                <div class="plan-item">
+                    <span class="plan-name">One Airtel Special Internet 520 1Jr</span>
+                    <span class="plan-benefit">520 1Jr</span>
+                    <span class="plan-price">520 FCFA</span>
+                </div>
+                <div class="plan-item">
+                    <span class="plan-name">One Airtel Internet 40960MB</span>
+                    <span class="plan-benefit">40960 MB</span>
+                    <span class="plan-price">49 999 FCFA</span>
+                </div>
+                <div class="plan-item">
+                    <span class="plan-name">One Airtel Internet 800MB</span>
+                    <span class="plan-benefit">800 MB</span>
+                    <span class="plan-price">1 899 FCFA</span>
+                </div>
+                <div class="plan-item">
+                    <span class="plan-name">One Airtel Internet 11264MB</span>
+                    <span class="plan-benefit">11264 MB</span>
+                    <span class="plan-price">24 999 FCFA</span>
+                </div>
+                <div class="plan-item">
+                    <span class="plan-name">One Airtel Internet 600MB</span>
+                    <span class="plan-benefit">600 MB</span>
+                    <span class="plan-price">1 999 FCFA</span>
+                </div>
+                <div class="plan-item">
+                    <span class="plan-name">One Airtel Internet 1024MB</span>
+                    <span class="plan-benefit">1024 MB</span>
+                    <span class="plan-price">5 499 FCFA</span>
+                </div>
+                <div class="plan-item">
+                    <span class="plan-name">One Airtel Internet 300MB</span>
+                    <span class="plan-benefit">300 MB</span>
+                    <span class="plan-price">1 199 FCFA</span>
+                </div>
+                <div class="plan-item">
+                    <span class="plan-name">One Airtel Internet 2048 MB</span>
+                    <span class="plan-benefit">2048 MB</span>
+                    <span class="plan-price">4 499 FCFA</span>
+                </div>
+                <div class="plan-item">
+                    <span class="plan-name">One Airtel Internet 3072 MB</span>
+                    <span class="plan-benefit">3072 MB</span>
+                    <span class="plan-price">5 999 FCFA</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+      <!-- SECTION TARIFS COMPLETS MASQUÉS -->
+        <div class="tariffs-section">
+            <div class="tariffs-toggle" id="tariffsToggle">
+                <span>Voir tous les tarifs détaillés One Airtel</span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            
+            <div class="tariffs-list-container" id="tariffsList">
+                <h3 style="margin-bottom: 20px; color: #333; font-family: 'Inter', sans-serif;">Tarifs détaillés One Airtel (Tous les prix en FCFA)</h3>
+                <table class="tariffs-table">
+                    <thead>
+                        <tr>
+                            <th>Pays</th>
+                            <th>Appel Local</th>
+                            <th>Appel vers le Congo</th>
+                            <th>Appel Reste du Monde</th>
+                            <th>Appel Satellite</th>
+                            <th>Réception d'appel</th>
+                            <th>SMS/Texto</th>
+                            <th>DATA/10kb</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="country-highlight">En RDC</td>
+                            <td>101</td>
+                            <td>301</td>
+                            <td>800</td>
+                            <td>15983</td>
+                            <td>151</td>
+                            <td>54</td>
+                            <td>0,70</td>
+                        </tr>
+                        <tr>
+                            <td class="country-highlight">Au Gabon</td>
+                            <td>158</td>
+                            <td>158</td>
+                            <td>690</td>
+                            <td>13778</td>
+                            <td>304</td>
+                            <td>47</td>
+                            <td>0,70</td>
+                        </tr>
+                        <tr>
+                            <td class="country-highlight">Au Nigeria</td>
+                            <td>101</td>
+                            <td>376</td>
+                            <td>724</td>
+                            <td>14467</td>
+                            <td>124</td>
+                            <td>49</td>
+                            <td>0,70</td>
+                        </tr>
+                        <tr>
+                            <td class="country-highlight">Au Ghana</td>
+                            <td>101</td>
+                            <td>446</td>
+                            <td>859</td>
+                            <td>17154</td>
+                            <td>184</td>
+                            <td>58</td>
+                            <td>0,70</td>
+                        </tr>
+                        <tr>
+                            <td class="country-highlight">Au Kenya</td>
+                            <td>101</td>
+                            <td>358</td>
+                            <td>690</td>
+                            <td>13778</td>
+                            <td>184</td>
+                            <td>47</td>
+                            <td>0,70</td>
+                        </tr>
+                        <tr>
+                            <td class="country-highlight">Au Tchad</td>
+                            <td>101</td>
+                            <td>422</td>
+                            <td>814</td>
+                            <td>16258</td>
+                            <td>364</td>
+                            <td>55</td>
+                            <td>0,70</td>
+                        </tr>
+                        <tr>
+                            <td class="country-highlight">Au Niger</td>
+                            <td>101</td>
+                            <td>438</td>
+                            <td>845</td>
+                            <td>16888</td>
+                            <td>244</td>
+                            <td>57</td>
+                            <td>0,70</td>
+                        </tr>
+                        <tr>
+                            <td class="country-highlight">Au Rwanda</td>
+                            <td>101</td>
+                            <td>358</td>
+                            <td>690</td>
+                            <td>13778</td>
+                            <td>244</td>
+                            <td>47</td>
+                            <td>0,70</td>
+                        </tr>
+                        <tr>
+                            <td class="country-highlight">En Tanzanie</td>
+                            <td>101</td>
+                            <td>426</td>
+                            <td>814</td>
+                            <td>16258</td>
+                            <td>184</td>
+                            <td>55</td>
+                            <td>0,70</td>
+                        </tr>
+                        <tr>
+                            <td class="country-highlight">À Madagascar</td>
+                            <td>101</td>
+                            <td>431</td>
+                            <td>827</td>
+                            <td>16534</td>
+                            <td>601</td>
+                            <td>56</td>
+                            <td>0,70</td>
+                        </tr>
+                        <tr>
+                            <td class="country-highlight">Au Malawi</td>
+                            <td>101</td>
+                            <td>421</td>
+                            <td>803</td>
+                            <td>16052</td>
+                            <td>304</td>
+                            <td>54</td>
+                            <td>0,70</td>
+                        </tr>
+                        <tr>
+                            <td class="country-highlight">Au Seychelles</td>
+                            <td>101</td>
+                            <td>796</td>
+                            <td>688</td>
+                            <td>13757</td>
+                            <td>364</td>
+                            <td>47</td>
+                            <td>0,70</td>
+                        </tr>
+                        <tr>
+                            <td class="country-highlight">En Ouganda</td>
+                            <td>101</td>
+                            <td>422</td>
+                            <td>814</td>
+                            <td>16258</td>
+                            <td>184</td>
+                            <td>55</td>
+                            <td>0,70</td>
+                        </tr>
+                        <tr>
+                            <td class="country-highlight">En Zambie</td>
+                            <td>101</td>
+                            <td>358</td>
+                            <td>690</td>
+                            <td>13778</td>
+                            <td>244</td>
+                            <td>47</td>
+                            <td>0,70</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    <div class="table-footer">
+        <p class="footer-text">
+            Pour plus d'informations, consultez notre site web<br>
+            <a href="https://www.airtel.cg" class="footer-link">www.airtel.cg</a> ou composez le <strong>*121#</strong>
+        </p>
+    </div>
+    </div>
+    </div>
+
+
+    <!-- NOUVEAU FOOTER -->
+    <footer>
+        <div class="footer-grid-section">
+            <div class="footer-grid-column">
+                <h5>A propos d'Artiel</h5>
+                <ul>
+                    <li><a href="#">Accès rapide</a></li>
+                    <li><a href="#">Aide</a></li>
+                    <li><a href="#">Privacy</a></li>
+                </ul>
+            </div>
+            <div class="footer-grid-column">
+                <h5>Carrière</h5>
+                <ul>
+                    <li><a href="#">Actualités</a></li>
+                    <li><a href="#">Couverture</a></li>
+                    <li><a href="#">Chiffre Safety</a></li>
+                </ul>
+            </div>
+            <div class="footer-grid-column">
+                <h5>Media</h5>
+                <ul>
+                    <li><a href="#">Programmes sociaux/CSR</a></li>
+                    <li><a href="#">Nos Boutiques</a></li>
+                    <li><a href="#">Besoin de Suggestion</a></li>
+                </ul>
+            </div>
+            <div class="footer-grid-column">
+                <h5>Arnet Money</h5>
+                <ul>
+                    <li><a href="#">Cataloger d'interconnexion</a></li>
+                    <li><a href="#">Numéros utiles</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom-section">
+            <div class="footer-bottom-links-extended">
+                <a href="#">NOUS CONTRACTER</a>
+                <a href="#">DROITS D'AUTEUR</a>
+                <a href="#">TERMES ET CONDITIONS</a>
+                <a href="#">AU TERMES ET CONDITIONS GSM</a>
+                <a href="#">AVIS DE CONFIDENTIALITÉ</a>
+            </div>
+        </div>
+
+        <div class="copyright-section">
+            <p>© 2024 Arnet Africa. Tous les droits sont réservés.</p>
+            <p style="margin-top: 10px;">RETOUR AU SOMMET</p>
+        </div>
+
+        <div class="social-links" style="justify-content: center; margin-top: 20px;">
+            <a href="#" class="social-link">T</a>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top">↑</a>
+
+    <script>
+        // Initialiser les icônes Lucide
+        lucide.createIcons();
+
+        // Menu mobile
+        document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+            document.getElementById('nav-links').classList.toggle('active');
+        });
+
+        // Fermer le menu mobile quand on clique sur un lien
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('nav-links').classList.remove('active');
+            });
+        });
+
+        // Script pour gérer l'affichage de la liste des pays
+        document.addEventListener('DOMContentLoaded', function () {
+            const countriesToggle = document.getElementById('countriesToggle');
+            const countriesList = document.getElementById('countriesList');
+
+            countriesToggle.addEventListener('click', function () {
+                countriesToggle.classList.toggle('active');
+                countriesList.classList.toggle('active');
+            });
+        });
+
+        // Script pour gérer l'affichage de la liste des forfaits
+        document.addEventListener('DOMContentLoaded', function () {
+            const plansToggle = document.getElementById('plansToggle');
+            const plansList = document.getElementById('plansList');
+
+            plansToggle.addEventListener('click', function () {
+                plansToggle.classList.toggle('active');
+                plansList.classList.toggle('active');
+            });
+        });
+
+          // Script pour gérer l'affichage des tarifs détaillés
+        document.addEventListener('DOMContentLoaded', function() {
+            const tariffsToggle = document.getElementById('tariffsToggle');
+            const tariffsList = document.getElementById('tariffsList');
+            
+            tariffsToggle.addEventListener('click', function() {
+                tariffsToggle.classList.toggle('active');
+                tariffsList.classList.toggle('active');
+            });
+        });
+
+        // Gestion du bouton "Retour au sommet" dans le footer
+        document.querySelector('.copyright-section p:last-child').addEventListener('click', function() {
+            document.querySelector('.hero-container').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Gestion du bouton "Retour au sommet" fixe
+        document.querySelector('.back-to-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('.hero-container').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+
+</html>

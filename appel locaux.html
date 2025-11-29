@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airtel Congo - Forfaits Prépayés</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Styles de la navbar du premier fichier */
+        .header-top {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 10px 0;
+        }
+
+        .header-top-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 30px;
+        }
+
+        .header-top-content a {
+            color: #666;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+
+        .header-top-content a:hover {
+            color: #d32f2f;
+        }
+
+        nav {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #e30613;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .nav-links > li {
+            position: relative;
+        }
+
+        .nav-links > li > a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            padding: 25px 0;
+            display: block;
+            transition: color 0.3s;
+            white-space: nowrap;
+        }
+
+        .nav-links > li > a:hover,
+        .nav-links > li > a.active {
+            color: #d32f2f;
+        }
+
+        .nav-links > li > a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #d32f2f;
+        }
+
+        /* Styles pour les menus déroulants de la nouvelle navigation */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            min-width: 240px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            margin-top: 10px;
+            padding: 8px 0;
+            z-index: 1001;
+        }
+
+        .nav-links > li:hover > .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            margin-top: 0;
+        }
+
+        .dropdown-menu a {
+            padding: 12px 20px;
+            border-bottom: none;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .dropdown-menu a:hover {
+            background: rgba(211, 47, 47, 0.05);
+            color: #d32f2f;
+        }
+
+        .dropdown-menu .arrow {
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        /* Sous-menu de second niveau */
+        .sub-dropdown {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            margin-left: 10px;
+            padding: 8px 0;
+            z-index: 1002;
+        }
+
+        .dropdown-menu li:hover > .sub-dropdown {
+            opacity: 1;
+            visibility: visible;
+            margin-left: 5px;
+        }
+
+        .sub-dropdown a {
+            padding: 10px 20px;
+            font-size: 13px;
+            display: block;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .sub-dropdown a:hover {
+            background: rgba(211, 47, 47, 0.05);
+            color: #d32f2f;
+        }
+
+        /* Menu à 3 niveaux */
+        .sub-dropdown li {
+            position: relative;
+        }
+
+        .third-level {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            margin-left: 10px;
+            padding: 8px 0;
+            z-index: 1003;
+        }
+
+        .sub-dropdown li:hover > .third-level {
+            opacity: 1;
+            visibility: visible;
+            margin-left: 5px;
+        }
+
+        .third-level a {
+            padding: 10px 20px;
+            font-size: 13px;
+            display: block;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .third-level a:hover {
+            background: rgba(211, 47, 47, 0.05);
+            color: #d32f2f;
+        }
+
+        /* Styles pour les éléments spéciaux en rouge */
+        .services-internet {
+            color: #d32f2f !important;
+            font-weight: bold;
+        }
+
+        .roaming {
+            color: #d32f2f !important;
+            font-weight: bold;
+        }
+
+        /* Styles pour les sous-menus supplémentaires */
+        .dropdown-menu .has-submenu {
+            position: relative;
+        }
+
+        .dropdown-menu .has-submenu > a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dropdown-menu .sub-level {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background: white;
+            min-width: 220px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 0.5rem 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-menu .has-submenu:hover .sub-level {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        /* Animation pour l'indicateur de sous-menu */
+        .arrow {
+            font-size: 0.875rem;
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .has-submenu:hover .arrow {
+            transform: rotate(90deg);
+        }
+
+        /* Mobile menu button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                padding-left: 1rem;
+            }
+
+            .sub-dropdown,
+            .third-level {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                padding-left: 1rem;
+            }
+        }
+
+        /* Styles du contenu existant (conservés) */
+        /* Container principal avec sidebar fixe */
+        .main-container {
+            display: flex;
+            flex: 1;
+            position: relative;
+        }
+
+        /* Sidebar gauche FIXE */
+        .sidebar {
+            width: 400px;
+            background-color: #ffffff;
+            padding: 40px 33px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        .sidebar-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .sidebar-divider {
+            width: 65px;
+            height: 4px;
+            background-color: #e60000;
+            margin-bottom: 30px;
+        }
+
+        .promo-card {
+            background: linear-gradient(135deg, #cc0000 0%, #e60000 100%);
+            border-radius: 8px;
+            padding: 30px 25px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .promo-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .promo-badge {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .promo-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .promo-description {
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 25px;
+            opacity: 0.95;
+        }
+
+        .promo-image {
+            width: 100%;
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Contenu principal avec défilement */
+        .main-content {
+            flex: 1;
+            padding: 40px 60px;
+            background-color: #fafafa;
+            overflow-y: auto;
+            min-height: calc(100vh - 140px);
+        }
+
+        /* Onglets */
+        .tabs {
+            display: flex;
+            gap: 40px;
+            border-bottom: 2px solid #e0e0e0;
+            margin-bottom: 30px;
+        }
+
+        .tab {
+            padding: 15px 0;
+            font-size: 15px;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            position: relative;
+            top: 2px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .tab.active {
+            color: #e60000;
+            border-bottom-color: #e60000;
+        }
+
+        .tab:hover {
+            color: #e60000;
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .section-anchor {
+            scroll-margin-top: 20px;
+        }
+
+        .back-to-tabs {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #e60000;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 20px;
+            padding: 8px 16px;
+            border: 2px solid #e60000;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .back-to-tabs:hover {
+            background-color: #e60000;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        /* Plans */
+        .plan-item {
+            background: white;
+            border-radius: 8px;
+            padding: 25px 30px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: all 0.3s;
+        }
+
+        .plan-item:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .plan-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .plan-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .more-link {
+            color: #e60000;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .more-link:hover {
+            text-decoration: underline;
+        }
+
+        .plan-main {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+        }
+
+        .plan-left {
+            display: flex;
+            gap: 80px;
+            flex: 1;
+        }
+
+        .plan-price {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-amount {
+            font-size: 22px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 4px;
+        }
+
+        .price-description {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .plan-data {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .data-amount {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .plan-validity {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .validity-days {
+            font-size: 22px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 4px;
+        }
+
+        .validity-label {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .buy-button {
+            background-color: #e60000;
+            color: white;
+            border: none;
+            padding: 12px 32px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .buy-button:hover {
+            background-color: #cc0000;
+            transform: scale(1.02);
+        }
+
+        .plan-benefits {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .benefits-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .benefits-list {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            color: #333;
+        }
+
+        .benefit-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .badge-sms {
+            background-color: #666;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .badge-internet {
+            background-color: #0066cc;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        /* NOUVEAU FOOTER STYLES */
+        footer {
+            background: white;
+            color: white;
+            padding: 60px 80px 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #333;
+        }
+
+        .footer-brand p {
+            color: black;
+            font-size: 14px;
+            line-height: 1.8;
+            margin: 20px 0 25px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .social-link:hover {
+            background: rgba(226, 12, 24);
+        }
+
+        .footer-column h4 {
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            color: black;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul li a {
+            color: #999;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: rgba(226, 12, 24);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 30px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+
+        .footer-bottom p {
+            color: #666;
+            font-size: 13px;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .footer-bottom-links a {
+            color: #666;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+
+        .footer-bottom-links a:hover {
+            color: #e60000;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #e60000;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 20px;
+            box-shadow: 0 5px 20px rgba(230,0,0,0.4);
+            transition: transform 0.3s;
+            z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Styles spécifiques pour le footer selon l'image */
+        .footer-logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: rgba(226, 12, 24);
+            margin-bottom: 15px;
+        }
+
+        .footer-contact-info {
+            color: black;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        .copyright-section {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: black;
+            font-size: 13px;
+        }
+
+        .footer-grid-section {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-grid-column h5 {
+            color: black;
+            font-size: 14px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .footer-grid-column ul {
+            list-style: none;
+        }
+
+        .footer-grid-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-grid-column ul li a {
+            color: black;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+
+        .footer-grid-column ul li a:hover {
+            color: rgba(226, 12, 24);
+        }
+
+        .footer-bottom-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-bottom-links-extended {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .footer-bottom-links-extended a {
+            color: black;
+            text-decoration: none;
+            font-size: 12px;
+            transition: color 0.3s;
+        }
+
+        .footer-bottom-links-extended a:hover {
+            color: rgba(226, 12, 24);
+        }
+
+        /* Responsive pour petits écrans */
+        @media (max-width: 1024px) {
+            .main-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            
+            .main-content {
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Barre de navigation globale - NOUVELLE VERSION -->
+    <div class="header-top">
+        <div class="header-top-content">
+            <a href="index.html">INDIVIDUEL</a>
+            <a href="entreprise.html">ENTREPRISE</a>
+            <a href="broadband.html">BROADBAND</a>
+            <a href="airtel-money.html">AIRTEL MONEY PORTAL</a>
+            <a href="about.html">À PROPOS DE NOUS</a>
+        </div>
+    </div>
+
+   <!-- Navigation Principale -->
+    <nav class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <!-- Logo Airtel -->
+                <a href="index.html" class="logo">
+                <img src="image/Airtel_Logo.jpg" alt="Airtel Congo" class="logo-img">
+                airtel
+            </a>
+
+            <button class="mobile-menu-btn" id="mobile-menu-toggle">
+                <i data-lucide="menu"></i>
+            </button>
+
+            <ul class="nav-links" id="nav-links">
+                <!-- PAYEZ ET RECHARGEZ -->
+                <li>
+                    <a href="paiement-recharge.html" class="active">PAYEZ ET RECHARGEZ</a>
+                    <ul class="dropdown-menu">
+                        <!-- Postpayé avec sous-menu -->
+                        <li class="has-submenu">
+                            <a href="#" data-section="postpaye">Postpayé <span class="arrow">›</span></a>
+                            <ul class="sub-level">
+                                <li><a href="#" data-section="postpaye" data-subsection="postpaye-payment">Paiement de
+                                        facture en ligne</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Prépayé avec sous-menu -->
+                        <li class="has-submenu">
+                            <a href="#" data-section="prepaye">Prépayé <span class="arrow">›</span></a>
+                            <ul class="sub-level">
+                                <li><a href="#" data-section="prepaye" data-subsection="prepaye-recharge">Rechargez un
+                                        compte prépayé</a></li>
+                                <li><a href="#" data-section="prepaye" data-subsection="prepaye-forfait">Activez un
+                                        forfait Internet</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Broadband (sans sous-menu) -->
+                        <li><a href="#" data-section="broadband">Broadband</a></li>
+                    </ul>
+                </li>
+
+                <!-- SERVICES -->
+                <li>
+                    <a href="services.html">SERVICES</a>
+                    <ul class="dropdown-menu">
+                        <!-- PREPAYÉ - Niveau 1 -->
+                        <li>
+                            <a href="#">Prepayé <span class="arrow">›</span></a>
+                            <ul class="sub-dropdown">
+                                <!-- Appels & SMS - Niveau 2 -->
+                                <li>
+                                    <a href="#">Appels & SMS <span class="arrow">›</span></a>
+                                    <ul class="third-level">
+                                        <li><a href="appels-locaux.html">Appels locaux</a></li>
+                                        <li><a href="appels-internationaux.html">Appels internationaux</a></li>
+                                        <li><a href="sms.html">SMS</a></li>
+                                    </ul>
+                                </li>
+                                <!-- Services Internet - Niveau 2 -->
+                                <li>
+                                    <a href="#" class="services-internet">Services Internet <span
+                                            class="arrow">›</span></a>
+                                    <ul class="third-level">
+                                        <li><a href="forfaits-internet.html">Forfaits internet</a></li>
+                                        <li><a href="faq-internet.html">Foire aux questions</a></li>
+                                    </ul>
+                                </li>
+                                <!-- Roaming - Niveau 2 -->
+                                <li>
+                                    <a href="#" class="roaming">Roaming <span class="arrow">›</span></a>
+                                    <ul class="third-level">
+                                        <li><a href="airtel-world.html">Airtel world</a></li>
+                                        <li><a href="reseau-unique.html">Réseau Unique</a></li>
+                                        <li><a href="free-roaming.html">Free Roaming</a></li>
+                                    </ul>
+                                </li>
+                                <!-- Services à valeur ajoutée - Niveau 2 -->
+                                <li>
+                                    <a href="#">Services à valeur ajoutée <span class="arrow">›</span></a>
+                                    <ul class="third-level">
+                                        <li><a href="musique.html">Musique</a></li>
+                                        <li><a href="divertissement.html">Divertissement</a></li>
+                                    </ul>
+                                </li>
+                                <!-- Taxi Connect - Niveau 2 -->
+                                <li><a href="taxi-connect.html">Taxi Connect</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- NOS AGENCES -->
+                <li>
+                    <a href="Nos Agences.html">NOS AGENCES</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="airtel-shop.html">Airtel Shop</a></li>
+                        <li><a href="distributeurs.html">Distributeurs</a></li>
+                        <li><a href="couverture-reseau.html">Couverture réseau</a></li>
+                    </ul>
+                </li>
+
+                <!-- AIRTEL MONEY -->
+                <li>
+                    <a href="airtel-money.html">AIRTEL MONEY</a>
+                </li>
+
+                <!-- BESOIN D'AIDE -->
+                <li>
+                    <a href="aide.html">BESOIN D'AIDE</a>    
+                </li>
+
+                <!-- E-SIM -->
+                <li><a href="esim.html">E-SIM</a></li>
+
+                <!-- PROMOTIONS -->
+                <li>
+                    <a href="promotions.html">PROMO KELASI</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <!-- Sidebar gauche FIXE -->
+        <div class="sidebar">
+            <h1 class="sidebar-title">Nos Forfaits<br>Prépayés</h1>
+            <div class="sidebar-divider"></div>
+            
+            <div class="promo-card">
+                <div class="promo-badge">AIRTEL PRÉPAYÉ CONGO</div>
+                <h2 class="promo-title">FORFAITS YA NGONGA</h2>
+                <p class="promo-description">Des bons plans pour plus de volume. Appelez, naviguez et restez connecté</p>
+                <svg class="promo-image" viewBox="0 0 250 180" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Smartphone -->
+                    <rect x="75" y="20" width="100" height="140" rx="10" fill="white" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+                    <rect x="80" y="30" width="90" height="120" rx="5" fill="rgba(255,255,255,0.1)"/>
+                    
+                    <!-- Badges de forfaits -->
+                    <g>
+                        <!-- Badge 25 Min -->
+                        <rect x="35" y="40" width="70" height="35" rx="5" fill="rgba(147, 112, 219, 0.9)"/>
+                        <text x="70" y="54" font-family="Arial" font-size="16" font-weight="bold" fill="white" text-anchor="middle">25 Min</text>
+                        <text x="70" y="68" font-family="Arial" font-size="10" fill="white" text-anchor="middle">200 FCFA</text>
+                        
+                        <!-- Badge 80 Min -->
+                        <rect x="30" y="85" width="70" height="35" rx="5" fill="rgba(123, 104, 238, 0.9)"/>
+                        <text x="65" y="99" font-family="Arial" font-size="16" font-weight="bold" fill="white" text-anchor="middle">80 Min</text>
+                        <text x="65" y="113" font-family="Arial" font-size="10" fill="white" text-anchor="middle">750 FCFA</text>
+                        
+                        <!-- Badge 850 Min -->
+                        <rect x="150" y="85" width="70" height="35" rx="5" fill="rgba(144, 238, 144, 0.9)"/>
+                        <text x="185" y="99" font-family="Arial" font-size="16" font-weight="bold" fill="white" text-anchor="middle">850 Min</text>
+                        <text x="185" y="113" font-family="Arial" font-size="10" fill="white" text-anchor="middle">5000 FCFA</text>
+                    </g>
+                    
+                    <!-- Icône téléphone -->
+                    <circle cx="125" cy="90" r="15" fill="rgba(255,255,255,0.3)"/>
+                    <path d="M120 85 Q118 83 120 81 L122 79 Q124 77 126 79 L128 81 Q130 83 128 85 L127 86 Q125 88 123 90 L122 91 Q120 89 122 87 Z" fill="white"/>
+                    
+                    <!-- Personnage emoji -->
+                    <ellipse cx="125" cy="150" rx="20" ry="25" fill="#FFD700"/>
+                    <circle cx="118" cy="145" r="3" fill="#000"/>
+                    <circle cx="132" cy="145" r="3" fill="#000"/>
+                    <path d="M115 155 Q125 162 135 155" stroke="#000" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    
+                    <!-- Hashtag -->
+                    <text x="125" y="35" font-family="Arial" font-size="12" font-weight="bold" fill="rgba(255,255,255,0.8)" text-anchor="middle">#ForfaitTousRéseaux</text>
+                    
+                    <!-- Étoiles décoratives -->
+                    <text x="50" y="135" font-size="20" fill="rgba(255,255,255,0.6)">✨</text>
+                    <text x="190" y="55" font-size="20" fill="rgba(255,255,255,0.6)">✨</text>
+                    <text x="210" y="130" font-size="15" fill="rgba(255,255,255,0.5)">✨</text>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Contenu principal avec défilement -->
+        <div class="main-content">
+            <!-- Onglets -->
+            <div id="top-tabs" class="tabs">
+                <a href="#forfaits-appels" class="tab active">Forfaits Appels: 1/7 & 30 jours</a>
+                <a href="#forfaits-mbiaka" class="tab">Forfaits Ya MBIAKA</a>
+            </div>
+
+            <!-- Le reste du contenu reste identique -->
+            <!-- Section Forfaits Appels -->
+            <div id="forfaits-appels" class="section-anchor"></div>
+
+            <!-- Section Forfaits 1 jour -->
+            <div style="margin-bottom: 40px;">
+                <h3 style="font-size: 18px; font-weight: 700; color: #e60000; margin-bottom: 20px;">Forfaits 1 jour - Accès: *121*1*1#</h3>
+                
+                <!-- Plan 1 -->
+                <div class="plan-item">
+                    <div class="plan-header">
+                        <div class="plan-name">6 min tous réseaux</div>
+                    </div>
+                    
+                    <div class="plan-main">
+                        <div class="plan-left">
+                            <div class="plan-price">
+                                <div class="price-amount">100 CFA</div>
+                                <div class="price-description">Appels tous réseaux</div>
+                            </div>
+                            
+                            <div class="plan-data">
+                                <div class="data-amount">6 minutes</div>
+                            </div>
+                            
+                            <div class="plan-validity">
+                                <div class="validity-days">1 Jour</div>
+                                <div class="validity-label">validité</div>
+                            </div>
+                        </div>
+                        
+                        <button class="buy-button">100 CFA</button>
+                    </div>
+                </div>
+
+                <!-- Plan 2 -->
+                <div class="plan-item">
+                    <div class="plan-header">
+                        <div class="plan-name">11 min tous réseaux</div>
+                    </div>
+                    
+                    <div class="plan-main">
+                        <div class="plan-left">
+                            <div class="plan-price">
+                                <div class="price-amount">150 CFA</div>
+                                <div class="price-description">Appels tous réseaux</div>
+                            </div>
+                            
+                            <div class="plan-data">
+                                <div class="data-amount">11 minutes</div>
+                            </div>
+                            
+                            <div class="plan-validity">
+                                <div class="validity-days">1 Jour</div>
+                                <div class="validity-label">validité</div>
+                            </div>
+                        </div>
+                        
+                        <button class="buy-button">150 CFA</button>
+                    </div>
+                </div>
+
+                <!-- Plan 3 -->
+                <div class="plan-item">
+                    <div class="plan-header">
+                        <div class="plan-name">25 min tous réseaux</div>
+                    </div>
+                    
+                    <div class="plan-main">
+                        <div class="plan-left">
+                            <div class="plan-price">
+                                <div class="price-amount">200 CFA</div>
+                                <div class="price-description">Appels tous réseaux</div>
+                            </div>
+                            
+                            <div class="plan-data">
+                                <div class="data-amount">25 minutes</div>
+                            </div>
+                            
+                            <div class="plan-validity">
+                                <div class="validity-days">1 Jour</div>
+                                <div class="validity-label">validité</div>
+                            </div>
+                        </div>
+                        
+                        <button class="buy-button">200 CFA</button>
+                    </div>
+                </div>
+
+                <!-- Plan 4 -->
+                <div class="plan-item">
+                    <div class="plan-header">
+                        <div class="plan-name">70 min tous réseaux</div>
+                    </div>
+                    
+                    <div class="plan-main">
+                        <div class="plan-left">
+                            <div class="plan-price">
+                                <div class="price-amount">400 CFA</div>
+                                <div class="price-description">Appels tous réseaux</div>
+                            </div>
+                            
+                            <div class="plan-data">
+                                <div class="data-amount">70 minutes</div>
+                            </div>
+                            
+                            <div class="plan-validity">
+                                <div class="validity-days">1 Jour</div>
+                                <div class="validity-label">validité</div>
+                            </div>
+                        </div>
+                        
+                        <button class="buy-button">400 CFA</button>
+                    </div>
+                </div>
+                <a href="#top-tabs" class="back-to-tabs">↑ Retour aux forfaits</a>
+            </div>
+
+            <!-- Section Forfaits 7 jours -->
+            <div style="margin-bottom: 40px;">
+                <h3 style="font-size: 18px; font-weight: 700; color: #e60000; margin-bottom: 20px;">Forfaits 7 jours - Accès: *121*1*2#</h3>
+                
+                <!-- Plan 5 -->
+                <div class="plan-item">
+                    <div class="plan-header">
+                        <div class="plan-name">20 min tous réseaux</div>
+                    </div>
+                    
+                    <div class="plan-main">
+                        <div class="plan-left">
+                            <div class="plan-price">
+                                <div class="price-amount">350 CFA</div>
+                                <div class="price-description">Appels tous réseaux</div>
+                            </div>
+                            
+                            <div class="plan-data">
+                                <div class="data-amount">20 minutes</div>
+                            </div>
+                            
+                            <div class="plan-validity">
+                                <div class="validity-days">7 Jours</div>
+                                <div class="validity-label">validité</div>
+                            </div>
+                        </div>
+                        
+                        <button class="buy-button">350 CFA</button>
+                    </div>
+                </div>
+
+                <!-- Plan 6 -->
+                <div class="plan-item">
+                    <div class="plan-header">
+                        <div class="plan-name">50 min tous réseaux</div>
+                    </div>
+                    
+                    <div class="plan-main">
+                        <div class="plan-left">
+                            <div class="plan-price">
+                                <div class="price-amount">500 CFA</div>
+                                <div class="price-description">Appels tous réseaux</div>
+                            </div>
+                            
+                            <div class="plan-data">
+                                <div class="data-amount">50 minutes</div>
+                            </div>
+                            
+                            <div class="plan-validity">
+                                <div class="validity-days">7 Jours</div>
+                                <div class="validity-label">validité</div>
+                            </div>
+                        </div>
+                        
+                        <button class="buy-button">500 CFA</button>
+                    </div>
+                </div>
+
+                <!-- Plan 7 -->
+                <div class="plan-item">
+                    <div class="plan-header">
+                        <div class="plan-name">80 min tous réseaux</div>
+                    </div>
+                    
+                    <div class="plan-main">
+                        <div class="plan-left">
+                            <div class="plan-price">
+                                <div class="price-amount">750 CFA</div>
+                                <div class="price-description">Appels tous réseaux</div>
+                            </div>
+                            
+                            <div class="plan-data">
+                                <div class="data-amount">80 minutes</div>
+                            </div>
+                            
+                            <div class="plan-validity">
+                                <div class="validity-days">7 Jours</div>
+                                <div class="validity-label">validité</div>
+                            </div>
+                        </div>
+                        
+                        <button class="buy-button">750 CFA</button>
+                    </div>
+                </div>
+                <a href="#top-tabs" class="back-to-tabs">↑ Retour aux forfaits</a>
+            </div>
+
+            <!-- Section Forfaits 30 jours -->
+            <div>
+                <h3 style="font-size: 18px; font-weight: 700; color: #e60000; margin-bottom: 20px;">Forfaits 30 jours - Accès: *121*1*3#</h3>
+                
+                <!-- Plan 8 -->
+                <div class="plan-item">
+                    <div class="plan-header">
+                        <div class="plan-name">100 min tous réseaux</div>
+                    </div>
+                    
+                    <div class="plan-main">
+                        <div class="plan-left">
+                            <div class="plan-price">
+                                <div class="price-amount">1 500 CFA</div>
+                                <div class="price-description">Appels tous réseaux</div>
+                            </div>
+                            
+                            <div class="plan-data">
+                                <div class="data-amount">100 minutes</div>
+                            </div>
+                            
+                            <div class="plan-validity">
+                                <div class="validity-days">30 Jours</div>
+                                <div class="validity-label">validité</div>
+                            </div>
+                        </div>
+                        
+                        <button class="buy-button">1 500 CFA</button>
+                    </div>
+                </div>
+
+                <!-- Plan 9 -->
+                <div class="plan-item">
+                    <div class="plan-header">
+                        <div class="plan-name">350 min tous réseaux</div>
+                    </div>
+                    
+                    <div class="plan-main">
+                        <div class="plan-left">
+                            <div class="plan-price">
+                                <div class="price-amount">3 000 CFA</div>
+                                <div class="price-description">Appels tous réseaux</div>
+                            </div>
+                            
+                            <div class="plan-data">
+                                <div class="data-amount">350 minutes</div>
+                            </div>
+                            
+                            <div class="plan-validity">
+                                <div class="validity-days">30 Jours</div>
+                                <div class="validity-label">validité</div>
+                            </div>
+                        </div>
+                        
+                        <button class="buy-button">3 000 CFA</button>
+                    </div>
+                </div>
+
+                <!-- Plan 10 -->
+                <div class="plan-item">
+                    <div class="plan-header">
+                        <div class="plan-name">850 min tous réseaux</div>
+                    </div>
+                    
+                    <div class="plan-main">
+                        <div class="plan-left">
+                            <div class="plan-price">
+                                <div class="price-amount">5 000 CFA</div>
+                                <div class="price-description">Appels tous réseaux</div>
+                            </div>
+                            
+                            <div class="plan-data">
+                                <div class="data-amount">850 minutes</div>
+                            </div>
+                            
+                            <div class="plan-validity">
+                                <div class="validity-days">30 Jours</div>
+                                <div class="validity-label">validité</div>
+                            </div>
+                        </div>
+                        
+                        <button class="buy-button">5 000 CFA</button>
+                    </div>
+                </div>
+                <a href="#top-tabs" class="back-to-tabs">↑ Retour aux forfaits</a>
+            </div>
+
+            <!-- Section Forfaits Ya MBIAKA -->
+            <div id="forfaits-mbiaka" class="section-anchor" style="margin-top: 50px;">
+                <h2 style="font-size: 22px; font-weight: 700; color: #e60000; margin-bottom: 10px;">Forfaits Ya MBIAKA</h2>
+                <p style="font-size: 14px; color: #666; margin-bottom: 20px;">Les forfaits Ya MBIAKA, tout en 1 vous offrent les Appels, SMS et Internet en même temps. Composez *121*1# puis choisir 6. Appels, Sms tous réseaux + Internet</p>
+
+                <!-- MBIAKA 1 jour -->
+                <div class="plan-item">
+                    <div class="plan-header">
+                        <div class="plan-name">MBIAKA 1 jour</div>
+                    </div>
+                    
+                    <div class="plan-main">
+                        <div class="plan-left">
+                            <div class="plan-price">
+                                <div class="price-amount">350 CFA</div>
+                                <div class="price-description">Forfait combiné</div>
+                            </div>
+                            
+                            <div class="plan-data">
+                                <div class="data-amount">10 min + 10 SMS + 250 MB</div>
+                            </div>
+                            
+                            <div class="plan-validity">
+                                <div class="validity-days">24 Heures</div>
+                                <div class="validity-label">validité</div>
+                            </div>
+                        </div>
+                        
+                        <button class="buy-button">350 CFA</button>
+                    </div>
+                    
+                    <div class="plan-benefits">
+                        <div class="benefits-label">Contenu du forfait</div>
+                        <div class="benefits-list">
+                            <div class="benefit-item">
+                                <div class="benefit-icon">📞</div>
+                                <span>10 min tous réseaux</span>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <span class="badge-sms">SMS</span>
+                                </div>
+                                <span>10 SMS tous réseaux</span>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <span class="badge-internet">WEB</span>
+                                </div>
+                                <span>250 MB Internet</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MBIAKA 7 jours -->
+                <div class="plan-item">
+                    <div class="plan-header">
+                        <div class="plan-name">MBIAKA 7 jours</div>
+                    </div>
+                    
+                    <div class="plan-main">
+                        <div class="plan-left">
+                            <div class="plan-price">
+                                <div class="price-amount">1 500 CFA</div>
+                                <div class="price-description">Forfait combiné</div>
+                            </div>
+                            
+                            <div class="plan-data">
+                                <div class="data-amount">40 min + 40 SMS + 1024 MB</div>
+                            </div>
+                            
+                            <div class="plan-validity">
+                                <div class="validity-days">7 Jours</div>
+                                <div class="validity-label">validité</div>
+                            </div>
+                        </div>
+                        
+                        <button class="buy-button">1 500 CFA</button>
+                    </div>
+                    
+                    <div class="plan-benefits">
+                        <div class="benefits-label">Contenu du forfait</div>
+                        <div class="benefits-list">
+                            <div class="benefit-item">
+                                <div class="benefit-icon">📞</div>
+                                <span>40 min tous réseaux</span>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <span class="badge-sms">SMS</span>
+                                </div>
+                                <span>40 SMS tous réseaux</span>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <span class="badge-internet">WEB</span>
+                                </div>
+                                <span>1024 MB Internet</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MBIAKA 30 jours -->
+                <div class="plan-item">
+                    <div class="plan-header">
+                        <div class="plan-name">MBIAKA 30 jours</div>
+                    </div>
+                    
+                    <div class="plan-main">
+                        <div class="plan-left">
+                            <div class="plan-price">
+                                <div class="price-amount">5 000 CFA</div>
+                                <div class="price-description">Forfait combiné</div>
+                            </div>
+                            
+                            <div class="plan-data">
+                                <div class="data-amount">120 min + 120 SMS + 3072 MB</div>
+                            </div>
+                            
+                            <div class="plan-validity">
+                                <div class="validity-days">30 Jours</div>
+                                <div class="validity-label">validité</div>
+                            </div>
+                        </div>
+                        
+                        <button class="buy-button">5 000 CFA</button>
+                    </div>
+                    
+                    <div class="plan-benefits">
+                        <div class="benefits-label">Contenu du forfait</div>
+                        <div class="benefits-list">
+                            <div class="benefit-item">
+                                <div class="benefit-icon">📞</div>
+                                <span>120 min tous réseaux</span>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <span class="badge-sms">SMS</span>
+                                </div>
+                                <span>120 SMS tous réseaux</span>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <span class="badge-internet">WEB</span>
+                                </div>
+                                <span>3072 MB Internet</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#top-tabs" class="back-to-tabs">↑ Retour aux forfaits</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOUVEAU FOOTER -->
+    <footer>
+        <div class="footer-grid-section">
+            <div class="footer-grid-column">
+                <h5>A propos d'Artiel</h5>
+                <ul>
+                    <li><a href="#">Accès rapide</a></li>
+                    <li><a href="#">Aide</a></li>
+                    <li><a href="#">Privacy</a></li>
+                </ul>
+            </div>
+            <div class="footer-grid-column">
+                <h5>Carrière</h5>
+                <ul>
+                    <li><a href="#">Actualités</a></li>
+                    <li><a href="#">Couverture</a></li>
+                    <li><a href="#">Chiffre Safety</a></li>
+                </ul>
+            </div>
+            <div class="footer-grid-column">
+                <h5>Media</h5>
+                <ul>
+                    <li><a href="#">Programmes sociaux/CSR</a></li>
+                    <li><a href="#">Nos Boutiques</a></li>
+                    <li><a href="#">Besoin de Suggestion</a></li>
+                </ul>
+            </div>
+            <div class="footer-grid-column">
+                <h5>Arnet Money</h5>
+                <ul>
+                    <li><a href="#">Cataloger d'interconnexion</a></li>
+                    <li><a href="#">Numéros utiles</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom-section">
+            <div class="footer-bottom-links-extended">
+                <a href="#">NOUS CONTRACTER</a>
+                <a href="#">DROITS D'AUTEUR</a>
+                <a href="#">TERMES ET CONDITIONS</a>
+                <a href="#">AU TERMES ET CONDITIONS GSM</a>
+                <a href="#">AVIS DE CONFIDENTIALITÉ</a>
+            </div>
+        </div>
+
+        <div class="copyright-section">
+            <p>© 2024 Arnet Africa. Tous les droits sont réservés.</p>
+            <p style="margin-top: 10px;">RETOUR AU SOMMET</p>
+        </div>
+
+        <div class="social-links" style="justify-content: center; margin-top: 20px;">
+            <a href="#" class="social-link">T</a>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top">↑</a>
+
+    <script>
+        // Initialiser les icônes Lucide
+        lucide.createIcons();
+
+        // Menu mobile
+        document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+            document.getElementById('nav-links').classList.toggle('active');
+        });
+
+        // Fermer le menu mobile quand on clique sur un lien
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('nav-links').classList.remove('active');
+            });
+        });
+
+        // Gestion de l'onglet actif au clic
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

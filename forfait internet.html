@@ -1,0 +1,1664 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airtel - Plans de Recharge Mobile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        #bg-tiktok{
+             width: 100%;
+            /* prend toute la largeur de la card */
+            height: 100%;
+            /* prend toute la hauteur de la card */
+          
+            object-position: center;
+            /* centrer l'image */
+            object-fit: contain;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background-color: #f5f5f5;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* Styles de la navbar du premier fichier */
+        .header-top {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 10px 0;
+        }
+
+        .header-top-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 30px;
+        }
+
+        .header-top-content a {
+            color: #666;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+
+        .header-top-content a:hover {
+            color: #d32f2f;
+        }
+
+        nav {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #e30613;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .nav-links > li {
+            position: relative;
+        }
+
+        .nav-links > li > a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            padding: 25px 0;
+            display: block;
+            transition: color 0.3s;
+            white-space: nowrap;
+        }
+
+        .nav-links > li > a:hover,
+        .nav-links > li > a.active {
+            color: #d32f2f;
+        }
+
+        .nav-links > li > a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #d32f2f;
+        }
+
+        /* Styles pour les menus déroulants de la nouvelle navigation */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            min-width: 240px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            margin-top: 10px;
+            padding: 8px 0;
+            z-index: 1001;
+        }
+
+        .nav-links > li:hover > .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            margin-top: 0;
+        }
+
+        .dropdown-menu a {
+            padding: 12px 20px;
+            border-bottom: none;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .dropdown-menu a:hover {
+            background: rgba(211, 47, 47, 0.05);
+            color: #d32f2f;
+        }
+
+        .dropdown-menu .arrow {
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        /* Sous-menu de second niveau */
+        .sub-dropdown {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            margin-left: 10px;
+            padding: 8px 0;
+            z-index: 1002;
+        }
+
+        .dropdown-menu li:hover > .sub-dropdown {
+            opacity: 1;
+            visibility: visible;
+            margin-left: 5px;
+        }
+
+        .sub-dropdown a {
+            padding: 10px 20px;
+            font-size: 13px;
+            display: block;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .sub-dropdown a:hover {
+            background: rgba(211, 47, 47, 0.05);
+            color: #d32f2f;
+        }
+
+        /* Menu à 3 niveaux */
+        .sub-dropdown li {
+            position: relative;
+        }
+
+        .third-level {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            margin-left: 10px;
+            padding: 8px 0;
+            z-index: 1003;
+        }
+
+        .sub-dropdown li:hover > .third-level {
+            opacity: 1;
+            visibility: visible;
+            margin-left: 5px;
+        }
+
+        .third-level a {
+            padding: 10px 20px;
+            font-size: 13px;
+            display: block;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .third-level a:hover {
+            background: rgba(211, 47, 47, 0.05);
+            color: #d32f2f;
+        }
+
+        /* Styles pour les éléments spéciaux en rouge */
+        .services-internet {
+            color: #d32f2f !important;
+            font-weight: bold;
+        }
+
+        .roaming {
+            color: #d32f2f !important;
+            font-weight: bold;
+        }
+
+        /* Styles pour les sous-menus supplémentaires */
+        .dropdown-menu .has-submenu {
+            position: relative;
+        }
+
+        .dropdown-menu .has-submenu > a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dropdown-menu .sub-level {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background: white;
+            min-width: 220px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 0.5rem 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-menu .has-submenu:hover .sub-level {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        /* Animation pour l'indicateur de sous-menu */
+        .arrow {
+            font-size: 0.875rem;
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .has-submenu:hover .arrow {
+            transform: rotate(90deg);
+        }
+
+        /* Mobile menu button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                padding-left: 1rem;
+            }
+
+            .sub-dropdown,
+            .third-level {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                padding-left: 1rem;
+            }
+        }
+
+        /* Styles du contenu existant (conservés) */
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0;
+            gap: 0;
+            min-height: calc(100vh - 91px);
+            overflow-x: hidden;
+        }
+
+        /* Sidebar avec background image */
+        .sidebar {
+            width: 100%;
+            height: 50vh; /* 50% de la hauteur de l'écran */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidebar-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: opacity 0.5s ease-in-out;
+            opacity: 0;
+            z-index: 1;
+        }
+
+        .sidebar-background.active {
+            opacity: 1;
+        }
+
+        .sidebar-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4); /* Overlay sombre pour améliorer la lisibilité */
+            z-index: 2;
+        }
+
+        .sidebar-content {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            height: 100%;
+            padding: 40px 33px;
+            z-index: 3;
+        }
+
+        .sidebar-text {
+            flex: 1;
+            color: white; /* Texte en blanc pour contraster avec le background */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Ombre pour améliorer la lisibilité */
+        }
+
+        .sidebar h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .sidebar-title-underline {
+            width: 65px;
+            height: 4px;
+            background: rgba(226, 12, 24);
+            margin-bottom: 0;
+        }
+
+        .promo-image-container {
+            display: none; /* On cache le conteneur d'images car on utilise maintenant des backgrounds */
+        }
+
+        /* SIDEBAR TEXTS POUR CHAQUE SECTION */
+        .sidebar-text-content {
+            display: none;
+        }
+
+        .sidebar-text-content.active {
+            display: block;
+        }
+
+        /* Main content en BAS maintenant */
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 20px;
+            font-size: 17px;
+        }
+
+        .tabs {
+            background: white;
+            display: flex;
+            gap: 0;
+            overflow-x: auto;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab {
+            padding: 20px 28px;
+            cursor: pointer;
+            border: none;
+            background: white;
+            font-size: 18px;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            white-space: nowrap;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 500;
+        }
+
+        .tab:hover {
+            color: rgba(226, 12, 24);
+            background: #f9f9f9;
+        }
+
+        .tab.active {
+            color: rgba(226, 12, 24);
+            border-bottom-color: rgba(226, 12, 24);
+            font-weight: 600;
+        }
+
+        .back-to-tabs {
+            display: inline-block;
+            margin: 20px 30px;
+            padding: 12px 24px;
+            background: #f0f0f0;
+            color: rgba(226, 12, 24);
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .back-to-tabs:hover {
+            background: #e5e5e5;
+        }
+
+        .back-to-tabs::before {
+            content: '↑ ';
+            font-size: 18px;
+        }
+
+        .plans-container {
+            background: white;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        .section-title {
+            background: #f8f8f8;
+            padding: 24px 30px;
+            font-size: 28px;
+            font-weight: 700;
+            color: rgba(226, 12, 24);
+           
+            scroll-margin-top: 80px; /* Augmenté pour compenser la navbar sticky */
+            width: 100%;
+        }
+
+        .section-intro {
+            padding: 24px 30px;
+            font-size: 18px;
+            color: #666;
+            line-height: 1.7;
+            background: #f9f9f9;
+            width: 100%;
+        }
+
+        .section-intro h2 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            color: #333;
+        }
+
+        .intro-code {
+            color: rgba(226, 12, 24);
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .intro-link {
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .intro-link:hover {
+            text-decoration: underline;
+        }
+
+        /* TABLEAUX REDIMENSIONNES */
+        .data-table {
+            width: 95%;
+            max-width: 1000px;
+            border-collapse: collapse;
+            margin: 20px auto;
+            font-size: 14px;
+            table-layout: fixed;
+        }
+
+        .data-table th {
+            background: rgba(226, 12, 24);
+            color: white;
+            padding: 12px 8px;
+            text-align: left;
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .data-table td {
+            padding: 12px 8px;
+            border-bottom: 1px solid #e5e5e5;
+            font-size: 16px;
+            color: #333;
+            word-wrap: break-word;
+        }
+
+        .data-table tr:hover {
+            background: #f9f9f9;
+        }
+
+        /* Largeurs spécifiques pour les colonnes */
+        .data-table th:nth-child(1),
+        .data-table td:nth-child(1) {
+            width: 20%;
+        }
+
+        .data-table th:nth-child(2),
+        .data-table td:nth-child(2) {
+            width: 12%;
+            text-align: center;
+        }
+
+        .data-table th:nth-child(3),
+        .data-table td:nth-child(3) {
+            width: 15%;
+            text-align: center;
+        }
+
+        .data-table th:nth-child(4),
+        .data-table td:nth-child(4) {
+            width: 15%;
+            text-align: center;
+        }
+
+        .data-table th:nth-child(5),
+        .data-table td:nth-child(5) {
+            width: 15%;
+            text-align: center;
+        }
+
+        .data-table th:nth-child(6),
+        .data-table td:nth-child(6) {
+            width: 23%;
+        }
+
+        .usage-info {
+            padding: 24px 30px;
+            background: #f9f9f9;
+            font-size: 17px;
+            line-height: 1.8;
+            color: #666;
+            width: 100%;
+        }
+
+        .usage-title {
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 12px;
+            font-size: 17px;
+        }
+
+        .usage-item {
+            margin-left: 20px;
+            margin-bottom: 8px;
+        }
+
+        h3 {
+            margin: 24px 30px;
+            font-size: 22px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 16px;
+        }
+
+        /* NOUVEAU FOOTER STYLES */
+        footer {
+            background: white;
+            color: white;
+            padding: 60px 80px 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #333;
+        }
+
+        .footer-brand p {
+            color: black;
+            font-size: 14px;
+            line-height: 1.8;
+            margin: 20px 0 25px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .social-link:hover {
+            background: rgba(226, 12, 24);
+        }
+
+        .footer-column h4 {
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            color: black;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul li a {
+            color: #999;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: rgba(226, 12, 24);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 30px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+
+        .footer-bottom p {
+            color: #666;
+            font-size: 13px;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .footer-bottom-links a {
+            color: #666;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+
+        .footer-bottom-links a:hover {
+            color: #e60000;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #e60000;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 20px;
+            box-shadow: 0 5px 20px rgba(230,0,0,0.4);
+            transition: transform 0.3s;
+            z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Styles spécifiques pour le footer selon l'image */
+        .footer-logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: rgba(226, 12, 24);
+            margin-bottom: 15px;
+        }
+
+        .footer-contact-info {
+            color: black;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        .copyright-section {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: black;
+            font-size: 13px;
+        }
+
+        .footer-grid-section {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-grid-column h5 {
+            color: black;
+            font-size: 14px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .footer-grid-column ul {
+            list-style: none;
+        }
+
+        .footer-grid-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-grid-column ul li a {
+            color: black;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+
+        .footer-grid-column ul li a:hover {
+            color: rgba(226, 12, 24);
+        }
+
+        .footer-bottom-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-bottom-links-extended {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .footer-bottom-links-extended a {
+            color: black;
+            text-decoration: none;
+            font-size: 12px;
+            transition: color 0.3s;
+        }
+
+        .footer-bottom-links-extended a:hover {
+            color: rgba(226, 12, 24);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Barre de navigation globale - NOUVELLE VERSION -->
+    <div class="header-top">
+        <div class="header-top-content">
+            <a href="index.html">INDIVIDUEL</a>
+            <a href="entreprise.html">ENTREPRISE</a>
+            <a href="broadband.html">BROADBAND</a>
+            <a href="airtel-money.html">AIRTEL MONEY PORTAL</a>
+            <a href="about.html">À PROPOS DE NOUS</a>
+        </div>
+    </div>
+
+   <!-- Navigation Principale -->
+    <nav class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <!-- Logo Airtel -->
+                <a href="index.html" class="logo">
+                <img src="image/Airtel_Logo.jpg" alt="Airtel Congo" class="logo-img">
+                airtel
+            </a>
+
+            <button class="mobile-menu-btn" id="mobile-menu-toggle">
+                <i data-lucide="menu"></i>
+            </button>
+
+            <ul class="nav-links" id="nav-links">
+                <!-- PAYEZ ET RECHARGEZ -->
+                <li>
+                    <a href="paiement-recharge.html" class="active">PAYEZ ET RECHARGEZ</a>
+                    <ul class="dropdown-menu">
+                        <!-- Postpayé avec sous-menu -->
+                        <li class="has-submenu">
+                            <a href="#" data-section="postpaye">Postpayé <span class="arrow">›</span></a>
+                            <ul class="sub-level">
+                                <li><a href="#" data-section="postpaye" data-subsection="postpaye-payment">Paiement de
+                                        facture en ligne</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Prépayé avec sous-menu -->
+                        <li class="has-submenu">
+                            <a href="#" data-section="prepaye">Prépayé <span class="arrow">›</span></a>
+                            <ul class="sub-level">
+                                <li><a href="#" data-section="prepaye" data-subsection="prepaye-recharge">Rechargez un
+                                        compte prépayé</a></li>
+                                <li><a href="#" data-section="prepaye" data-subsection="prepaye-forfait">Activez un
+                                        forfait Internet</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Broadband (sans sous-menu) -->
+                        <li><a href="#" data-section="broadband">Broadband</a></li>
+                    </ul>
+                </li>
+
+                <!-- SERVICES -->
+                <li>
+                    <a href="services.html">SERVICES</a>
+                    <ul class="dropdown-menu">
+                        <!-- PREPAYÉ - Niveau 1 -->
+                        <li>
+                            <a href="#">Prepayé <span class="arrow">›</span></a>
+                            <ul class="sub-dropdown">
+                                <!-- Appels & SMS - Niveau 2 -->
+                                <li>
+                                    <a href="#">Appels & SMS <span class="arrow">›</span></a>
+                                    <ul class="third-level">
+                                        <li><a href="appels-locaux.html">Appels locaux</a></li>
+                                        <li><a href="appels-internationaux.html">Appels internationaux</a></li>
+                                        <li><a href="sms.html">SMS</a></li>
+                                    </ul>
+                                </li>
+                                <!-- Services Internet - Niveau 2 -->
+                                <li>
+                                    <a href="#" class="services-internet">Services Internet <span
+                                            class="arrow">›</span></a>
+                                    <ul class="third-level">
+                                        <li><a href="forfaits-internet.html">Forfaits internet</a></li>
+                                        <li><a href="faq-internet.html">Foire aux questions</a></li>
+                                    </ul>
+                                </li>
+                                <!-- Roaming - Niveau 2 -->
+                                <li>
+                                    <a href="#" class="roaming">Roaming <span class="arrow">›</span></a>
+                                    <ul class="third-level">
+                                        <li><a href="airtel-world.html">Airtel world</a></li>
+                                        <li><a href="reseau-unique.html">Réseau Unique</a></li>
+                                        <li><a href="free-roaming.html">Free Roaming</a></li>
+                                    </ul>
+                                </li>
+                                <!-- Services à valeur ajoutée - Niveau 2 -->
+                                <li>
+                                    <a href="#">Services à valeur ajoutée <span class="arrow">›</span></a>
+                                    <ul class="third-level">
+                                        <li><a href="musique.html">Musique</a></li>
+                                        <li><a href="divertissement.html">Divertissement</a></li>
+                                    </ul>
+                                </li>
+                                <!-- Taxi Connect - Niveau 2 -->
+                                <li><a href="taxi-connect.html">Taxi Connect</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- NOS AGENCES -->
+                <li>
+                    <a href="Nos Agences.html">NOS AGENCES</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="airtel-shop.html">Airtel Shop</a></li>
+                        <li><a href="distributeurs.html">Distributeurs</a></li>
+                        <li><a href="couverture-reseau.html">Couverture réseau</a></li>
+                    </ul>
+                </li>
+
+                <!-- AIRTEL MONEY -->
+                <li>
+                    <a href="airtel-money.html">AIRTEL MONEY</a>
+                </li>
+
+                <!-- BESOIN D'AIDE -->
+                <li>
+                    <a href="aide.html">BESOIN D'AIDE</a>    
+                </li>
+
+                <!-- E-SIM -->
+                <li><a href="esim.html">E-SIM</a></li>
+
+                <!-- PROMOTIONS -->
+                <li>
+                    <a href="promotions.html">PROMO KELASI</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Sidebar avec background images -->
+        <div class="sidebar">
+            <!-- Background images -->
+            <div class="sidebar-background active" id="bg-double-impact" style="background-image: url('image/V5.png');"></div>
+            <div class="sidebar-background" id="bg-tiktok" style="background-image: url('image/VP.jpeg');"></div>
+            <div class="sidebar-background" id="bg-vsd-weekend" style="background-image: url('image/V5.png');"></div>
+            <div class="sidebar-background" id="bg-jours" style="background-image: url('image/V1.png');"></div>
+            <div class="sidebar-background" id="bg-ya-ngonga" style="background-image: url('https://via.placeholder.com/1920x1080/ff6600/ffffff?text=Ya+Ngonga');"></div>
+            <div class="sidebar-background" id="bg-speciaux" style="background-image: url('image/V2.png');"></div>
+            <div class="sidebar-background" id="bg-surprise" style="background-image: url('https://via.placeholder.com/1920x1080/009688/ffffff?text=Forfaits+Surprise');"></div>
+            
+            <!-- Overlay pour améliorer la lisibilité du texte -->
+            <div class="sidebar-overlay"></div>
+            
+            <div class="sidebar-content" >
+                <div class="sidebar-text"  >
+                    <!-- Textes pour chaque section -->
+                    <div class="sidebar-text-content active" id="sidebar-double-impact" >
+                        <h2>Double Impact!</h2>
+                        <h2>Data jour et nuit<br>Active au *121*4*1#</h2>
+                        <div class="sidebar-title-underline"></div>
+                    </div>
+
+                    <div class="sidebar-text-content" id="sidebar-tiktok">
+                        <h2>TikTok Illimité!</h2>
+                        <h2>24h de divertissement<br>Seulement 300F</h2>
+                        <div class="sidebar-title-underline"></div>
+                    </div>
+
+                    <div class="sidebar-text-content" id="sidebar-vsd-weekend">
+                        <h2>Weekend Vibes!</h2>
+                        <h2>Data illimitée<br>Pour ton week-end</h2>
+                        <div class="sidebar-title-underline"></div>
+                    </div>
+
+                    <div class="sidebar-text-content" id="sidebar-jours">
+                        <h2>Flexibilité!</h2>
+                        <h2>1, 7 ou 30 jours<br>Choisis ta durée</h2>
+                        <div class="sidebar-title-underline"></div>
+                    </div>
+
+                    <div class="sidebar-text-content" id="sidebar-ya-ngonga">
+                        <h2>Ya Ngonga!</h2>
+                        <h2>Forfaits heures<br>Data express</h2>
+                        <div class="sidebar-title-underline"></div>
+                    </div>
+
+                    <div class="sidebar-text-content" id="sidebar-speciaux">
+                        <h2>Spécial!</h2>
+                        <h2>Offres exclusives<br>Pour clients éligibles</h2>
+                        <div class="sidebar-title-underline"></div>
+                    </div>
+
+                    <div class="sidebar-text-content" id="sidebar-surprise">
+                        <h2>Surprise!</h2>
+                        <h2>Forfaits surprises<br>Découvre les avantages</h2>
+                        <div class="sidebar-title-underline"></div>
+                    </div>
+                </div>
+
+                <!-- Conteneur d'images caché -->
+                <div class="promo-image-container" style="display: none;">
+                    <img src="image/V5.png" alt="Double Impact" class="promo-image active" id="img-double-impact">
+                    <img src="image/VP.jpeg" alt="TikTok" class="promo-image" id="img-tiktok">
+                    <img src="image/V5.png" alt="VSD Weekend" class="promo-image" id="img-vsd-weekend">
+                    <img src="image/V1.png" alt="1/7 & 30 jours" class="promo-image" id="img-jours">
+                    <img src="https://via.placeholder.com/260x400/ff6600/ffffff?text=Ya+Ngonga" alt="Ya Ngonga"
+                        class="promo-image" id="img-ya-ngonga">
+                    <img src="image/V2.png" alt="Forfaits Spéciaux" class="promo-image" id="img-speciaux">
+                    <img src="https://via.placeholder.com/260x400/009688/ffffff?text=Forfaits+Surprise"
+                        alt="Forfaits Surprise" class="promo-image" id="img-surprise">
+                </div>
+            </div>
+        </div>
+
+        <!-- Main content en BAS maintenant -->
+        <div class="main-content">
+            <!-- Point d'ancrage pour le retour en haut -->
+            <div id="top-tabs-anchor"></div>
+            
+            <div class="tabs">
+                <a href="#double-impact" class="tab active" data-image="bg-double-impact" data-sidebar="sidebar-double-impact">Double impact</a>
+                <a href="#tiktok" class="tab" data-image="bg-tiktok" data-sidebar="sidebar-tiktok">Forfait TikTok</a>
+                <a href="#vsd-weekend" class="tab" data-image="bg-vsd-weekend" data-sidebar="sidebar-vsd-weekend">Forfaits VSD Weekend</a>
+                <a href="#jours" class="tab" data-image="bg-jours" data-sidebar="sidebar-jours">1 / 7 & 30 jours</a>
+                <a href="#ya-ngonga" class="tab" data-image="bg-ya-ngonga" data-sidebar="sidebar-ya-ngonga">Ya Ngonga (Heures)</a>
+                <a href="#speciaux" class="tab" data-image="bg-speciaux" data-sidebar="sidebar-speciaux">Forfaits Spéciaux</a>
+                <a href="#surprise" class="tab" data-image="bg-surprise" data-sidebar="sidebar-surprise">Forfaits Surprise</a>
+            </div>
+
+            <div class="plans-container">
+                <!-- Section 1: Double Impact -->
+                <div id="double-impact" class="section-title">Nos Forfaits Internet mobile : Double impact</div>
+                <div class="section-intro">
+                    Forfaits accessibles par Airtel money via: <span class="intro-code">*121*4*1#</span> ou
+                    <a href="http://bit.ly/4aK5ztR" class="intro-link">http://bit.ly/4aK5ztR</a>
+                    <br>sur l'application MY Airtel (Crédits / Airtel money)
+                </div>
+
+                <div style="padding: 0 30px;">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Forfait</th>
+                                <th>Prix</th>
+                                <th>Validité jours</th>
+                                <th>Volume / MB</th>
+                                <th>Volume / GB</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Internet 4GB</td>
+                                <td>1 000</td>
+                                <td>3</td>
+                                <td>4 096</td>
+                                <td>4</td>
+                            </tr>
+                            <tr>
+                                <td>Internet 4.5GB</td>
+                                <td>1 000</td>
+                                <td>3</td>
+                                <td>4 608</td>
+                                <td>4,5</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="usage-info">
+                        <div class="usage-title">Mode d'utilisation</div>
+                        <div class="usage-item">4.5GB à 1000F validité 3 jours <strong>via Airtel Money</strong></div>
+                        <div class="usage-item" style="margin-left: 40px;">2.25GB utilisable le jours (6H-minuit)</div>
+                        <div class="usage-item" style="margin-left: 40px;">2.25GB utilisable la nuit (minuit à 6H)</div>
+                        <br>
+                        <div class="usage-item">4G à 1000F validité 3 jours <strong>via crédit de communication</strong>
+                        </div>
+                        <div class="usage-item" style="margin-left: 40px;">2GB utilisable le jours (6H-minuit)</div>
+                        <div class="usage-item" style="margin-left: 40px;">2GB utilisable la nuit (minuit à 6H)</div>
+                        <br>
+                        <a href="https://www.airtel.cg/internetservice/databundle"
+                            class="intro-link">https://www.airtel.cg/internetservice/databundle</a>
+                    </div>
+                    <a href="#top-tabs-anchor" class="back-to-tabs">Retour aux onglets</a>
+                </div>
+
+                <!-- Section 2: TikTok -->
+                <div id="tiktok" class="section-title">Nos Forfaits Internet mobile : Forfait TikTok</div>
+                <div class="section-intro">
+                    Téléchargez et installez MY Airtel App sur PlayStore ou AppStore via
+                    <a href="http://bit.ly/4aK5ztR" class="intro-link">http://bit.ly/4aK5ztR</a>
+                    afin de profiter de votre forfait Tik Tok illimité 1 jour à 300F.
+                    En PLUS les nouveaux utilisateurs ont <strong>1GB gratuit à l'installation</strong> sur le
+                    téléphone.
+                </div>
+
+                <div style="padding: 0 30px;">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Forfait</th>
+                                <th>Prix</th>
+                                <th>Validité jour</th>
+                                <th>Accès direct</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>TikTok illimité</td>
+                                <td>300</td>
+                                <td>1</td>
+                                <td>Uniquement via MY Airtel App</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="padding: 20px 0; font-size: 14px; color: #888;">
+                        PS: Forfait accessible via l'application MY Airtel. Tapez:
+                        <a href="http://bit.ly/4aK5ztR" class="intro-link">http://bit.ly/4aK5ztR</a>
+                        <br>par Crédits / Airtel money
+                        <br><br>
+                        <a href="https://www.airtel.cg/internetservice/databundle"
+                            class="intro-link">https://www.airtel.cg/internetservice/databundle</a>
+                    </div>
+                    <a href="#top-tabs-anchor" class="back-to-tabs">Retour aux onglets</a>
+                </div>
+
+                <!-- Section 3: VSD Weekend -->
+                <div id="vsd-weekend" class="section-title">Nos Forfaits Internet mobile : Forfaits VSD Weekend</div>
+                <div class="section-intro">
+                    Forfaits accessibles via: <span class="intro-code">*121*4*6#</span> ou
+                    <a href="http://bit.ly/4aK5ztR" class="intro-link">http://bit.ly/4aK5ztR</a>
+                    <br>par Crédits / Airtel money)
+                </div>
+
+                <div style="padding: 0 30px;">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Forfait</th>
+                                <th>Prix</th>
+                                <th>Validité jour (s)</th>
+                                <th>Volume / MB</th>
+                                <th>Volume / GB</th>
+                                <th>Accès direct</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>700MB</td>
+                                <td>300</td>
+                                <td>3</td>
+                                <td>700</td>
+                                <td>-</td>
+                                <td>*121*4*6# ou MY Airtel App</td>
+                            </tr>
+                            <tr>
+                                <td>2.5GB</td>
+                                <td>700</td>
+                                <td>3</td>
+                                <td>2 560</td>
+                                <td>2,5</td>
+                                <td>*121*4*6# ou MY Airtel App</td>
+                            </tr>
+                            <tr>
+                                <td>7GB</td>
+                                <td>1 500</td>
+                                <td>3</td>
+                                <td>7 168</td>
+                                <td>7</td>
+                                <td>*121*4*6# ou MY Airtel App</td>
+                            </tr>
+                            <tr>
+                                <td>2GB</td>
+                                <td>500</td>
+                                <td>3</td>
+                                <td>2 048</td>
+                                <td>2</td>
+                                <td>Uniquement via MY Airtel App</td>
+                            </tr>
+                            <tr>
+                                <td>5.5GB</td>
+                                <td>1 200</td>
+                                <td>3</td>
+                                <td>5 632</td>
+                                <td>5,5</td>
+                                <td>Uniquement via MY Airtel App</td>
+                            </tr>
+                            <tr>
+                                <td>12GB</td>
+                                <td>2 500</td>
+                                <td>3</td>
+                                <td>12 288</td>
+                                <td>12</td>
+                                <td>Uniquement via MY Airtel App</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="padding: 20px 0;">
+                        <a href="https://www.airtel.cg/internetservice/databundle"
+                            class="intro-link">https://www.airtel.cg/internetservice/databundle</a>
+                    </div>
+                    <a href="#top-tabs-anchor" class="back-to-tabs">Retour aux onglets</a>
+                </div>
+
+                <!-- Section 4: 1/7 & 30 jours -->
+                <div id="jours" class="section-title">Nos Forfaits Internet mobile : 1 / 7 & 30 jours</div>
+                <div class="section-intro">
+                    Ces forfaits internet accessibles via <span class="intro-code">*121*4#</span> par tous les clients
+                    prépayés, se présentent comme suit:
+                </div>
+
+                <div style="padding: 0 30px;">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Forfait</th>
+                                <th>Prix</th>
+                                <th>Validité jour (s)</th>
+                                <th>Volume / MB</th>
+                                <th>Volume / GB</th>
+                                <th>Accès direct</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Internet 110MB</td>
+                                <td>150</td>
+                                <td>1</td>
+                                <td>110</td>
+                                <td>-</td>
+                                <td>*121*4*2*1#</td>
+                            </tr>
+                            <tr>
+                                <td>Internet 400MB</td>
+                                <td>250</td>
+                                <td>1</td>
+                                <td>400</td>
+                                <td>-</td>
+                                <td>*121*4*2*2#</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="padding: 20px 0 40px 0;">
+                        <a href="https://www.airtel.cg/internetservice/databundle"
+                            class="intro-link">https://www.airtel.cg/internetservice/databundle</a>
+                    </div>
+                    <a href="#top-tabs-anchor" class="back-to-tabs">Retour aux onglets</a>
+                </div>
+
+                <!-- Section 5: Ya Ngonga (Forfaits Heures) -->
+                <div id="ya-ngonga" class="section-title">Nos Forfaits Internet mobile : Forfaits Ya Ngonga (Forfaits Heures)</div>
+                <div class="section-intro">
+                    Ces forfaits sont accessibles à tous les abonnés via:
+                    <br><br>
+                    <span class="intro-code">*121*4#</span> puis choisir <strong style="color: #7b3fb5;">6. Forfaits Ya Ngonga</strong>
+                </div>
+
+                <div style="padding: 0 30px;">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Forfait</th>
+                                <th>Prix</th>
+                                <th>Validité Heures</th>
+                                <th>Volume / MB</th>
+                                <th>Volume / GB</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Internet 1.5B</td>
+                                <td>250</td>
+                                <td>2</td>
+                                <td>1 536</td>
+                                <td>1,5</td>
+                            </tr>
+                            <tr>
+                                <td>Internet 3.5GB</td>
+                                <td>450</td>
+                                <td>4</td>
+                                <td>3 584</td>
+                                <td>3,5</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="padding: 20px 0;">
+                        <a href="https://www.airtel.cg/internetservice/databundle" class="intro-link">https://www.airtel.cg/internetservice/databundle</a>
+                    </div>
+                    <a href="#top-tabs-anchor" class="back-to-tabs">Retour aux onglets</a>
+                </div>
+
+                <!-- Section 6: Forfaits Spéciaux -->
+                <div id="speciaux" class="section-title">Nos Forfaits Internet mobile : Forfaits Spéciaux</div>
+                <div class="section-intro">
+                    Ces forfaits ne sont visibles que par les clients éligibles :
+                </div>
+
+                <div style="padding: 0 30px;">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Forfait</th>
+                                <th>Prix</th>
+                                <th>Validité jour (s)</th>
+                                <th>Volume / MB</th>
+                                <th>Volume / GB</th>
+                                <th>Accès direct</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Internet 240MB</td>
+                                <td>300</td>
+                                <td>1</td>
+                                <td>240</td>
+                                <td>-</td>
+                                <td>*121*4*1#</td>
+                            </tr>
+                            <tr>
+                                <td>Internet 400MB</td>
+                                <td>500</td>
+                                <td>1</td>
+                                <td>400</td>
+                                <td>-</td>
+                                <td>*121*4*1#</td>
+                            </tr>
+                            <tr>
+                                <td>Internet 650MB</td>
+                                <td>650</td>
+                                <td>1</td>
+                                <td>650</td>
+                                <td>-</td>
+                                <td>*121*4*1#</td>
+                            </tr>
+                            <tr>
+                                <td>Internet 1GB</td>
+                                <td>300</td>
+                                <td>1</td>
+                                <td>1 024</td>
+                                <td>1</td>
+                                <td>*121*0*2*2#</td>
+                            </tr>
+                            <tr>
+                                <td>Internet 270MB</td>
+                                <td>350</td>
+                                <td>3</td>
+                                <td>270</td>
+                                <td>-</td>
+                                <td>*121*4*1#</td>
+                            </tr>
+                            <tr>
+                                <td>Internet 788MB</td>
+                                <td>500</td>
+                                <td>3</td>
+                                <td>788</td>
+                                <td>-</td>
+                                <td>*121*4*1#</td>
+                            </tr>
+                            <tr>
+                                <td>Internet 2GB</td>
+                                <td>500</td>
+                                <td>3</td>
+                                <td>2 048</td>
+                                <td>2</td>
+                                <td>*121*0*2*2#</td>
+                            </tr>
+                            <tr>
+                                <td>Internet 2.9GB</td>
+                                <td>1 000</td>
+                                <td>3</td>
+                                <td>2 970</td>
+                                <td>2,9</td>
+                                <td>*121*4*1#</td>
+                            </tr>
+                            <tr>
+                                <td>Internet 5GB</td>
+                                <td>1 000</td>
+                                <td>7</td>
+                                <td>5 120</td>
+                                <td>5</td>
+                                <td>*121*0*2*2#</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="padding: 20px 0;">
+                        <a href="https://www.airtel.cg/internetservice/databundle" class="intro-link">https://www.airtel.cg/internetservice/databundle</a>
+                    </div>
+                    <a href="#top-tabs-anchor" class="back-to-tabs">Retour aux onglets</a>
+                </div>
+
+                <!-- Section 7: Forfaits Surprise -->
+                <div id="surprise" class="section-title">Nos Forfaits Internet mobile : Forfaits Surprise</div>
+                <div class="section-intro">
+                    Ces forfaits ne sont visibles que par les clients éligibles via:
+                    <br><br>
+                    <span class="intro-code">*121*4#</span> puis choisir <strong style="color: #7b3fb5;">5. Forfaits Surprise</strong>
+                </div>
+
+                <div style="padding: 0 30px;">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Forfait</th>
+                                <th>Prix</th>
+                                <th>Validité jours</th>
+                                <th>Volume / MB</th>
+                                <th>Accès direct</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Internet 500MB</td>
+                                <td>350</td>
+                                <td>3</td>
+                                <td>500</td>
+                                <td>*121*4#</td>
+                            </tr>
+                            <tr>
+                                <td>Internet 900MB</td>
+                                <td>500</td>
+                                <td>3</td>
+                                <td>900</td>
+                                <td>*121*4#</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="padding: 20px 0;">
+                        <a href="https://www.airtel.cg/internetservice/databundle" class="intro-link">https://www.airtel.cg/internetservice/databundle</a>
+                    </div>
+                    <a href="#top-tabs-anchor" class="back-to-tabs">Retour aux onglets</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOUVEAU FOOTER -->
+    <footer>
+        <div class="footer-grid-section">
+            <div class="footer-grid-column">
+                <h5>A propos d'Artiel</h5>
+                <ul>
+                    <li><a href="#">Accès rapide</a></li>
+                    <li><a href="#">Aide</a></li>
+                    <li><a href="#">Privacy</a></li>
+                </ul>
+            </div>
+            <div class="footer-grid-column">
+                <h5>Carrière</h5>
+                <ul>
+                    <li><a href="#">Actualités</a></li>
+                    <li><a href="#">Couverture</a></li>
+                    <li><a href="#">Chiffre Safety</a></li>
+                </ul>
+            </div>
+            <div class="footer-grid-column">
+                <h5>Media</h5>
+                <ul>
+                    <li><a href="#">Programmes sociaux/CSR</a></li>
+                    <li><a href="#">Nos Boutiques</a></li>
+                    <li><a href="#">Besoin de Suggestion</a></li>
+                </ul>
+            </div>
+            <div class="footer-grid-column">
+                <h5>Arnet Money</h5>
+                <ul>
+                    <li><a href="#">Cataloger d'interconnexion</a></li>
+                    <li><a href="#">Numéros utiles</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom-section">
+            <div class="footer-bottom-links-extended">
+                <a href="#">NOUS CONTRACTER</a>
+                <a href="#">DROITS D'AUTEUR</a>
+                <a href="#">TERMES ET CONDITIONS</a>
+                <a href="#">AU TERMES ET CONDITIONS GSM</a>
+                <a href="#">AVIS DE CONFIDENTIALITÉ</a>
+            </div>
+        </div>
+
+        <div class="copyright-section">
+            <p>© 2024 Arnet Africa. Tous les droits sont réservés.</p>
+            <p style="margin-top: 10px;">RETOUR AU SOMMET</p>
+        </div>
+
+        <div class="social-links" style="justify-content: center; margin-top: 20px;">
+            <a href="#" class="social-link">T</a>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top">↑</a>
+
+    <script>
+        // Initialiser les icônes Lucide
+        lucide.createIcons();
+
+        // Menu mobile
+        document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+            document.getElementById('nav-links').classList.toggle('active');
+        });
+
+        // Fermer le menu mobile quand on clique sur un lien
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('nav-links').classList.remove('active');
+            });
+        });
+
+        // Gestion du changement d'image, sidebar-text et onglet actif
+        const tabs = document.querySelectorAll('.tab');
+        const backgrounds = document.querySelectorAll('.sidebar-background');
+        const sidebarTexts = document.querySelectorAll('.sidebar-text-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // Retirer la classe active de tous les onglets
+                tabs.forEach(t => t.classList.remove('active'));
+
+                // Ajouter la classe active à l'onglet cliqué
+                this.classList.add('active');
+
+                // Cacher toutes les images de background
+                backgrounds.forEach(bg => bg.classList.remove('active'));
+
+                // Cacher tous les textes du sidebar
+                sidebarTexts.forEach(text => text.classList.remove('active'));
+
+                // Afficher l'image de background correspondante
+                const backgroundId = this.getAttribute('data-image');
+                const targetBackground = document.getElementById(backgroundId);
+                if (targetBackground) {
+                    targetBackground.classList.add('active');
+                }
+
+                // Afficher le texte du sidebar correspondant
+                const sidebarId = this.getAttribute('data-sidebar');
+                const targetSidebar = document.getElementById(sidebarId);
+                if (targetSidebar) {
+                    targetSidebar.classList.add('active');
+                }
+
+                // Navigation vers l'ancrage
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Gestion du bouton "Retour au sommet" dans le footer
+        document.querySelector('.copyright-section p:last-child').addEventListener('click', function() {
+            document.getElementById('top-tabs-anchor').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Gestion du bouton "Retour au sommet" fixe
+        document.querySelector('.back-to-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('top-tabs-anchor').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

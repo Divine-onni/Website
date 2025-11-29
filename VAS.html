@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services VAS - Airtel Congo</title>
+    <script src="/_sdk/element_sdk.js"></script>
+    <script src="/_sdk/data_sdk.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        /* Styles de la navbar du premier fichier */
+        .header-top {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 10px 0;
+        }
+
+        .header-top-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 30px;
+        }
+
+        .header-top-content a {
+            color: #666;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+
+        .header-top-content a:hover {
+            color: #d32f2f;
+        }
+
+        nav {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #e30613;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .nav-links > li {
+            position: relative;
+        }
+
+        .nav-links > li > a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            padding: 25px 0;
+            display: block;
+            transition: color 0.3s;
+            white-space: nowrap;
+        }
+
+        .nav-links > li > a:hover,
+        .nav-links > li > a.active {
+            color: #d32f2f;
+        }
+
+        .nav-links > li > a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #d32f2f;
+        }
+
+        /* Styles pour les menus déroulants de la nouvelle navigation */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            min-width: 240px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            margin-top: 10px;
+            padding: 8px 0;
+            z-index: 1001;
+        }
+
+        .nav-links > li:hover > .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            margin-top: 0;
+        }
+
+        .dropdown-menu a {
+            padding: 12px 20px;
+            border-bottom: none;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .dropdown-menu a:hover {
+            background: rgba(211, 47, 47, 0.05);
+            color: #d32f2f;
+        }
+
+        .dropdown-menu .arrow {
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        /* Sous-menu de second niveau */
+        .sub-dropdown {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            margin-left: 10px;
+            padding: 8px 0;
+            z-index: 1002;
+        }
+
+        .dropdown-menu li:hover > .sub-dropdown {
+            opacity: 1;
+            visibility: visible;
+            margin-left: 5px;
+        }
+
+        .sub-dropdown a {
+            padding: 10px 20px;
+            font-size: 13px;
+            display: block;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .sub-dropdown a:hover {
+            background: rgba(211, 47, 47, 0.05);
+            color: #d32f2f;
+        }
+
+        /* Menu à 3 niveaux */
+        .sub-dropdown li {
+            position: relative;
+        }
+
+        .third-level {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            margin-left: 10px;
+            padding: 8px 0;
+            z-index: 1003;
+        }
+
+        .sub-dropdown li:hover > .third-level {
+            opacity: 1;
+            visibility: visible;
+            margin-left: 5px;
+        }
+
+        .third-level a {
+            padding: 10px 20px;
+            font-size: 13px;
+            display: block;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .third-level a:hover {
+            background: rgba(211, 47, 47, 0.05);
+            color: #d32f2f;
+        }
+
+        /* Styles pour les éléments spéciaux en rouge */
+        .services-internet {
+            color: #d32f2f !important;
+            font-weight: bold;
+        }
+
+        .roaming {
+            color: #d32f2f !important;
+            font-weight: bold;
+        }
+
+        /* Styles pour les sous-menus supplémentaires */
+        .dropdown-menu .has-submenu {
+            position: relative;
+        }
+
+        .dropdown-menu .has-submenu > a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dropdown-menu .sub-level {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background: white;
+            min-width: 220px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 0.5rem 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-menu .has-submenu:hover .sub-level {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        /* Animation pour l'indicateur de sous-menu */
+        .arrow {
+            font-size: 0.875rem;
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .has-submenu:hover .arrow {
+            transform: rotate(90deg);
+        }
+
+        /* Mobile menu button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                padding-left: 1rem;
+            }
+
+            .sub-dropdown,
+            .third-level {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                padding-left: 1rem;
+            }
+        }
+
+        /* Styles du contenu existant (conservés) */
+        .slider-container {
+            width: 100%;
+            height: 500px;
+            position: relative;
+            background: white;
+            overflow: hidden;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .slide-content {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .text-section {
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: black;
+            margin-top: 20px;
+        }
+
+        .text-section h2 {
+            font-size: 48px;
+            margin-bottom: 24px;
+            font-weight: 700;
+            color: #E20C18;
+        }
+
+        .text-section p {
+            font-size: 20px;
+            line-height: 1.6;
+            opacity: 0.95;
+            color: black;
+            margin-bottom: 30px;
+        }
+
+        .service-code {
+            font-size: 24px;
+            font-weight: bold;
+            color: #E20C18;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .know-more-btn {
+            background-color: #E20C18;
+            color: #fff;
+            padding: 15px 40px;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 5px;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(230,0,0,0.4);
+            width: fit-content;
+        }
+
+        .know-more-btn:hover {
+            background-color: #C00A15;
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(230,0,0,0.6);
+        }
+
+        .image-section { 
+            padding: 20px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .slide-image {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .navigation {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 10;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(226, 12, 24, 0.3);
+            cursor: pointer;
+            transition: 0.3s;
+            border: none;
+        }
+
+        .nav-dot.active {
+            background: #E20C18;
+            width: 32px;
+            border-radius: 6px;
+        }
+
+        .arrow-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(226, 12, 24, 0.8);
+            border: none;
+            color: white;
+            font-size: 32px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .arrow-btn.prev { left: 30px; }
+        .arrow-btn.next { right: 30px; }
+
+        .arrow-btn:hover {
+            background: #E20C18;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .slide-content {
+                grid-template-columns: 1fr;
+            }
+
+            .text-section { padding: 30px; }
+
+            .text-section h2 { font-size: 32px; }
+            .text-section p { font-size: 16px; }
+            .service-code { font-size: 18px; }
+
+            .arrow-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+            }
+
+            .arrow-btn.prev { left: 15px; }
+            .arrow-btn.next { right: 15px; }
+        }
+
+        /* Section Services VAS - CORRECTIONS APPLIQUÉES */
+        .vas-services {
+            padding: 80px;
+            background: white;
+        }
+
+        .vas-section-title {
+            text-align: center;
+            font-size: 42px;
+            color: #333;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .vas-section-title span {
+            color: rgba(226, 12, 24);
+        }
+
+        .vas-section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: rgba(226, 12, 24);
+        }
+
+        /* CORRECTION PRINCIPALE : Grille uniforme pour toutes les cartes */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* CORRECTION : Suppression du container spécial pour la 4ème carte */
+        /* Toutes les cartes sont maintenant dans la même grille */
+
+        /* CORRECTION : Cartes avec hauteur fixe et uniforme */
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #f0f0f0;
+            /* CORRECTION : Hauteur fixe pour uniformité */
+            height: 580px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(226, 12, 24);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(230, 0, 0, 0.15);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            background: #fff5f5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            color: rgba(226, 12, 24);
+        }
+
+        .service-card h3 {
+            font-size: 26px;
+            color: rgba(226, 12, 24);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .service-card p {
+            font-size: 18px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        /* CORRECTION : Hauteur fixe pour la liste de fonctionnalités */
+        .features-list {
+            text-align: left;
+            margin-bottom: 20px;
+            /* CORRECTION : Hauteur fixe pour uniformiser */
+            height: 180px;
+            overflow-y: auto;
+            padding-right: 10px;
+            flex-grow: 1;
+        }
+
+        .features-list::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .features-list::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 2px;
+        }
+
+        .features-list::-webkit-scrollbar-thumb {
+            background: rgba(226, 12, 24, 0.5);
+            border-radius: 2px;
+        }
+
+        .features-list li {
+            color: #666;
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+            font-size: 16px;
+        }
+
+        .features-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: rgba(226, 12, 24);
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .service-access {
+            background: #f8f8f8;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .access-code {
+            font-size: 22px;
+            font-weight: bold;
+            color: rgba(226, 12, 24);
+            margin-bottom: 5px;
+        }
+
+        .cost {
+            font-size: 18px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .service-link {
+            color: rgba(226, 12, 24);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.3s;
+        }
+
+        .service-link:hover {
+            gap: 12px;
+        }
+
+        /* Footer */
+        footer {
+            background: white;
+            color: white;
+            padding: 60px 80px 30px;
+        }
+
+        .footer-grid-section {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-grid-column h5 {
+            color: black;
+            font-size: 14px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .footer-grid-column ul {
+            list-style: none;
+        }
+
+        .footer-grid-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-grid-column ul li a {
+            color: black;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+
+        .footer-grid-column ul li a:hover {
+            color: rgba(226, 12, 24);
+        }
+
+        .footer-bottom-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-bottom-links-extended {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .footer-bottom-links-extended a {
+            color: black;
+            text-decoration: none;
+            font-size: 12px;
+            transition: color 0.3s;
+        }
+
+        .footer-bottom-links-extended a:hover {
+            color: rgba(226, 12, 24);
+        }
+
+        .copyright-section {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: black;
+            font-size: 13px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .social-link:hover {
+            background: rgba(226, 12, 24);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #e60000;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 20px;
+            box-shadow: 0 5px 20px rgba(230, 0, 0, 0.4);
+            transition: transform 0.3s;
+            z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .vas-services {
+                padding: 40px 20px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                max-width: 100%;
+            }
+
+            .service-card {
+                height: auto; /* Hauteur automatique sur mobile */
+                min-height: 520px;
+                padding: 20px;
+            }
+
+            .features-list {
+                height: auto; /* Hauteur automatique sur mobile */
+                max-height: 180px;
+            }
+
+            footer {
+                padding: 40px 20px 20px;
+            }
+
+            .footer-grid-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Défilement fluide pour les ancres */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Barre de navigation globale - NOUVELLE VERSION -->
+    <div class="header-top">
+        <div class="header-top-content">
+            <a href="index.html">INDIVIDUEL</a>
+            <a href="entreprise.html">ENTREPRISE</a>
+            <a href="broadband.html">BROADBAND</a>
+            <a href="airtel-money.html">AIRTEL MONEY PORTAL</a>
+            <a href="about.html">À PROPOS DE NOUS</a>
+        </div>
+    </div>
+
+   <!-- Navigation Principale -->
+    <nav class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <!-- Logo Airtel -->
+                <a href="index.html" class="logo">
+                <img src="image/Airtel_Logo.jpg" alt="Airtel Congo" class="logo-img">
+                airtel
+            </a>
+
+            <button class="mobile-menu-btn" id="mobile-menu-toggle">
+                <i data-lucide="menu"></i>
+            </button>
+
+            <ul class="nav-links" id="nav-links">
+                <!-- PAYEZ ET RECHARGEZ -->
+                <li>
+                    <a href="paiement-recharge.html" class="active">PAYEZ ET RECHARGEZ</a>
+                    <ul class="dropdown-menu">
+                        <!-- Postpayé avec sous-menu -->
+                        <li class="has-submenu">
+                            <a href="#" data-section="postpaye">Postpayé <span class="arrow">›</span></a>
+                            <ul class="sub-level">
+                                <li><a href="#" data-section="postpaye" data-subsection="postpaye-payment">Paiement de
+                                        facture en ligne</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Prépayé avec sous-menu -->
+                        <li class="has-submenu">
+                            <a href="#" data-section="prepaye">Prépayé <span class="arrow">›</span></a>
+                            <ul class="sub-level">
+                                <li><a href="#" data-section="prepaye" data-subsection="prepaye-recharge">Rechargez un
+                                        compte prépayé</a></li>
+                                <li><a href="#" data-section="prepaye" data-subsection="prepaye-forfait">Activez un
+                                        forfait Internet</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Broadband (sans sous-menu) -->
+                        <li><a href="#" data-section="broadband">Broadband</a></li>
+                    </ul>
+                </li>
+
+                <!-- SERVICES -->
+                <li>
+                    <a href="services.html">SERVICES</a>
+                    <ul class="dropdown-menu">
+                        <!-- PREPAYÉ - Niveau 1 -->
+                        <li>
+                            <a href="#">Prepayé <span class="arrow">›</span></a>
+                            <ul class="sub-dropdown">
+                                <!-- Appels & SMS - Niveau 2 -->
+                                <li>
+                                    <a href="#">Appels & SMS <span class="arrow">›</span></a>
+                                    <ul class="third-level">
+                                        <li><a href="appel locaux.html">Appels locaux</a></li>
+                                        <li><a href="appels-internationaux.html">Appels internationaux</a></li>
+                                        <li><a href="SMS.html">SMS</a></li>
+                                    </ul>
+                                </li>
+                                <!-- Services Internet - Niveau 2 -->
+                                <li>
+                                    <a href="#" class="services-internet">Services Internet <span
+                                            class="arrow">›</span></a>
+                                    <ul class="third-level">
+                                        <li><a href="forfait internet.html">Forfaits internet</a></li>
+                                        <li><a href="faq-internet.html">Foire aux questions</a></li>
+                                    </ul>
+                                </li>
+                                <!-- Roaming - Niveau 2 -->
+                                <li>
+                                    <a href="#" class="roaming">Roaming <span class="arrow">›</span></a>
+                                    <ul class="third-level">
+                                        <li><a href="airtelworld.html">Airtel world</a></li>
+                                        <li><a href="one airtel.html">Réseau Unique</a></li>
+                                        <li><a href="free roaming.html">Free Roaming</a></li>
+                                    </ul>
+                                </li>
+                                <!-- Services à valeur ajoutée - Niveau 2 -->
+                                <li>
+                                    <a href="VAS.html">Services à valeur ajoutée <span class="arrow">›</span></a>
+                                    
+                                </li>
+                                <!-- Taxi Connect - Niveau 2 -->
+                                <li><a href="taxi-connect.html">Taxi Connect</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- NOS AGENCES -->
+                <li>
+                    <a href="Nos Agences.html">NOS AGENCES</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="airtel-shop.html">Airtel Shop</a></li>
+                        <li><a href="distributeurs.html">Distributeurs</a></li>
+                        <li><a href="couverture-reseau.html">Couverture réseau</a></li>
+                    </ul>
+                </li>
+
+                <!-- AIRTEL MONEY -->
+                <li>
+                    <a href="airtel-money.html">AIRTEL MONEY</a>
+                </li>
+
+                <!-- BESOIN D'AIDE -->
+                <li>
+                    <a href="aide.html">BESOIN D'AIDE</a>    
+                </li>
+
+                <!-- E-SIM -->
+                <li><a href="esim.html">E-SIM</a></li>
+
+                <!-- PROMOTIONS -->
+                <li>
+                    <a href="promotions.html">PROMO KELASI</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+     <div class="slider-container">
+        <!-- SLIDE 1 - SANTÉ NA NGAI -->
+        <div class="slide active" data-slide="0">
+            <div class="slide-content">
+                <div class="text-section">
+                    <h2>Santé na Ngai</h2>
+                    <div class="service-code">Composez *121*77#</div>
+                    <p>Accédez à des conseils santé personnalisés, des consultations médicales à distance et un suivi de votre bien-être au quotidien.</p>
+                    <a href="#service-sante" class="know-more-btn">En savoir plus</a>
+                </div>
+                <div class="image-section">
+                    <div class="slide-image" style="background-image: url('image/mp.png');">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 2 - BASSANGO -->
+        <div class="slide" data-slide="1">
+            <div class="slide-content">
+                <div class="text-section">
+                    <h2>Bassango</h2>
+                    <div class="service-code">Composez *121*78#</div>
+                    <p>Restez informé avec les dernières nouvelles, actualités nationales et internationales directement sur votre mobile.</p>
+                    <a href="#service-basango" class="know-more-btn">En savoir plus</a>
+                </div>
+                <div class="image-section">
+                    <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1504711434969-e33886168f5c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3 - AIRTEL GAME BOLINGO -->
+        <div class="slide" data-slide="2">
+            <div class="slide-content">
+                <div class="text-section">
+                    <h2>Airtel Game Bolingo</h2>
+                    <div class="service-code">Composez *121*79#</div>
+                    <p>Découvrez une collection de jeux passionnants et divertissez-vous où que vous soyez avec vos jeux préférés.</p>
+                    <a href="#service-game" class="know-more-btn">En savoir plus</a>
+                </div>
+                <div class="image-section">
+                    <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4 - FRIENDZ CHAT -->
+        <div class="slide" data-slide="3">
+            <div class="slide-content">
+                <div class="text-section">
+                    <h2>Friendz Chat</h2>
+                    <div class="service-code">Composez *121*80#</div>
+                    <p>Connectez-vous avec de nouvelles personnes, échangez et créez de nouvelles amitiés dans un espace convivial et sécurisé.</p>
+                    <a href="#service-friendz" class="know-more-btn">En savoir plus</a>
+                </div>
+                <div class="image-section">
+                    <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 5 - SOS -->
+        <div class="slide" data-slide="4">
+            <div class="slide-content">
+                <div class="text-section">
+                    <h2>SOS</h2>
+                    <div class="service-code">Composez *121*81#</div>
+                    <p>Service d'urgence disponible 24h/24. Contactez rapidement les services d'assistance en cas de besoin critique.</p>
+                    <a href="#service-sos" class="know-more-btn">En savoir plus</a>
+                </div>
+                <div class="image-section">
+                    <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1582560469781-1965b9af903d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <button class="arrow-btn prev">‹</button>
+        <button class="arrow-btn next">›</button>
+
+        <div class="navigation">
+            <button class="nav-dot active" data-slide="0"></button>
+            <button class="nav-dot" data-slide="1"></button>
+            <button class="nav-dot" data-slide="2"></button>
+            <button class="nav-dot" data-slide="3"></button>
+            <button class="nav-dot" data-slide="4"></button>
+        </div>
+    </div>
+
+
+    <!-- Section Services VAS - CORRECTION APPLIQUÉE -->
+    <section class="vas-services" id="services">
+        <h2 class="vas-section-title">Nos Services <span>VAS</span></h2>
+
+        <div class="services-grid">
+            <!-- Service Basango -->
+            <div class="service-card" id="service-basango">
+                <div class="service-icon">📰</div>
+                <h3>Basango</h3>
+                <p>Restez informé avec des contenus diversifiés et actualisés</p>
+
+                <div class="features-list">
+                    <li>Sport</li>
+                    <li>Pharmacie de garde</li>
+                    <li>Divertissement</li>
+                    <li>Astuces et conseils</li>
+                    <li>To kende kelassi</li>
+                    <li>Religion</li>
+                    <li>Agence immobilière</li>
+                    <li>Santé</li>
+                    <li>Appel d'offre</li>
+                    <li>Offre d'emploi</li>
+                    <li>Airtel Yekola</li>
+                </div>
+
+                <div class="service-access">
+                    <div class="access-code">*503#</div>
+                    <div class="cost">50F / contenu</div>
+                </div>
+
+                <a href="https://www.airtel.cg/valueaddedservices" class="service-link">
+                    
+                </a>
+            </div>
+
+            <!-- Service Bolingo -->
+            <div class="service-card" id="service-bolingo">
+                <div class="service-icon">💖</div>
+                <h3>Bolingo</h3>
+                <p>Service dédié aux fans de mots d'amour et aux poètes</p>
+
+                <div class="features-list">
+                    <li>Calculateur de compatibilité amoureuse</li>
+                    <li>Jeux d'amour avec partenaires</li>
+                    <li>Rendez-vous à l'aveugle</li>
+                    <li>Citations d'amour</li>
+                    <li>Conseils d'amour</li>
+                    <li>Compatibilités du zodiaque</li>
+                    <li>Caractéristiques du zodiaque</li>
+                </div>
+
+                <div class="service-access">
+                    <div class="access-code">*505#</div>
+                    <div class="cost">50F / contenu</div>
+                </div>
+
+                <a href="https://www.airtel.cg/valueaddedservices" class="service-link">
+                    
+                </a>
+            </div>
+
+            <!-- Service Airtel Game -->
+            <div class="service-card" id="service-game">
+                <div class="service-icon">🎮</div>
+                <h3>Airtel Game</h3>
+                <p>Plateforme de jeux vidéo pour les vrais passionnés</p>
+
+                <div class="features-list">
+                    <li>Jeux en ligne accessibles</li>
+                    <li>Plateforme optimisée 4G</li>
+                    <li>Large sélection de jeux</li>
+                    <li>Jouez à tout moment</li>
+                </div>
+
+                <div class="service-access">
+                    <div style="margin-bottom: 12px;">
+                        <div style="font-weight: bold; margin-bottom: 5px; font-size: 16px;">Par SMS :</div>
+                        <div style="font-size: 16px;">Envoyez "CG" au 158</div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 4px;">
+                        <div style="font-size: 16px;"><strong>50F</strong> pour 1 jour</div>
+                        <div style="font-size: 16px;"><strong>250F</strong> pour 7 jours</div>
+                        <div style="font-size: 16px;"><strong>750F</strong> pour 30 jours</div>
+                    </div>
+                </div>
+
+                <a href="https://www.airtel.cg/valueaddedservices" class="service-link">
+                    
+                </a>
+            </div>
+
+            <!-- Service Santé na nga - CORRECTION : Maintenant dans la même grille -->
+            <div class="service-card" id="service-sante">
+                <div class="service-icon">🏥</div>
+                <h3>Santé na nga</h3>
+                <p>Service de santé et bien-être accessible à tous</p>
+
+                <div class="features-list">
+                    <li>Conseils santé personnalisés</li>
+                    <li>Rappels de prise de médicaments</li>
+                    <li>Informations sur les maladies</li>
+                    <li>Conseils nutritionnels</li>
+                    <li>Suivi de bien-être</li>
+                    <li>Alertes santé</li>
+                </div>
+
+                <div class="service-access">
+                    <div class="access-code">*504#</div>
+                    <div class="cost">50F / consultation</div>
+                </div>
+
+                <a href="https://www.airtel.cg/valueaddedservices" class="service-link">
+                    
+                </a>
+            </div>
+
+            <!-- Service Friendz Chat -->
+            <div class="service-card" id="service-friendz">
+                <div class="service-icon">💬</div>
+                <h3>Friendz Chat</h3>
+                <p>Rencontrez de nouveaux amis près de chez vous et chattez sans limites</p>
+
+                <div class="features-list">
+                    <li>Nouvelles rencontres locales</li>
+                    <li>Chat illimité</li>
+                    <li>Interface conviviale</li>
+                    <li>Connexion facile</li>
+                    <li>Communauté active</li>
+                </div>
+
+                <div class="service-access">
+                    <div class="access-code">*145#</div>
+                    <div class="cost">À partir de 30F</div>
+                </div>
+
+                <a href="https://www.airtel.cg/valueaddedservices" class="service-link">
+                    
+                </a>
+            </div>
+
+            <!-- Service SOS Crédit -->
+            <div class="service-card" id="service-sos">
+                <div class="service-icon">💰</div>
+                <h3>SOS Crédit</h3>
+                <p>Empruntez du crédit en cas de besoin - Impossible de rester sans crédit</p>
+
+                <div class="features-list">
+                    <li>Crédit d'urgence disponible</li>
+                    <li>Procédure simple et rapide</li>
+                    <li>Pas de justificatifs complexes</li>
+                    <li>Accessible 24h/24</li>
+                    <li>Service sécurisé</li>
+                </div>
+
+                <div class="service-access">
+                    <div class="access-code">*143#</div>
+                    <div class="cost">Pour découvrir</div>
+                </div>
+
+                <a href="https://www.airtel.cg/valueaddedservices" class="service-link">
+                    
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid-section">
+            <div class="footer-grid-column">
+                <h5>A propos d'Airtel</h5>
+                <ul>
+                    <li><a href="#">Accès rapide</a></li>
+                    <li><a href="#">Aide</a></li>
+                    <li><a href="#">Privacy</a></li>
+                </ul>
+            </div>
+            <div class="footer-grid-column">
+                <h5>Carrière</h5>
+                <ul>
+                    <li><a href="#">Actualités</a></li>
+                    <li><a href="#">Couverture</a></li>
+                    <li><a href="#">Chiffre Safety</a></li>
+                </ul>
+            </div>
+            <div class="footer-grid-column">
+                <h5>Media</h5>
+                <ul>
+                    <li><a href="#">Programmes sociaux/CSR</a></li>
+                    <li><a href="#">Nos Boutiques</a></li>
+                    <li><a href="#">Besoin de Suggestion</a></li>
+                </ul>
+            </div>
+            <div class="footer-grid-column">
+                <h5>Airtel Money</h5>
+                <ul>
+                    <li><a href="#">Catalogue d'interconnexion</a></li>
+                    <li><a href="#">Numéros utiles</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom-section">
+            <div class="footer-bottom-links-extended">
+                <a href="#">NOUS CONTRACTER</a>
+                <a href="#">DROITS D'AUTEUR</a>
+                <a href="#">TERMES ET CONDITIONS</a>
+                <a href="#">AU TERMES ET CONDITIONS GSM</a>
+                <a href="#">AVIS DE CONFIDENTIALITÉ</a>
+            </div>
+        </div>
+
+        <div class="copyright-section">
+            <p>© 2024 Airtel Africa. Tous les droits sont réservés.</p>
+            <p style="margin-top: 10px;"><a href="#top" style="color: black; text-decoration: none;">RETOUR AU SOMMET</a></p>
+        </div>
+
+        <div class="social-links">
+            <a href="#" class="social-link">T</a>
+            <a href="#" class="social-link">F</a>
+            <a href="#" class="social-link">I</a>
+            <a href="#" class="social-link">L</a>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top">↑</a>
+
+    <script>
+        // Initialiser les icônes Lucide
+        lucide.createIcons();
+
+        // Menu mobile
+        document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+            document.getElementById('nav-links').classList.toggle('active');
+        });
+
+        // Fermer le menu mobile quand on clique sur un lien
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('nav-links').classList.remove('active');
+            });
+        });
+
+        // SDK configuration
+        const defaultConfig = {
+            main_title: "Services VAS - Airtel Congo",
+            background_color: "#e20c18",
+            text_color: "#ffffff",
+            accent_color: "#e60000"
+        };
+
+        async function onConfigChange(config) {
+            const container = document.querySelector('.vas-hero');
+            if (container) container.style.background = config.background_color || defaultConfig.background_color;
+
+            document.querySelectorAll('.text-section').forEach(s => {
+                s.style.color = config.text_color || defaultConfig.text_color;
+            });
+        }
+
+        function mapToCapabilities(config) {
+            return { recolorables: [], borderables: [], fontEditable: undefined, fontSizeable: undefined };
+        }
+
+        function mapToEditPanelValues(config) {
+            return new Map(Object.entries(config));
+        }
+
+        if (window.elementSdk) {
+            window.elementSdk.init({ defaultConfig, onConfigChange, mapToCapabilities, mapToEditPanelValues });
+        }
+
+        // Smooth scroll for back to top
+        document.querySelector('.back-to-top').addEventListener('click', function (e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+         let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const navDots = document.querySelectorAll('.nav-dot');
+        const totalSlides = slides.length;
+
+        function updateSlide(index) {
+            slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+            navDots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+            currentSlide = index;
+        }
+
+        document.querySelector('.arrow-btn.next').onclick = () => updateSlide((currentSlide + 1) % totalSlides);
+        document.querySelector('.arrow-btn.prev').onclick = () => updateSlide((currentSlide - 1 + totalSlides) % totalSlides);
+
+        navDots.forEach(dot => {
+            dot.onclick = () => updateSlide(parseInt(dot.dataset.slide));
+        });
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowRight') updateSlide((currentSlide + 1) % totalSlides);
+            if (e.key === 'ArrowLeft') updateSlide((currentSlide - 1 + totalSlides) % totalSlides);
+        });
+
+        // Auto-play carousel every 5 seconds
+        setInterval(() => {
+            updateSlide((currentSlide + 1) % totalSlides);
+        }, 5000);
+    </script>
+   
+</body>
+
+</html>
