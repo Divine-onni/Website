@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-SIM Airtel - Carte SIM Virtuelle</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
         :root {
@@ -27,7 +27,7 @@
             overflow-x: hidden;
         }
 
-        /* NOUVELLE NAVIGATION - Styles du premier code */
+        /* Styles pour la navigation principale */
         .header-top {
             background: white;
             border-bottom: 1px solid #e0e0e0;
@@ -124,7 +124,7 @@
             background: #d32f2f;
         }
 
-        /* Styles pour les menus déroulants de la nouvelle navigation */
+        /* Styles pour les menus déroulants */
         .dropdown-menu {
             position: absolute;
             top: 100%;
@@ -750,7 +750,7 @@
     </style>
 </head>
 <body>
-    <!-- Barre de navigation globale - NOUVELLE VERSION -->
+    <!-- Barre de navigation globale de la page principale -->
     <div class="header-top">
         <div class="header-top-content">
             <a href="index.html">INDIVIDUEL</a>
@@ -761,8 +761,8 @@
         </div>
     </div>
 
-   <!-- Navigation Principale -->
-    <nav class="bg-white shadow-sm sticky top-0 z-40">
+    <!-- Navigation principale de la page principale -->
+    <nav>
         <div class="nav-container">
             <a href="index.html" class="logo">
                 <img src="image/Airtel_Logo.jpg" alt="Airtel Congo" class="logo-img">
@@ -776,35 +776,32 @@
             <ul class="nav-links" id="nav-links">
                 <!-- PAYEZ ET RECHARGEZ -->
                 <li>
-                    <a href="Payez.html" class="active">PAYEZ ET RECHARGEZ</a>
+                    <a href="Payez.html">PAYEZ ET RECHARGEZ</a>
                     <ul class="dropdown-menu">
                         <!-- Postpayé avec sous-menu -->
                         <li class="has-submenu">
-                            <a href="#" data-section="postpaye">Postpayé <span class="arrow">›</span></a>
+                            <a href="#">Postpayé <span class="arrow">›</span></a>
                             <ul class="sub-level">
-                                <li><a href="#" data-section="postpaye" data-subsection="postpaye-payment">Paiement de
-                                        facture en ligne</a></li>
+                                <li><a href="postpaye.html">Paiement de facture en ligne</a></li>
                             </ul>
                         </li>
-
+                        
                         <!-- Prépayé avec sous-menu -->
                         <li class="has-submenu">
-                            <a href="#" data-section="prepaye">Prépayé <span class="arrow">›</span></a>
+                            <a href="#">Prépayé <span class="arrow">›</span></a>
                             <ul class="sub-level">
-                                <li><a href="#" data-section="prepaye" data-subsection="prepaye-recharge">Rechargez un
-                                        compte prépayé</a></li>
-                                <li><a href="#" data-section="prepaye" data-subsection="prepaye-forfait">Activez un
-                                        forfait Internet</a></li>
+                                <li><a href="prepaye-recharge.html">Rechargez un compte prépayé</a></li>
+                                <li><a href="prepaye-forfait.html">Activez un forfait Internet</a></li>
                             </ul>
                         </li>
-
+                        
                         <!-- Broadband (sans sous-menu) -->
-                        <li><a href="#" data-section="broadband">Broadband</a></li>
+                        <li><a href="broadband.html">Broadband</a></li>
                     </ul>
                 </li>
 
                 <!-- SERVICES -->
-                 <li>
+                <li>
                     <a href="services.html">SERVICES</a>
                     <ul class="dropdown-menu">
                         <!-- PREPAYÉ - Niveau 1 -->
@@ -815,17 +812,16 @@
                                 <li>
                                     <a href="#">Appels & SMS <span class="arrow">›</span></a>
                                     <ul class="third-level">
-                                        <li><a href="appel locaux.html">Appels locaux</a></li>
-                                      
-                                        <li><a href="SMS.html">SMS</a></li>
+                                        <li><a href="appels-locaux.html">Appels locaux</a></li>
+                                        <li><a href="appels-internationaux.html">Appels internationaux</a></li>
+                                        <li><a href="sms.html">SMS</a></li>
                                     </ul>
                                 </li>
                                 <!-- Services Internet - Niveau 2 -->
                                 <li>
-                                    <a href="#" class="services-internet">Services Internet <span
-                                            class="arrow">›</span></a>
+                                    <a href="#" class="services-internet">Services Internet <span class="arrow">›</span></a>
                                     <ul class="third-level">
-                                        <li><a href="forfait internet.html">Forfaits internet</a></li>
+                                        <li><a href="forfaits-internet.html">Forfaits internet</a></li>
                                         <li><a href="faq-internet.html">Foire aux questions</a></li>
                                     </ul>
                                 </li>
@@ -833,18 +829,21 @@
                                 <li>
                                     <a href="#" class="roaming">Roaming <span class="arrow">›</span></a>
                                     <ul class="third-level">
-                                        <li><a href="airtelworld.html">Airtel world</a></li>
-                                        <li><a href="one airtel.html">Réseau Unique</a></li>
-                                        <li><a href="free roaming.html">Free Roaming</a></li>
+                                        <li><a href="airtel-world.html">Airtel world</a></li>
+                                        <li><a href="reseau-unique.html">Réseau Unique</a></li>
+                                        <li><a href="free-roaming.html">Free Roaming</a></li>
                                     </ul>
                                 </li>
                                 <!-- Services à valeur ajoutée - Niveau 2 -->
                                 <li>
-                                    <a href="VAS.html">Services à valeur ajoutée <span class="arrow">›</span></a>
-                                    
+                                    <a href="#">Services à valeur ajoutée <span class="arrow">›</span></a>
+                                    <ul class="third-level">
+                                        <li><a href="musique.html">Musique</a></li>
+                                        <li><a href="divertissement.html">Divertissement</a></li>
+                                    </ul>
                                 </li>
                                 <!-- Taxi Connect - Niveau 2 -->
-                                <li><a href="taxi-connect.html">Taxi Connect</a></li>
+                                <li><a href="Taxi_connect.html">Taxi Connect</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -867,11 +866,11 @@
 
                 <!-- BESOIN D'AIDE -->
                 <li>
-                    <a href="aide.html">BESOIN D'AIDE</a>    
+                    <a href="aide.html">BESOIN D'AIDE</a>
                 </li>
 
                 <!-- E-SIM -->
-                <li><a href="esim.html">E-SIM</a></li>
+                <li><a href="esim.html" class="active">E-SIM</a></li>
 
                 <!-- PROMOTIONS -->
                 <li>
@@ -1240,21 +1239,10 @@
 
     <a href="#" class="back-to-top">↑</a>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     <script>
         // Initialiser les icônes Lucide
         lucide.createIcons();
-
-        // Menu mobile
-        document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
-            document.getElementById('nav-links').classList.toggle('active');
-        });
-
-        // Fermer le menu mobile quand on clique sur un lien
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', function() {
-                document.getElementById('nav-links').classList.remove('active');
-            });
-        });
 
         // Animation au scroll
         const observerOptions = {
@@ -1305,6 +1293,18 @@
         // Animation du hero
         window.addEventListener('load', () => {
             document.querySelector('.hero-content').style.opacity = '1';
+        });
+
+        // Menu mobile
+        document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+            document.getElementById('nav-links').classList.toggle('active');
+        });
+
+        // Fermer le menu mobile quand on clique sur un lien
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('nav-links').classList.remove('active');
+            });
         });
     </script>
 </body>
