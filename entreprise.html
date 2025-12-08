@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airtel B2B – Solutions Entreprises</title>
+    <script src="/_sdk/element_sdk.js"></script>
+    <script src="/_sdk/data_sdk.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .header-top {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 10px 0;
+        }
+
+        .header-top-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 30px;
+        }
+
+        .header-top-content a {
+            color: #666;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+
+        .header-top-content a:hover {
+            color: #d32f2f;
+        }
+
+        nav {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #e30613;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .nav-links > li {
+            position: relative;
+        }
+
+        .nav-links > li > a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            padding: 25px 0;
+            display: block;
+            transition: color 0.3s;
+            white-space: nowrap;
+        }
+
+        .nav-links > li > a:hover,
+        .nav-links > li > a.active {
+            color: #d32f2f;
+        }
+
+        .nav-links > li > a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #d32f2f;
+        }
+
+        /* Styles pour les menus déroulants de la nouvelle navigation */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            min-width: 240px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            margin-top: 10px;
+            padding: 8px 0;
+            z-index: 1001;
+        }
+
+        .nav-links > li:hover > .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            margin-top: 0;
+        }
+
+        .dropdown-menu a {
+            padding: 12px 20px;
+            border-bottom: none;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .dropdown-menu a:hover {
+            background: rgba(211, 47, 47, 0.05);
+            color: #d32f2f;
+        }
+
+        .dropdown-menu .arrow {
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        /* Sous-menu de second niveau */
+        .sub-dropdown {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            margin-left: 10px;
+            padding: 8px 0;
+            z-index: 1002;
+        }
+
+        .dropdown-menu li:hover > .sub-dropdown {
+            opacity: 1;
+            visibility: visible;
+            margin-left: 5px;
+        }
+
+        .sub-dropdown a {
+            padding: 10px 20px;
+            font-size: 13px;
+            display: block;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .sub-dropdown a:hover {
+            background: rgba(211, 47, 47, 0.05);
+            color: #d32f2f;
+        }
+
+        /* Menu à 3 niveaux */
+        .sub-dropdown li {
+            position: relative;
+        }
+
+        .third-level {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            margin-left: 10px;
+            padding: 8px 0;
+            z-index: 1003;
+        }
+
+        .sub-dropdown li:hover > .third-level {
+            opacity: 1;
+            visibility: visible;
+            margin-left: 5px;
+        }
+
+        .third-level a {
+            padding: 10px 20px;
+            font-size: 13px;
+            display: block;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .third-level a:hover {
+            background: rgba(211, 47, 47, 0.05);
+            color: #d32f2f;
+        }
+
+        /* Styles pour les éléments spéciaux en rouge */
+        .services-internet {
+            color: #d32f2f !important;
+            font-weight: bold;
+        }
+
+        .roaming {
+            color: #d32f2f !important;
+            font-weight: bold;
+        }
+
+        /* Styles pour les sous-menus supplémentaires */
+        .dropdown-menu .has-submenu {
+            position: relative;
+        }
+
+        .dropdown-menu .has-submenu > a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dropdown-menu .sub-level {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background: white;
+            min-width: 220px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 0.5rem 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-menu .has-submenu:hover .sub-level {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        /* Animation pour l'indicateur de sous-menu */
+        .arrow {
+            font-size: 0.875rem;
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .has-submenu:hover .arrow {
+            transform: rotate(90deg);
+        }
+
+        /* Mobile menu button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                padding-left: 1rem;
+            }
+
+            .sub-dropdown,
+            .third-level {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                padding-left: 1rem;
+            }
+        }
+
+        /* Footer */
+        footer {
+            background: white;
+            color: white;
+            padding: 60px 80px 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #333;
+        }
+
+        .footer-brand p {
+            color: black;
+            font-size: 14px;
+            line-height: 1.8;
+            margin: 20px 0 25px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .social-link:hover {
+            background: rgba(226, 12, 24);
+        }
+
+        .footer-column h4 {
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            color: black;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul li a {
+            color: #999;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: rgba(226, 12, 24);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 30px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+
+        .footer-bottom p {
+            color: #666;
+            font-size: 13px;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .footer-bottom-links a {
+            color: #666;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+
+        .footer-bottom-links a:hover {
+            color: #e60000;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #e60000;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 20px;
+            box-shadow: 0 5px 20px rgba(230,0,0,0.4);
+            transition: transform 0.3s;
+            z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Styles spécifiques pour le footer selon l'image */
+        .footer-logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: rgba(226, 12, 24);
+            margin-bottom: 15px;
+        }
+
+        .footer-contact-info {
+            color: black;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        .copyright-section {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: black;
+            font-size: 13px;
+        }
+
+        .footer-grid-section {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-grid-column h5 {
+            color: black;
+            font-size: 14px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .footer-grid-column ul {
+            list-style: none;
+        }
+
+        .footer-grid-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-grid-column ul li a {
+            color: black;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+
+        .footer-grid-column ul li a:hover {
+            color: rgba(226, 12, 24);
+        }
+
+        .footer-bottom-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-bottom-links-extended {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .footer-bottom-links-extended a {
+            color: black;
+            text-decoration: none;
+            font-size: 12px;
+            transition: color 0.3s;
+        }
+
+        .footer-bottom-links-extended a:hover {
+            color: rgba(226, 12, 24);
+        }
+
+        /* Styles pour votre contenu B2B */
+        .hero {
+            background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            width: 100%;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Animation d'entrée */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* Effet hover sur les cartes */
+        .solution-card {
+            transition: all 0.3s ease;
+        }
+
+        .solution-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Icône SVG personnalisée */
+        .icon-wrapper {
+            transition: transform 0.3s ease;
+        }
+
+        .solution-card:hover .icon-wrapper {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Gradient pour la carte DATA */
+        .data-gradient {
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+        }
+
+        /* Commander icon animation */
+        @keyframes pulse-slow {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.05);
+            }
+        }
+
+        .commander-icon-wrapper {
+            animation: pulse-slow 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barre de navigation globale - NOUVELLE VERSION -->
+    <div class="header-top">
+        <div class="header-top-content">
+            <a href="index.html">INDIVIDUEL</a>
+            <a href="entreprise.html" class="active">ENTREPRISE</a>
+            <a href="broadband.html">BROADBAND</a>
+            <a href="airtel-money.html">AIRTEL MONEY PORTAL</a>
+            <a href="about.html">À PROPOS DE NOUS</a>
+        </div>
+    </div>
+
+   <!-- Navigation Principale -->
+    <nav class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="image/Airtel_Logo.jpg" alt="Airtel Congo" class="logo-img">
+                airtel
+            </a>
+
+            <button class="mobile-menu-btn" id="mobile-menu-toggle">
+                <i data-lucide="menu"></i>
+            </button>
+
+            <ul class="nav-links" id="nav-links">
+                <!-- PAYEZ ET RECHARGEZ -->
+                <li>
+                    <a href="Payez.html">PAYEZ ET RECHARGEZ</a>
+                    <ul class="dropdown-menu">
+                        <!-- Postpayé avec sous-menu -->
+                        <li class="has-submenu">
+                            <a href="#" data-section="postpaye">Postpayé <span class="arrow">›</span></a>
+                            <ul class="sub-level">
+                                <li><a href="#" data-section="postpaye" data-subsection="postpaye-payment">Paiement de facture en ligne</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Prépayé avec sous-menu -->
+                        <li class="has-submenu">
+                            <a href="#" data-section="prepaye">Prépayé <span class="arrow">›</span></a>
+                            <ul class="sub-level">
+                                <li><a href="#" data-section="prepaye" data-subsection="prepaye-recharge">Rechargez un compte prépayé</a></li>
+                                <li><a href="#" data-section="prepaye" data-subsection="prepaye-forfait">Activez un forfait Internet</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Broadband (sans sous-menu) -->
+                        <li><a href="#" data-section="broadband">Broadband</a></li>
+                    </ul>
+                </li>
+
+                <!-- SERVICES -->
+                 <li>
+                    <a href="services.html">SERVICES</a>
+                    <ul class="dropdown-menu">
+                        <!-- PREPAYÉ - Niveau 1 -->
+                        <li>
+                            <a href="#">Prepayé <span class="arrow">›</span></a>
+                            <ul class="sub-dropdown">
+                                <!-- Appels & SMS - Niveau 2 -->
+                                <li>
+                                    <a href="#">Appels & SMS <span class="arrow">›</span></a>
+                                    <ul class="third-level">
+                                        <li><a href="appel locaux.html">Appels locaux</a></li>
+                                      
+                                        <li><a href="SMS.html">SMS</a></li>
+                                    </ul>
+                                </li>
+                                <!-- Services Internet - Niveau 2 -->
+                                <li>
+                                    <a href="#" class="services-internet">Services Internet <span class="arrow">›</span></a>
+                                    <ul class="third-level">
+                                        <li><a href="forfait internet.html">Forfaits internet</a></li>
+                                        <li><a href="faq-internet.html">Foire aux questions</a></li>
+                                    </ul>
+                                </li>
+                                <!-- Roaming - Niveau 2 -->
+                                <li>
+                                    <a href="#" class="roaming">Roaming <span class="arrow">›</span></a>
+                                    <ul class="third-level">
+                                        <li><a href="airtelworld.html">Airtel world</a></li>
+                                        <li><a href="one airtel.html">Réseau Unique</a></li>
+                                        <li><a href="free roaming.html">Free Roaming</a></li>
+                                    </ul>
+                                </li>
+                                <!-- Services à valeur ajoutée - Niveau 2 -->
+                                <li>
+                                    <a href="VAS.html">Services à valeur ajoutée <span class="arrow">›</span></a>
+                                </li>
+                                <!-- Taxi Connect - Niveau 2 -->
+                                <li><a href="Taxi-connect.html">Taxi Connect</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- NOS AGENCES -->
+                <li>
+                    <a href="Nos Agences.html">NOS AGENCES</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="airtel-shop.html">Airtel Shop</a></li>
+                        <li><a href="distributeurs.html">Distributeurs</a></li>
+                        <li><a href="couverture-reseau.html">Couverture réseau</a></li>
+                    </ul>
+                </li>
+
+                <!-- AIRTEL MONEY -->
+                <li>
+                    <a href="airtel-money.html">AIRTEL MONEY</a>
+                </li>
+
+                <!-- BESOIN D'AIDE -->
+                <li>
+                    <a href="aide.html">BESOIN D'AIDE</a>    
+                </li>
+
+                <!-- E-SIM -->
+                <li><a href="esim.html">E-SIM</a></li>
+
+                <!-- PROMOTIONS -->
+                <li>
+                    <a href="promotions.html">PROMO KELASI</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION avec image business en background -->
+    <section class="hero flex items-center" style="min-height: 600px;">
+        <div class="w-full max-w-7xl mx-auto px-6 lg:px-12 py-20">
+            <div class="hero-content animate-fade-in">
+                <div class="max-w-xl">
+                    <h1 class="text-4xl lg:text-5xl font-light leading-tight mb-6 text-white drop-shadow-lg">
+                        Offering largest B2B Platform<br>
+                        for Businesses in Africa
+                    </h1>
+                    <a href="compte.html" class="inline-flex items-center text-white hover:text-gray-100 font-medium text-lg group transition-all bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full border-2 border-white/40">
+                        Login here to access your <span class="font-bold ml-1">Airtel</span> Account 
+                        <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOLUTIONS GRID -->
+    <section class="w-full bg-gray-50 py-20">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- DATA -->
+                <article class="solution-card data-gradient rounded-3xl p-10 text-white relative overflow-hidden shadow-xl">
+                    <div class="relative z-10">
+                        <h3 class="text-3xl lg:text-4xl font-bold mb-6">
+                            <span class="text-yellow-300">NOS Solution Data</span>
+                        </h3>
+                        <ul class="space-y-3 text-lg">
+                            <li class="flex items-start">
+                                <span class="text-yellow-300 mr-3 text-2xl">•</span> 
+                                <a href="internet prepayé.html" class="hover:text-yellow-200 transition-colors">
+                                    L'internet Mobile Prépayé
+                                </a>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-yellow-300 mr-3 text-2xl">•</span> 
+                                <a href="internet-fixe-wimax.html" class="hover:text-yellow-200 transition-colors">
+                                    Internet Fixe et Wimax
+                                </a>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-yellow-300 mr-3 text-2xl">•</span> 
+                                <a href="liaison dedié.html" class="hover:text-yellow-200 transition-colors">
+                                    Liaisons dediées
+                                </a>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-yellow-300 mr-3 text-2xl">•</span> 
+                                <a href="APN.html" class="hover:text-yellow-200 transition-colors">
+                                    APN Dedié
+                                </a>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-yellow-300 mr-3 text-2xl">•</span> 
+                                <a href="mpl data.html" class="hover:text-yellow-200 transition-colors">
+                                    MPLS Data
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="icon-wrapper absolute right-8 top-1/2 -translate-y-1/2 opacity-20">
+                        <svg class="w-24 h-24" fill="currentColor" viewbox="0 0 24 24">
+                            <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z" />
+                        </svg>
+                    </div>
+                </article>
+
+                <!-- VOICE -->
+                <article class="solution-card bg-white border-2 border-red-200 rounded-3xl p-10 relative overflow-hidden shadow-lg">
+                    <div class="relative z-10">
+                        <h3 class="text-3xl lg:text-4xl font-bold mb-6 text-red-600">
+                            Nos <span class="text-red-700">Solutions Voix</span>
+                        </h3>
+                        <ul class="space-y-3 text-lg text-gray-900">
+                            <li class="flex items-start">
+                                <span class="text-red-600 mr-3 text-2xl">•</span> 
+                                <a href="bussines control.html" class="text-gray-900 hover:text-red-600 transition-colors">
+                                    Business Contrôle
+                                </a>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-600 mr-3 text-2xl">•</span> 
+                                <a href="business-groupe.html" class="text-gray-900 hover:text-red-600 transition-colors">
+                                    Business Groupe
+                                </a>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-600 mr-3 text-2xl">•</span> 
+                                <a href="business-plus.html" class="text-gray-900 hover:text-red-600 transition-colors">
+                                    Business Plus
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="icon-wrapper absolute right-8 top-1/2 -translate-y-1/2 opacity-10">
+                        <svg class="w-24 h-24 text-red-600" fill="currentColor" viewbox="0 0 24 24">
+                            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                        </svg>
+                    </div>
+                </article>
+
+                <!-- VALUE ADDED -->
+                <article class="solution-card bg-white border-2 border-red-200 rounded-3xl p-10 relative overflow-hidden shadow-lg">
+                    <div class="relative z-10">
+                        <h3 class="text-3xl lg:text-4xl font-bold mb-6 text-red-600">
+                            Nos Services <span class="text-red-700">à Valeur Ajoutées</span>
+                        </h3>
+                        <ul class="space-y-3 text-lg text-gray-900">
+                            <li class="flex items-start">
+                                <span class="text-red-600 mr-3 text-2xl">•</span> 
+                                <a href="car-tracking.html" class="text-gray-900 hover:text-red-600 transition-colors">
+                                    Car Tracking
+                                </a>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-600 mr-3 text-2xl">•</span> 
+                                <a href="sms-pro.html" class="text-gray-900 hover:text-red-600 transition-colors">
+                                    SMS Pro
+                                </a>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-600 mr-3 text-2xl">•</span> 
+                                <a href="bulk-sms.html" class="text-gray-900 hover:text-red-600 transition-colors">
+                                    Bulk SMS / SMS Banking
+                                </a>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-600 mr-3 text-2xl">•</span> 
+                                <a href="avaya-spaces.html" class="text-gray-900 hover:text-red-600 transition-colors">
+                                    Avaya Spaces
+                                </a>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-600 mr-3 text-2xl">•</span> 
+                                <a href="ivr.html" class="text-gray-900 hover:text-red-600 transition-colors">
+                                    IVR
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="icon-wrapper absolute right-8 top-1/2 -translate-y-1/2 opacity-10">
+                        <svg class="w-24 h-24 text-red-600" fill="currentColor" viewbox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                        </svg>
+                    </div>
+                </article>
+
+                <!-- CLIENT EXPERIENCE -->
+                <article class="solution-card bg-white border-2 border-red-200 rounded-3xl p-10 relative overflow-hidden shadow-lg">
+                    <div class="relative z-10">
+                        <h3 class="text-3xl lg:text-4xl font-bold mb-6 text-red-600">
+                            Client <span class="text-red-700">Notre Service Client</span>
+                        </h3>
+                        <ul class="space-y-3 text-lg text-gray-900">
+                            <li class="flex items-start">
+                                <span class="text-red-600 mr-3 text-2xl">•</span> 
+                                <a href="contact.html" class="text-gray-900 hover:text-red-600 transition-colors">
+                                    Nous Contacter
+                                </a>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-600 mr-3 text-2xl">•</span> 
+                                <a href="pourquoi-airtel.html" class="text-gray-900 hover:text-red-600 transition-colors">
+                                    Pourquoi Airtel
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="icon-wrapper absolute right-8 top-1/2 -translate-y-1/2 opacity-10">
+                        <svg class="w-24 h-24 text-red-600" fill="currentColor" viewbox="0 0 24 24">
+                            <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
+                        </svg>
+                    </div>
+                </article>
+
+                <!-- COMMANDER -->
+                <article class="solution-card bg-gradient-to-br from-red-600 to-red-700 rounded-3xl p-10 text-white relative overflow-hidden shadow-xl md:col-span-2">
+                    <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
+                        <!-- Texte -->
+                        <div class="flex-1 text-center lg:text-left">
+                            <h3 class="text-3xl lg:text-4xl font-bold mb-4">Commander</h3>
+                            <p class="text-white/90 text-lg mb-6">Commandez vos solutions B2B en ligne</p>
+                            <a href="commander.html" class="inline-flex items-center bg-white text-red-600 hover:bg-gray-50 font-semibold px-8 py-4 rounded-full shadow-lg transition-all group">
+                                Commander maintenant 
+                                <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                            </a>
+                        </div>
+                        <!-- Icône -->
+                        <div class="flex-shrink-0">
+                            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border-2 border-white/30">
+                                <svg class="w-24 h-24 text-white" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="20" y="30" width="80" height="60" rx="8" stroke-width="3" />
+                                    <circle cx="40" cy="50" r="8" fill="currentColor" />
+                                    <circle cx="60" cy="50" r="8" fill="currentColor" />
+                                    <circle cx="80" cy="50" r="8" fill="currentColor" />
+                                    <line x1="30" y1="70" x2="90" y2="70" stroke-width="3" />
+                                    <line x1="30" y1="80" x2="70" y2="80" stroke-width="3" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid-section">
+            <div class="footer-grid-column">
+                <h5>A propos d'Airtel</h5>
+                <ul>
+                    <li><a href="#">Accès rapide</a></li>
+                    <li><a href="#">Aide</a></li>
+                    <li><a href="#">Privacy</a></li>
+                </ul>
+            </div>
+            <div class="footer-grid-column">
+                <h5>Carrière</h5>
+                <ul>
+                    <li><a href="#">Actualités</a></li>
+                    <li><a href="#">Couverture</a></li>
+                    <li><a href="#">Chiffre Safety</a></li>
+                </ul>
+            </div>
+            <div class="footer-grid-column">
+                <h5>Media</h5>
+                <ul>
+                    <li><a href="#">Programmes sociaux/CSR</a></li>
+                    <li><a href="#">Nos Boutiques</a></li>
+                    <li><a href="#">Besoin de Suggestion</a></li>
+                </ul>
+            </div>
+            <div class="footer-grid-column">
+                <h5>Airtel Money</h5>
+                <ul>
+                    <li><a href="#">Cataloger d'interconnexion</a></li>
+                    <li><a href="#">Numéros utiles</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom-section">
+            <div class="footer-bottom-links-extended">
+                <a href="#">NOUS CONTRACTER</a>
+                <a href="#">DROITS D'AUTEUR</a>
+                <a href="#">TERMES ET CONDITIONS</a>
+                <a href="#">AU TERMES ET CONDITIONS GSM</a>
+                <a href="#">AVIS DE CONFIDENTIALITÉ</a>
+            </div>
+        </div>
+
+        <div class="copyright-section">
+            <p>© 2024 Airtel Africa. Tous les droits sont réservés.</p>
+            <p style="margin-top: 10px;">RETOUR AU SOMMET</p>
+        </div>
+
+        <div class="social-links" style="justify-content: center; margin-top: 20px;">
+            <a href="#" class="social-link">T</a>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top">↑</a>
+
+    <script>
+        // Initialiser les icônes Lucide
+        lucide.createIcons();
+
+        // Menu mobile
+        document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+            document.getElementById('nav-links').classList.toggle('active');
+        });
+
+        // Fermer le menu mobile quand on clique sur un lien
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('nav-links').classList.remove('active');
+            });
+        });
+
+        // SDK configuration
+        const defaultConfig = {
+            main_title: "Airtel Congo B2B",
+            background_color: "#000000",
+            text_color: "#ffffff",
+            accent_color: "#e60000"
+        };
+
+        async function onConfigChange(config){
+            const container=document.querySelector('.hero');
+            if(container) container.style.background=config.background_color || defaultConfig.background_color;
+
+            document.querySelectorAll('.text-white').forEach(s=>{
+                s.style.color=config.text_color || defaultConfig.text_color;
+            });
+        }
+
+        function mapToCapabilities(config){
+            return { recolorables:[], borderables:[], fontEditable:undefined, fontSizeable:undefined };
+        }
+
+        function mapToEditPanelValues(config){
+            return new Map(Object.entries(config));
+        }
+
+        if(window.elementSdk){
+            window.elementSdk.init({ defaultConfig, onConfigChange, mapToCapabilities, mapToEditPanelValues });
+        }
+    </script>
+</body>
+</html>

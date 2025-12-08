@@ -1,0 +1,1259 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Des Liaisons Dédiées - Airtel Congo</title>
+    <script src="/_sdk/element_sdk.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .header-top {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 10px 0;
+        }
+
+        .header-top-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 30px;
+        }
+
+        .header-top-content a {
+            color: #666;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+
+        .header-top-content a:hover {
+            color: #d32f2f;
+        }
+
+        nav {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #e30613;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .nav-links > li {
+            position: relative;
+        }
+
+        .nav-links > li > a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            padding: 25px 0;
+            display: block;
+            transition: color 0.3s;
+            white-space: nowrap;
+        }
+
+        .nav-links > li > a:hover,
+        .nav-links > li > a.active {
+            color: #d32f2f;
+        }
+
+        .nav-links > li > a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #d32f2f;
+        }
+
+        /* Styles pour les menus déroulants de la nouvelle navigation */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            min-width: 240px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            margin-top: 10px;
+            padding: 8px 0;
+            z-index: 1001;
+        }
+
+        .nav-links > li:hover > .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            margin-top: 0;
+        }
+
+        .dropdown-menu a {
+            padding: 12px 20px;
+            border-bottom: none;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .dropdown-menu a:hover {
+            background: rgba(211, 47, 47, 0.05);
+            color: #d32f2f;
+        }
+
+        .dropdown-menu .arrow {
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        /* Sous-menu de second niveau */
+        .sub-dropdown {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            margin-left: 10px;
+            padding: 8px 0;
+            z-index: 1002;
+        }
+
+        .dropdown-menu li:hover > .sub-dropdown {
+            opacity: 1;
+            visibility: visible;
+            margin-left: 5px;
+        }
+
+        .sub-dropdown a {
+            padding: 10px 20px;
+            font-size: 13px;
+            display: block;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .sub-dropdown a:hover {
+            background: rgba(211, 47, 47, 0.05);
+            color: #d32f2f;
+        }
+
+        /* Menu à 3 niveaux */
+        .sub-dropdown li {
+            position: relative;
+        }
+
+        .third-level {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            margin-left: 10px;
+            padding: 8px 0;
+            z-index: 1003;
+        }
+
+        .sub-dropdown li:hover > .third-level {
+            opacity: 1;
+            visibility: visible;
+            margin-left: 5px;
+        }
+
+        .third-level a {
+            padding: 10px 20px;
+            font-size: 13px;
+            display: block;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .third-level a:hover {
+            background: rgba(211, 47, 47, 0.05);
+            color: #d32f2f;
+        }
+
+        /* Styles pour les éléments spéciaux en rouge */
+        .services-internet {
+            color: #d32f2f !important;
+            font-weight: bold;
+        }
+
+        .roaming {
+            color: #d32f2f !important;
+            font-weight: bold;
+        }
+
+        /* Styles pour les sous-menus supplémentaires */
+        .dropdown-menu .has-submenu {
+            position: relative;
+        }
+
+        .dropdown-menu .has-submenu > a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dropdown-menu .sub-level {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background: white;
+            min-width: 220px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 0.5rem 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-menu .has-submenu:hover .sub-level {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        /* Animation pour l'indicateur de sous-menu */
+        .arrow {
+            font-size: 0.875rem;
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .has-submenu:hover .arrow {
+            transform: rotate(90deg);
+        }
+
+        /* Mobile menu button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                padding-left: 1rem;
+            }
+
+            .sub-dropdown,
+            .third-level {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                padding-left: 1rem;
+            }
+        }
+
+        /* Footer */
+        footer {
+            background: white;
+            color: white;
+            padding: 60px 80px 30px;
+            margin-top: 60px;
+        }
+
+        .footer-grid-section {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-grid-column h5 {
+            color: black;
+            font-size: 14px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .footer-grid-column ul {
+            list-style: none;
+        }
+
+        .footer-grid-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-grid-column ul li a {
+            color: black;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+
+        .footer-grid-column ul li a:hover {
+            color: rgba(226, 12, 24);
+        }
+
+        .footer-bottom-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-bottom-links-extended {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .footer-bottom-links-extended a {
+            color: black;
+            text-decoration: none;
+            font-size: 12px;
+            transition: color 0.3s;
+        }
+
+        .footer-bottom-links-extended a:hover {
+            color: rgba(226, 12, 24);
+        }
+
+        .copyright-section {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: black;
+            font-size: 13px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .social-link:hover {
+            background: rgba(226, 12, 24);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #e60000;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 20px;
+            box-shadow: 0 5px 20px rgba(230,0,0,0.4);
+            transition: transform 0.3s;
+            z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Styles du contenu principal */
+        .main-content {
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* SECTION HEADER MODÉRÉMENT RÉDUITE */
+        .header-section {
+            background: linear-gradient(135deg, #d10000 0%, #a00000 100%);
+            padding: 50px 0 25px; /* Réduction modérée du padding (original: 60px 0 30px) */
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            margin-top: 0;
+        }
+
+        .header-section::before {
+            content: '';
+            position: absolute;
+            top: -40%; /* Réduction modérée de la taille du cercle */
+            right: -10%;
+            width: 500px; /* Réduction modérée de la largeur (original: 600px) */
+            height: 500px; /* Réduction modérée de la hauteur */
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 50px; /* Réduction modérée de l'espace entre le texte et l'image (original: 60px) */
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-text {
+            flex: 1;
+        }
+
+        .header-section h1 {
+            font-size: 56px; /* Réduction modérée de la taille de police (original: 64px) */
+            color: #ffffff;
+            font-weight: 700;
+            margin: 0;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            animation: fadeInLeft 0.8s ease-out;
+        }
+
+        /* IMAGE MODÉRÉMENT RÉDUITE */
+        .header-image-wrapper {
+            flex: 0 0 380px; /* Réduction modérée de la largeur fixe (original: 450px) */
+            animation: fadeInRight 0.8s ease-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-image-wrapper img {
+            width: 100%;
+            height: auto;
+            max-width: 380px; /* Réduction modérée de la largeur maximale (original: 450px) */
+            object-fit: cover;
+            border-radius: 14px; /* Réduction modérée du rayon des coins */
+            box-shadow: 0 9px 25px rgba(0, 0, 0, 0.28); /* Réduction modérée de l'ombre */
+            transition: transform 0.3s ease;
+        }
+
+        .header-image-wrapper img:hover {
+            transform: scale(1.04); /* Réduction modérée de l'effet de zoom */
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 220px; /* Réduction modérée de la hauteur (original: 250px) */
+            background: rgba(255, 255, 255, 0.1);
+            border: 2.5px dashed rgba(255, 255, 255, 0.3); /* Réduction modérée de l'épaisseur */
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 12px; /* Réduction modérée de l'espacement */
+            color: #ffffff;
+            font-size: 17px; /* Réduction modérée de la taille de police */
+            text-align: center;
+            padding: 18px; /* Réduction modérée du padding */
+        }
+
+        .image-placeholder::before {
+            content: '🖼️';
+            font-size: 56px; /* Réduction modérée de la taille de l'icône (original: 64px) */
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-section {
+            padding: 55px 0; /* Réduction très légère du padding (original: 60px 0) */
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .content-card {
+            background: #ffffff;
+            border-radius: 20px; /* Inchangé */
+            padding: 40px; /* Inchangé */
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08); /* Inchangé */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px); /* Inchangé */
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12); /* Inchangé */
+        }
+
+        .content-section h2 {
+            font-size: 42px; /* Inchangé */
+            color: #d10000;
+            font-weight: 700;
+            margin: 0 0 20px 0;
+            position: relative;
+            display: inline-block;
+        }
+
+        .content-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px; /* Inchangé */
+            left: 0;
+            width: 80px; /* Inchangé */
+            height: 4px; /* Inchangé */
+            background: linear-gradient(90deg, #d10000 0%, #ff4444 100%);
+            border-radius: 2px;
+        }
+
+        .intro-text {
+            font-size: 18px; /* Inchangé */
+            line-height: 1.8;
+            color: #495057;
+            margin: 40px 0 30px 0; /* Inchangé */
+            font-weight: 400;
+        }
+
+        .usage-section {
+            margin-top: 40px; /* Inchangé */
+        }
+
+        .section-label {
+            font-size: 20px; /* Inchangé */
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-label::before {
+            content: '✦';
+            color: #d10000;
+            font-size: 24px; /* Inchangé */
+        }
+
+        .content-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .category-group {
+            margin-bottom: 30px; /* Inchangé */
+        }
+
+        .category-title {
+            font-size: 18px; /* Inchangé */
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .category-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px; /* Inchangé */
+            height: 20px; /* Inchangé */
+            background: #d10000;
+            border-radius: 2px;
+        }
+
+        .content-section ul li {
+            font-size: 17px; /* Inchangé */
+            color: #495057;
+            line-height: 1.8;
+            padding: 12px 20px; /* Inchangé */
+            margin: 8px 0; /* Inchangé */
+            background: #f8f9fa;
+            border-radius: 10px; /* Inchangé */
+            border-left: 3px solid #d10000;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-section ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0;
+            height: 100%;
+            background: rgba(209, 0, 0, 0.05);
+            transition: width 0.3s ease;
+        }
+
+        .content-section ul li:hover {
+            transform: translateX(10px); /* Inchangé */
+            background: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Inchangé */
+        }
+
+        .content-section ul li:hover::before {
+            width: 100%;
+        }
+
+        .nested-list {
+            margin-top: 15px; /* Inchangé */
+        }
+
+        .nested-list li {
+            background: #ffffff;
+            border-left-color: #ff6b6b;
+            font-size: 16px; /* Inchangé */
+        }
+
+        @media (max-width: 968px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .header-section h1 {
+                font-size: 48px; /* Légère réduction pour tablette */
+            }
+
+            .header-image-wrapper {
+                flex: 0 0 auto;
+                max-width: 350px; /* Réduction modérée pour tablette */
+                width: 100%;
+            }
+
+            .header-image-wrapper img {
+                max-width: 350px;
+            }
+
+            .content-card {
+                padding: 30px; /* Inchangé */
+            }
+
+            .content-section h2 {
+                font-size: 32px; /* Inchangé */
+            }
+
+            .container {
+                padding: 0 20px;
+            }
+
+            .footer-grid-section {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-section {
+                padding: 45px 0 20px; /* Réduction modérée pour mobile */
+            }
+
+            .header-section h1 {
+                font-size: 36px; /* Inchangé */
+            }
+
+            .content-section {
+                padding: 50px 0; /* Inchangé */
+            }
+
+            .content-card {
+                padding: 25px; /* Inchangé */
+            }
+
+            .content-section h2 {
+                font-size: 28px; /* Inchangé */
+            }
+
+            .image-placeholder {
+                height: 200px; /* Réduction modérée pour mobile */
+                font-size: 16px; /* Inchangé */
+            }
+
+            .footer-grid-section {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
+                padding: 40px 20px 20px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .header-section {
+                padding: 40px 0 20px; /* Inchangé */
+            }
+
+            .header-section h1 {
+                font-size: 32px; /* Inchangé */
+            }
+
+            .content-section {
+                padding: 40px 0; /* Inchangé */
+            }
+
+            .header-image-wrapper {
+                max-width: 320px; /* Réduction modérée pour mobile petit */
+            }
+
+            .header-image-wrapper img {
+                max-width: 320px;
+            }
+        }
+    </style>
+    <style>@view-transition { navigation: auto; }</style>
+    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+</head>
+<body>
+    <!-- Barre de navigation globale - NOUVELLE VERSION -->
+    <div class="header-top">
+        <div class="header-top-content">
+            <a href="index.html">INDIVIDUEL</a>
+            <a href="entreprise.html">ENTREPRISE</a>
+            <a href="broadband.html">BROADBAND</a>
+            <a href="airtel-money.html">AIRTEL MONEY PORTAL</a>
+            <a href="about.html">À PROPOS DE NOUS</a>
+        </div>
+    </div>
+
+    <!-- Navigation Principale -->
+    <nav class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="image/Airtel_Logo.jpg" alt="Airtel Congo" class="logo-img">
+                airtel
+            </a>
+
+            <button class="mobile-menu-btn" id="mobile-menu-toggle">
+                <i data-lucide="menu"></i>
+            </button>
+
+            <ul class="nav-links" id="nav-links">
+                <!-- PAYEZ ET RECHARGEZ -->
+                <li>
+                    <a href="Payez.html" class="active">PAYEZ ET RECHARGEZ</a>
+                    <ul class="dropdown-menu">
+                        <!-- Postpayé avec sous-menu -->
+                        <li class="has-submenu">
+                            <a href="#" data-section="postpaye">Postpayé <span class="arrow">›</span></a>
+                            <ul class="sub-level">
+                                <li><a href="#" data-section="postpaye" data-subsection="postpaye-payment">Paiement de
+                                        facture en ligne</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Prépayé avec sous-menu -->
+                        <li class="has-submenu">
+                            <a href="#" data-section="prepaye">Prépayé <span class="arrow">›</span></a>
+                            <ul class="sub-level">
+                                <li><a href="#" data-section="prepaye" data-subsection="prepaye-recharge">Rechargez un
+                                        compte prépayé</a></li>
+                                <li><a href="#" data-section="prepaye" data-subsection="prepaye-forfait">Activez un
+                                        forfait Internet</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Broadband (sans sous-menu) -->
+                        <li><a href="#" data-section="broadband">Broadband</a></li>
+                    </ul>
+                </li>
+
+                <!-- SERVICES -->
+                <li>
+                    <a href="services.html">SERVICES</a>
+                    <ul class="dropdown-menu">
+                        <!-- PREPAYÉ - Niveau 1 -->
+                        <li>
+                            <a href="#">Prepayé <span class="arrow">›</span></a>
+                            <ul class="sub-dropdown">
+                                <!-- Appels & SMS - Niveau 2 -->
+                                <li>
+                                    <a href="#">Appels & SMS <span class="arrow">›</span></a>
+                                    <ul class="third-level">
+                                        <li><a href="appel locaux.html">Appels locaux</a></li>
+                                        <li><a href="SMS.html">SMS</a></li>
+                                    </ul>
+                                </li>
+                                <!-- Services Internet - Niveau 2 -->
+                                <li>
+                                    <a href="#" class="services-internet">Services Internet <span
+                                            class="arrow">›</span></a>
+                                    <ul class="third-level">
+                                        <li><a href="forfait internet.html">Forfaits internet</a></li>
+                                        <li><a href="faq-internet.html">Foire aux questions</a></li>
+                                    </ul>
+                                </li>
+                                <!-- Roaming - Niveau 2 -->
+                                <li>
+                                    <a href="#" class="roaming">Roaming <span class="arrow">›</span></a>
+                                    <ul class="third-level">
+                                        <li><a href="airtelworld.html">Airtel world</a></li>
+                                        <li><a href="one airtel.html">Réseau Unique</a></li>
+                                        <li><a href="free roaming.html">Free Roaming</a></li>
+                                    </ul>
+                                </li>
+                                <!-- Services à valeur ajoutée - Niveau 2 -->
+                                <li>
+                                    <a href="VAS.html">Services à valeur ajoutée <span class="arrow">›</span></a>
+                                </li>
+                                <!-- Taxi Connect - Niveau 2 -->
+                                <li><a href="Taxi-connect.html">Taxi Connect</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- NOS AGENCES -->
+                <li>
+                    <a href="Nos Agences.html">NOS AGENCES</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="airtel-shop.html">Airtel Shop</a></li>
+                        <li><a href="distributeurs.html">Distributeurs</a></li>
+                        <li><a href="couverture-reseau.html">Couverture réseau</a></li>
+                    </ul>
+                </li>
+
+                <!-- AIRTEL MONEY -->
+                <li>
+                    <a href="airtel-money.html">AIRTEL MONEY</a>
+                </li>
+
+                <!-- BESOIN D'AIDE -->
+                <li>
+                    <a href="aide.html">BESOIN D'AIDE</a>    
+                </li>
+
+                <!-- E-SIM -->
+                <li><a href="esim.html">E-SIM</a></li>
+
+                <!-- PROMOTIONS -->
+                <li>
+                    <a href="promotions.html">PROMO KELASI</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Contenu Principal -->
+    <div class="main-content">
+        <header class="header-section">
+            <div class="container">
+                <div class="header-content">
+                    <div class="header-text">
+                        <h1 id="main-title">Des Liaisons Dédiées</h1>
+                    </div>
+                    <div class="header-image-wrapper">
+                        <img src="image/H.jpeg" alt="Homme travaillant sur un ordinateur" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="image-placeholder" style="display: none;">
+                            <div>
+                                Remplacez IMAGE_LIAISON.jpg
+                            </div>
+                            <div style="font-size: 14px; opacity: 0.8;">
+                                par votre propre image locale
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <section class="content-section">
+            <div class="container">
+                <div class="content-card">
+                    <h2 id="section-title">Des Liaisons Dédiées</h2>
+                    <p class="intro-text" id="intro-text">Une ligne ou connexion dédiée est un type de contrat par lequel l'opérateur s'engage à fournir un lien à débit fixe et symétrique entre deux sites distants (celui du client et de l'opérateur).</p>
+                    <div class="usage-section">
+                        <div class="section-label" id="usage-label">
+                            L'E1 peut être utilisé pour les opérations de service à la clientèle par :
+                        </div>
+                        <ul>
+                            <li>🏦 Les Banques</li>
+                            <li>🏨 Les Hôtels</li>
+                            <li>✈️ Les Compagnies aériennes</li>
+                            <li>⭐ D'autres fournisseurs de services à valeur ajoutée</li>
+                        </ul>
+                        <div class="category-group">
+                            <div class="category-title">
+                                Les administrations telles que :
+                            </div>
+                            <ul class="nested-list">
+                                <li>⚖️ Les firmes juridiques</li>
+                                <li>🛡️ Les cabinets d'assurance</li>
+                                <li>💱 Les sociétés de change</li>
+                                <li>🚨 Les opérations de sauvetage d'urgence telles que les lignes d'appels d'urgence gratuites</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid-section">
+            <div class="footer-grid-column">
+                <h5>A propos d'Airtel</h5>
+                <ul>
+                    <li><a href="#">Accès rapide</a></li>
+                    <li><a href="#">Aide</a></li>
+                    <li><a href="#">Privacy</a></li>
+                </ul>
+            </div>
+            <div class="footer-grid-column">
+                <h5>Carrière</h5>
+                <ul>
+                    <li><a href="#">Actualités</a></li>
+                    <li><a href="#">Couverture</a></li>
+                    <li><a href="#">Chiffre Safety</a></li>
+                </ul>
+            </div>
+            <div class="footer-grid-column">
+                <h5>Media</h5>
+                <ul>
+                    <li><a href="#">Programmes sociaux/CSR</a></li>
+                    <li><a href="#">Nos Boutiques</a></li>
+                    <li><a href="#">Besoin de Suggestion</a></li>
+                </ul>
+            </div>
+            <div class="footer-grid-column">
+                <h5>Airtel Money</h5>
+                <ul>
+                    <li><a href="#">Cataloger d'interconnexion</a></li>
+                    <li><a href="#">Numéros utiles</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom-section">
+            <div class="footer-bottom-links-extended">
+                <a href="#">NOUS CONTRACTER</a>
+                <a href="#">DROITS D'AUTEUR</a>
+                <a href="#">TERMES ET CONDITIONS</a>
+                <a href="#">AU TERMES ET CONDITIONS GSM</a>
+                <a href="#">AVIS DE CONFIDENTIALITÉ</a>
+            </div>
+        </div>
+
+        <div class="copyright-section">
+            <p>© 2024 Airtel Africa. Tous les droits sont réservés.</p>
+            <p style="margin-top: 10px;">RETOUR AU SOMMET</p>
+        </div>
+
+        <div class="social-links">
+            <a href="#" class="social-link">T</a>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top">↑</a>
+
+    <script>
+        // Initialiser les icônes Lucide
+        lucide.createIcons();
+
+        // Menu mobile
+        document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+            document.getElementById('nav-links').classList.toggle('active');
+        });
+
+        // Fermer le menu mobile quand on clique sur un lien
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('nav-links').classList.remove('active');
+            });
+        });
+
+        // Configuration SDK
+        const defaultConfig = {
+            main_title: "Des Liaisons Dédiées",
+            section_title: "Des Liaisons Dédiées",
+            intro_text: "Une ligne ou connexion dédiée est un type de contrat par lequel l'opérateur s'engage à fournir un lien à débit fixe et symétrique entre deux sites distants (celui du client et de l'opérateur).",
+            usage_label: "L'E1 peut être utilisé pour les opérations de service à la clientèle par :",
+            primary_color: "#d10000",
+            background_color: "#f8f9fa",
+            text_color: "#495057",
+            card_background: "#ffffff",
+            accent_color: "#ff6b6b",
+            font_family: "Inter",
+            font_size: 16
+        };
+
+        async function onConfigChange(config) {
+            const mainTitle = document.getElementById('main-title');
+            const sectionTitle = document.getElementById('section-title');
+            const introText = document.getElementById('intro-text');
+            const usageLabel = document.getElementById('usage-label');
+
+            if (mainTitle) {
+                mainTitle.textContent = config.main_title || defaultConfig.main_title;
+                mainTitle.style.color = config.card_background || defaultConfig.card_background;
+                mainTitle.style.fontFamily = `${config.font_family || defaultConfig.font_family}, 'Segoe UI', system-ui, -apple-system, sans-serif`;
+                mainTitle.style.fontSize = `${(config.font_size || defaultConfig.font_size) * 3.5}px`; // Ajustement modéré
+            }
+
+            if (sectionTitle) {
+                sectionTitle.textContent = config.section_title || defaultConfig.section_title;
+                sectionTitle.style.color = config.primary_color || defaultConfig.primary_color;
+                sectionTitle.style.fontFamily = `${config.font_family || defaultConfig.font_family}, 'Segoe UI', system-ui, -apple-system, sans-serif`;
+                sectionTitle.style.fontSize = `${(config.font_size || defaultConfig.font_size) * 2.625}px`; // Inchangé
+            }
+
+            if (introText) {
+                introText.textContent = config.intro_text || defaultConfig.intro_text;
+                introText.style.color = config.text_color || defaultConfig.text_color;
+                introText.style.fontFamily = `${config.font_family || defaultConfig.font_family}, 'Segoe UI', system-ui, -apple-system, sans-serif`;
+                introText.style.fontSize = `${(config.font_size || defaultConfig.font_size) * 1.125}px`; // Inchangé
+            }
+
+            if (usageLabel) {
+                usageLabel.textContent = config.usage_label || defaultConfig.usage_label;
+                usageLabel.style.color = config.text_color || defaultConfig.text_color;
+                usageLabel.style.fontFamily = `${config.font_family || defaultConfig.font_family}, 'Segoe UI', system-ui, -apple-system, sans-serif`;
+                usageLabel.style.fontSize = `${(config.font_size || defaultConfig.font_size) * 1.25}px`; // Inchangé
+            }
+
+            // Apply colors
+            const mainContent = document.querySelector('.main-content');
+            if (mainContent) {
+                mainContent.style.background = `linear-gradient(135deg, ${config.background_color || defaultConfig.background_color} 0%, #e9ecef 100%)`;
+            }
+            
+            const headerSection = document.querySelector('.header-section');
+            if (headerSection) {
+                headerSection.style.background = `linear-gradient(135deg, ${config.primary_color || defaultConfig.primary_color} 0%, #a00000 100%)`;
+            }
+
+            const contentCard = document.querySelector('.content-card');
+            if (contentCard) {
+                contentCard.style.background = config.card_background || defaultConfig.card_background;
+            }
+
+            const allListItems = document.querySelectorAll('.content-section ul li');
+            allListItems.forEach(li => {
+                li.style.color = config.text_color || defaultConfig.text_color;
+                li.style.borderLeftColor = config.primary_color || defaultConfig.primary_color;
+                li.style.fontFamily = `${config.font_family || defaultConfig.font_family}, 'Segoe UI', system-ui, -apple-system, sans-serif`;
+                li.style.fontSize = `${(config.font_size || defaultConfig.font_size) * 1.0625}px`; // Inchangé
+            });
+
+            const nestedListItems = document.querySelectorAll('.nested-list li');
+            nestedListItems.forEach(li => {
+                li.style.borderLeftColor = config.accent_color || defaultConfig.accent_color;
+            });
+        }
+
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                onConfigChange,
+                mapToCapabilities: (config) => ({
+                    recolorables: [
+                        {
+                            get: () => config.primary_color || defaultConfig.primary_color,
+                            set: (value) => {
+                                config.primary_color = value;
+                                window.elementSdk.setConfig({ primary_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.background_color || defaultConfig.background_color,
+                            set: (value) => {
+                                config.background_color = value;
+                                window.elementSdk.setConfig({ background_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.text_color || defaultConfig.text_color,
+                            set: (value) => {
+                                config.text_color = value;
+                                window.elementSdk.setConfig({ text_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.card_background || defaultConfig.card_background,
+                            set: (value) => {
+                                config.card_background = value;
+                                window.elementSdk.setConfig({ card_background: value });
+                            }
+                        },
+                        {
+                            get: () => config.accent_color || defaultConfig.accent_color,
+                            set: (value) => {
+                                config.accent_color = value;
+                                window.elementSdk.setConfig({ accent_color: value });
+                            }
+                        }
+                    ],
+                    borderables: [],
+                    fontEditable: {
+                        get: () => config.font_family || defaultConfig.font_family,
+                        set: (value) => {
+                            config.font_family = value;
+                            window.elementSdk.setConfig({ font_family: value });
+                        }
+                    },
+                    fontSizeable: {
+                        get: () => config.font_size || defaultConfig.font_size,
+                        set: (value) => {
+                            config.font_size = value;
+                            window.elementSdk.setConfig({ font_size: value });
+                        }
+                    }
+                }),
+                mapToEditPanelValues: (config) => new Map([
+                    ["main_title", config.main_title || defaultConfig.main_title],
+                    ["section_title", config.section_title || defaultConfig.section_title],
+                    ["intro_text", config.intro_text || defaultConfig.intro_text],
+                    ["usage_label", config.usage_label || defaultConfig.usage_label]
+                ])
+            });
+        }
+    </script>
+</body>
+</html>

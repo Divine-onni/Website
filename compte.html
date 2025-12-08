@@ -1,0 +1,1476 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plateforme B2B Airtel – Services aux Entreprises</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- SDKs -->
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+  
+  <style>
+    /* Variables CSS communes */
+    :root {
+      --airtel-red: #e30613;
+      --airtel-red-dark: #c0392b;
+      --airtel-red-light: #ff4757;
+      --white: #ffffff;
+      --off-white: #fafafa;
+      --light-gray: #f5f5f5;
+      --text-main: #1a1a1a;
+      --text-muted: #6b7280;
+      --border-light: #e5e7eb;
+    }
+
+
+     /* Animation d'entrée */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* Effet hover sur les cartes */
+        .solution-card {
+            transition: all 0.3s ease;
+        }
+
+        .solution-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Icône SVG personnalisée */
+        .icon-wrapper {
+            transition: transform 0.3s ease;
+        }
+
+        .solution-card:hover .icon-wrapper {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Gradient pour la carte DATA */
+        .data-gradient {
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+        }
+
+        /* Commander icon animation */
+        @keyframes pulse-slow {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.05);
+            }
+        }
+
+        .commander-icon-wrapper {
+            animation: pulse-slow 3s ease-in-out infinite;
+        }
+
+        /* Styles personnalisés pour les cartes */
+        .solution-card {
+            min-height: 320px;
+        }
+        
+        .commander-card {
+            min-height: 280px;
+        }
+
+    /* Styles de base */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--off-white);
+      color: var(--text-main);
+      box-sizing: border-box;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    /* Layout wrapper */
+    .app-wrapper {
+      width: 100%;
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* HERO - From First Code */
+    .hero-section {
+      width: 100%;
+      flex: 1 0 auto;
+      background: url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1600&q=80') center/cover no-repeat;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      inset: auto -20% 0 auto;
+      width: 55%;
+      max-width: 800px;
+      height: 70%;
+      background: radial-gradient(circle, rgba(227, 6, 19, 0.15), transparent 60%);
+      filter: blur(60px);
+      opacity: 0.7;
+      pointer-events: none;
+      transform: translateX(10%);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .login-card {
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+      border-radius: 1.25rem;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(18px);
+    }
+
+    .login-input {
+      background-color: var(--light-gray);
+      border-color: var(--border-light);
+      color: var(--text-main);
+      transition: all 0.18s ease;
+    }
+
+    .login-input:focus {
+      border-color: var(--airtel-red);
+      box-shadow: 0 0 0 3px rgba(227, 6, 19, 0.1);
+      outline: none;
+      background-color: var(--white);
+    }
+
+    .primary-btn {
+      background: linear-gradient(135deg, var(--airtel-red), var(--airtel-red-dark));
+      color: #ffffff;
+      transition: all 0.2s ease;
+      box-shadow: 0 15px 30px rgba(227, 6, 19, 0.45);
+    }
+
+    .primary-btn:hover {
+      background: linear-gradient(135deg, var(--airtel-red-dark), #991b1b);
+      transform: translateY(-1px) scale(1.01);
+      box-shadow: 0 22px 45px rgba(227, 6, 19, 0.7);
+    }
+
+    /* ONBOARDING - From Second Code */
+    .onboarding-wrapper {
+      width: 100%;
+      padding: 60px 40px;
+      background: white;
+    }
+
+    .onboarding-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .onboarding-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .onboarding-label {
+      display: inline-block;
+      background: var(--airtel-red);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .onboarding-title {
+      font-size: 42px;
+      font-weight: 700;
+      color: #2c3e50;
+      margin: 0 0 15px 0;
+      line-height: 1.2;
+    }
+
+    .onboarding-subtitle {
+      font-size: 18px;
+      color: #7f8c8d;
+      margin: 0;
+    }
+
+    /* Progress Bar */
+    .onboarding-progress {
+      margin-bottom: 60px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      background: #dfe6e9;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+
+    .progress-fill {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--airtel-red) 0%, var(--airtel-red-dark) 100%);
+      border-radius: 10px;
+      animation: progressAnimation 2s ease-out;
+    }
+
+    @keyframes progressAnimation {
+      from { width: 0%; }
+      to { width: 100%; }
+    }
+
+    .progress-steps {
+      display: flex;
+      justify-content: space-between;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .progress-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .progress-step span {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: #dfe6e9;
+      color: #95a5a6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+      transition: all 0.3s ease;
+    }
+
+    .progress-step.active span {
+      background: var(--airtel-red);
+      color: white;
+      box-shadow: 0 4px 15px rgba(227, 6, 19, 0.3);
+    }
+
+    /* Onboarding Steps Cards - EXACT DESIGN FROM SECOND CODE */
+    .onboarding-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    .step-card {
+      background: white;
+      border-radius: 20px;
+      padding: 35px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--airtel-red) 0%, var(--airtel-red-dark) 100%);
+    }
+
+    .step-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    .step-badge {
+      display: inline-block;
+      background: #fff5f5;
+      color: var(--airtel-red);
+      padding: 6px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .step-icon {
+      margin-bottom: 25px;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* ILLUSTRATIONS - Exactement comme dans le second code */
+    .laptop-illustration,
+    .phone-illustration,
+    .business-illustration {
+      position: relative;
+      width: 150px;
+      height: 120px;
+    }
+
+    .laptop {
+      width: 100px;
+      height: 70px;
+      background: #34495e;
+      border-radius: 8px 8px 0 0;
+      position: absolute;
+      top: 10px;
+      left: 25px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .laptop::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: -10px;
+      width: 120px;
+      height: 8px;
+      background: #2c3e50;
+      border-radius: 0 0 4px 4px;
+    }
+
+    .laptop-screen {
+      width: 90px;
+      height: 55px;
+      background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+      margin: 5px auto;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .register-btn {
+      background: #e74c3c;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 700;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .person-laptop,
+    .person-phone {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+
+    .person-head {
+      width: 20px;
+      height: 20px;
+      background: #f39c12;
+      border-radius: 50%;
+      margin: 0 auto 2px;
+    }
+
+    .person-body {
+      width: 25px;
+      height: 30px;
+      background: var(--airtel-red);
+      border-radius: 8px 8px 0 0;
+      margin: 0 auto;
+    }
+
+    .person-legs {
+      width: 25px;
+      height: 15px;
+      background: #2c3e50;
+      margin: 0 auto;
+    }
+
+    .phone {
+      width: 50px;
+      height: 90px;
+      background: #34495e;
+      border-radius: 8px;
+      position: absolute;
+      top: 5px;
+      left: 50px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .phone-screen {
+      width: 42px;
+      height: 75px;
+      background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+      margin: 4px auto;
+      border-radius: 4px;
+      padding: 8px 5px;
+    }
+
+    .phone-lines {
+      width: 100%;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 2px;
+      margin-bottom: 5px;
+    }
+
+    .phone-button {
+      width: 20px;
+      height: 20px;
+      background: var(--airtel-red);
+      border-radius: 50%;
+      margin: 8px auto 0;
+    }
+
+    .business-illustration {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .briefcase {
+      width: 50px;
+      height: 40px;
+      background: var(--airtel-red);
+      border-radius: 6px;
+      position: relative;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .briefcase::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: 15px;
+      width: 20px;
+      height: 10px;
+      background: var(--airtel-red-dark);
+      border-radius: 4px 4px 0 0;
+    }
+
+    .person-left,
+    .person-right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Contenu des cartes */
+    .step-content h3 {
+      font-size: 24px;
+      color: #2c3e50;
+      margin: 0 0 12px 0;
+      font-weight: 700;
+    }
+
+    .step-content p {
+      font-size: 15px;
+      color: #7f8c8d;
+      margin: 0 0 20px 0;
+      line-height: 1.6;
+    }
+
+    .step-highlights {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .step-highlights li {
+      padding: 8px 0 8px 28px;
+      position: relative;
+      font-size: 14px;
+      color: #5a6c7d;
+    }
+
+    .step-highlights li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--airtel-red);
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    /* CTA Section */
+    .onboarding-cta {
+      background: linear-gradient(135deg, var(--airtel-red) 0%, var(--airtel-red-dark) 100%);
+      border-radius: 20px;
+      padding: 50px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 15px 40px rgba(227, 6, 19, 0.3);
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .cta-text h2 {
+      font-size: 32px;
+      color: white;
+      margin: 0 0 10px 0;
+      font-weight: 700;
+    }
+
+    .cta-text p {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.9);
+      margin: 0;
+    }
+
+    .cta-button {
+      background: white;
+      color: var(--airtel-red);
+      border: none;
+      padding: 18px 40px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    /* SERVICES Section */
+    .services-section {
+      padding: 80px 20px;
+      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+      animation: fadeInDown 0.8s ease-out;
+    }
+
+    .section-header h1 {
+      font-size: 48px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin: 0 0 20px 0;
+      line-height: 1.2;
+    }
+
+    .section-header p {
+      font-size: 20px;
+      color: #6c757d;
+      margin: 0;
+      font-weight: 400;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    .service-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 40px 32px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid transparent;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--airtel-red) 0%, var(--airtel-red-light) 100%);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(227, 6, 19, 0.15);
+      border-color: var(--airtel-red);
+    }
+
+    .service-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .icon-container {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      transition: all 0.3s ease;
+      border: 2px solid #ffe5e7;
+    }
+
+    .service-card:hover .icon-container {
+      background: linear-gradient(135deg, var(--airtel-red) 0%, var(--airtel-red-light) 100%);
+      transform: scale(1.1) rotate(5deg);
+      border-color: var(--airtel-red);
+    }
+
+    .icon {
+      width: 40px;
+      height: 40px;
+      stroke: var(--airtel-red);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: all 0.3s ease;
+    }
+
+    .service-card:hover .icon {
+      stroke: #ffffff;
+    }
+
+    /* Animations */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Fade-in animation */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+    }
+
+    .fade-up.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero-glow {
+        width: 80%;
+        height: 60%;
+        transform: translateX(0);
+        inset: auto 0 0 10%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .onboarding-title {
+        font-size: 32px;
+      }
+      
+      .onboarding-subtitle {
+        font-size: 16px;
+      }
+      
+      .onboarding-steps {
+        grid-template-columns: 1fr;
+      }
+      
+      .onboarding-cta {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 30px;
+      }
+      
+      .cta-text h2 {
+        font-size: 26px;
+      }
+      
+      .progress-steps {
+        flex-direction: column;
+        gap: 20px;
+      }
+      
+      .services-section {
+        padding: 40px 20px;
+      }
+      
+      .section-header h1 {
+        font-size: 36px;
+      }
+      
+      .section-header p {
+        font-size: 18px;
+      }
+      
+      .services-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      
+      .service-card {
+        padding: 32px 24px;
+      }
+      
+      .service-card h3 {
+        font-size: 22px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .section-header h1 {
+        font-size: 28px;
+      }
+      
+      .section-header p {
+        font-size: 16px;
+      }
+      
+      .icon-container {
+        width: 70px;
+        height: 70px;
+      }
+      
+      .icon {
+        width: 35px;
+        height: 35px;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+</head>
+<body class="bg-gray-50">
+  <div class="app-wrapper">
+    <!-- Header -->
+    <header class="w-full bg-white/80 backdrop-blur-sm border-b border-gray-200">
+      <nav class="mx-auto w-full max-w-6xl px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="w-9 h-9 rounded-full bg-[var(--airtel-red)] flex items-center justify-center shadow-lg shadow-red-500/30">
+            <span class="text-white text-xl font-black">A</span>
+          </div>
+          <div class="flex flex-col leading-tight">
+            <span class="text-sm font-semibold tracking-[0.12em] text-[var(--text-muted)] uppercase">Airtel Business</span>
+            <span class="text-base font-semibold text-gray-900">Plateforme B2B</span>
+          </div>
+        </div>
+        <div class="hidden md:flex items-center gap-6 text-sm">
+          <button class="text-xs tracking-[0.16em] uppercase text-gray-600 hover:text-[var(--airtel-red)] transition-colors duration-150">
+            Découvrir les offres
+          </button>
+          <button class="text-xs tracking-[0.16em] uppercase text-gray-600 hover:text-[var(--airtel-red)] transition-colors duration-150">
+            Assistance
+          </button>
+          <button class="border border-gray-300 rounded-full px-4 py-1.5 text-xs uppercase tracking-[0.18em] text-gray-700 hover:border-[var(--airtel-red)] hover:text-[var(--airtel-red)] transition-colors duration-150">
+            FR
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- HERO Section -->
+    <main class="flex-1 w-full">
+      <section class="hero-section">
+        <div class="hero-glow" aria-hidden="true"></div>
+        <div class="hero-inner mx-auto w-full max-w-6xl px-6 pt-6 pb-16 lg:py-16">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            <!-- Texte hero -->
+            <div class="space-y-6 fade-up" id="hero-text">
+              <p class="inline-flex items-center gap-2 rounded-full border border-red-200 bg-red-50 px-3 py-1 text-[11px] uppercase tracking-[0.22em] text-[var(--airtel-red)] mb-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-[var(--airtel-red)] animate-pulse"></span>
+                Plateforme d'entreprise
+              </p>
+              <h1 class="text-3xl sm:text-4xl lg:text-[2.8rem] leading-tight font-semibold text-white drop-shadow-lg">
+                Offrir la plus grande plateforme <span class="text-[var(--airtel-red)] font-bold bg-white px-2 rounded">B2B</span> aux entreprises en Afrique.
+              </h1>
+              <p class="text-sm sm:text-base text-white drop-shadow-md max-w-xl"></p>
+              <div class="flex items-center gap-6 pt-4">
+                <div class="flex -space-x-2">
+                  <div class="w-7 h-7 rounded-full bg-[var(--airtel-red)] flex items-center justify-center text-[10px] text-white border-2 border-white font-semibold">
+                    IT
+                  </div>
+                  <div class="w-7 h-7 rounded-full bg-[var(--airtel-red)] flex items-center justify-center text-[10px] text-white border-2 border-white font-semibold">
+                    FIN
+                  </div>
+                  <div class="w-7 h-7 rounded-full bg-[var(--airtel-red)] flex items-center justify-center text-[10px] text-white border-2 border-white font-semibold">
+                    OPS
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Carte Connexion -->
+            <div class="fade-up" id="login-card">
+              <section aria-labelledby="connexion-titre" class="login-card px-6 py-6 sm:px-7 sm:py-7 max-w-md mx-auto">
+                <h2 id="connexion-titre" class="text-lg sm:text-xl font-bold text-gray-900 mb-1">Connexion d'entreprise</h2>
+                <p class="text-xs sm:text-sm text-gray-700 mb-5">Bienvenue sur la plateforme d'entreprise Airtel. Entrez votre adresse e-mail pour recevoir un code sécurisé.</p>
+                <form id="otp-form" class="space-y-4" aria-describedby="otp-note">
+                  <div class="flex flex-col space-y-1.5">
+                    <label for="email" class="text-xs font-medium text-gray-700">Adresse e-mail professionnelle</label>
+                    <input id="email" type="email" required class="login-input rounded-xl border px-3 py-2.5 text-sm placeholder:text-slate-500" placeholder="prenom.nom@entreprise.com">
+                  </div>
+                  <p id="otp-note" class="text-[11px] text-gray-600 leading-snug">
+                    Remarque : un code OTP à 6 chiffres sera envoyé sur votre adresse e-mail pour valider votre identité.
+                  </p>
+                  <button type="submit" class="primary-btn mt-1 w-full rounded-full px-4 py-2.5 text-xs sm:text-sm font-semibold tracking-[0.18em] uppercase flex items-center justify-center gap-2">
+                    <span>Valider & obtenir OTP</span>
+                    <span aria-hidden="true">➜</span>
+                  </button>
+                  <div id="feedback-message" class="text-[11px] text-emerald-600 mt-1 hidden">
+                    Le code OTP a été simulé et indiqué dans la console (démo). Remplacez cette zone par votre logique réelle.
+                  </div>
+                  <p class="text-[11px] text-gray-700 pt-1">
+                    Je n'ai pas de compte ?
+                    <button type="button" class="text-[var(--airtel-red)] font-semibold hover:underline">
+                      S'inscrire maintenant
+                    </button>
+                  </p>
+                </form>
+              </section>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ONBOARDING Section -->
+      <div class="onboarding-wrapper">
+        <div class="onboarding-inner">
+          <!-- En-tête -->
+          <div class="onboarding-header">
+            <div class="onboarding-label">
+              Guide en 3 étapes
+            </div>
+            <h1 class="onboarding-title">Commencez à utiliser la plate-forme en quelques étapes simples</h1>
+            <p class="onboarding-subtitle">Accès sans tracas et processus d'inscription facile</p>
+          </div>
+
+          
+
+          <!-- Cartes étapes - EXACTEMENT comme dans le second code -->
+          <div class="onboarding-steps">
+            <!-- Étape 1 -->
+            <div class="step-card">
+              <div class="step-badge">
+                Étape 1
+              </div>
+              <div class="step-icon">
+                <div class="laptop-illustration">
+                  <div class="laptop">
+                    <div class="laptop-screen">
+                      <div class="register-btn">
+                        REGISTER
+                      </div>
+                    </div>
+                  </div>
+                  <div class="person-laptop">
+                    <div class="person-head"></div>
+                    <div class="person-body"></div>
+                    <div class="person-legs"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="step-content">
+                <h3>Créez votre compte</h3>
+                <p>Tout ce dont vous avez besoin pour vous inscrire à la plate-forme Airtel Business sont les coordonnées de la personne de contact.</p>
+              </div>
+              <ul class="step-highlights">
+                <li>Inscription en quelques minutes</li>
+                <li>Informations de base uniquement</li>
+                <li>Interface intuitive</li>
+              </ul>
+            </div>
+
+            <!-- Étape 2 -->
+            <div class="step-card">
+              <div class="step-badge">
+                Étape 2
+              </div>
+              <div class="step-icon">
+                <div class="phone-illustration">
+                  <div class="phone">
+                    <div class="phone-screen">
+                      <div class="phone-lines"></div>
+                      <div class="phone-lines"></div>
+                      <div class="phone-lines"></div>
+                      <div class="phone-lines"></div>
+                      <div class="phone-button"></div>
+                    </div>
+                  </div>
+                  <div class="person-phone">
+                    <div class="person-head"></div>
+                    <div class="person-body"></div>
+                    <div class="person-legs"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="step-content">
+                <h3>Connectez-vous</h3>
+                <p>La personne de contact peut se connecter en utilisant l'identifiant de son adresse électronique et son mot de passe.</p>
+              </div>
+              <ul class="step-highlights">
+                <li>Connexion sécurisée</li>
+                <li>Accès depuis n'importe quel appareil</li>
+                <li>Récupération de mot de passe possible</li>
+              </ul>
+            </div>
+
+            <!-- Étape 3 -->
+            <div class="step-card">
+              <div class="step-badge">
+                Étape 3
+              </div>
+              <div class="step-icon">
+                <div class="business-illustration">
+                  <div class="briefcase"></div>
+                  <div class="person-left">
+                    <div class="person-head"></div>
+                    <div class="person-body"></div>
+                    <div class="person-legs"></div>
+                  </div>
+                  <div class="person-right">
+                    <div class="person-head"></div>
+                    <div class="person-body"></div>
+                    <div class="person-legs"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="step-content">
+                <h3>Démarrer une entreprise</h3>
+                <p>Gérer les comptes, les lignes et soumettre une requête.</p>
+              </div>
+              <ul class="step-highlights">
+                <li>Vue unifiée de vos comptes</li>
+                <li>Gestion simplifiée des lignes</li>
+                <li>Support et requêtes centralisés</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Bandeau CTA -->
+          <div class="onboarding-cta">
+            <div class="cta-text">
+              <h2>Prêt à commencer ?</h2>
+              <p>Suivez ces étapes et commencez à utiliser Airtel Business dès aujourd'hui.</p>
+            </div>
+            <button class="cta-button">Démarrer maintenant</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SERVICES Section -->
+      <div class="services-section">
+        <div class="container">
+          <div class="section-header">
+            <h1>Services aux entreprises</h1>
+            <p>Services aux entreprises simples, rapides et sans tracas</p>
+          </div>
+          <div class="services-grid">
+            <!-- Payer Ta Facture -->
+            <div class="service-card">
+              <div class="icon-container">
+                <svg class="icon" viewBox="0 0 24 24">
+                  <rect x="3" y="6" width="18" height="13" rx="2" />
+                  <path d="M3 10h18" />
+                  <circle cx="7" cy="15" r="1" fill="var(--airtel-red)" />
+                  <line x1="10" y1="15" x2="14" y2="15" />
+                </svg>
+              </div>
+              <h3>Payer Ta Facture</h3>
+              <p>Réglez vos factures en un clin d'œil grâce à nos options de paiement en ligne sécurisées et pratiques. Payez intelligemment, gagnez du temps.</p>
+            </div>
+
+            <!-- Consulter et télécharger vos factures -->
+            <div class="service-card">
+              <div class="icon-container">
+                <svg class="icon" viewBox="0 0 24 24">
+                  <path d="M3 10h18" />
+                  <path d="M3 6h18v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6z" />
+                  <path d="M7 3v3" />
+                  <path d="M17 3v3" />
+                  <rect x="7" y="13" width="3" height="3" rx="0.5" />
+                  <rect x="11" y="13" width="3" height="3" rx="0.5" />
+                  <rect x="15" y="13" width="3" height="3" rx="0.5" />
+                </svg>
+              </div>
+              <h3>Consulter et télécharger vos factures</h3>
+              <p>Suivez facilement vos factures impayées et téléchargez-les à tout moment et en tout lieu. Restez organisé, sans effort.</p>
+            </div>
+
+            <!-- Historique des paiements et reçus -->
+            <div class="service-card">
+              <div class="icon-container">
+                <svg class="icon" viewBox="0 0 24 24">
+                  <rect x="3" y="6" width="18" height="13" rx="2" />
+                  <path d="M3 10h18" />
+                  <circle cx="18" cy="8" r="3" stroke-width="1.5" />
+                  <path d="M17 8l0.5 0.5L19 7" />
+                </svg>
+              </div>
+              <h3>Historique des paiements et reçus</h3>
+              <p>Accédez à un historique complet de vos paiements et téléchargez vos reçus instantanément. Toutes vos transactions, au même endroit.</p>
+            </div>
+
+            <!-- Recharge/Contenu -->
+            <div class="service-card">
+              <div class="icon-container">
+                <svg class="icon" viewBox="0 0 24 24">
+                  <rect x="4" y="4" width="7" height="16" rx="1" />
+                  <rect x="13" y="4" width="7" height="16" rx="1" />
+                  <path d="M7.5 8v8" />
+                  <path d="M16.5 8v8" />
+                </svg>
+              </div>
+              <h3>Recharge/Contenu</h3>
+              <p>Rechargez vos lignes prépayées rapidement et en toute sécurité grâce à plusieurs options de paiement fiables. Restez connecté, toujours.</p>
+            </div>
+
+            <!-- Gérez vos comptes -->
+            <div class="service-card">
+              <div class="icon-container">
+                <svg class="icon" viewBox="0 0 24 24">
+                  <rect x="4" y="4" width="7" height="7" rx="1" />
+                  <rect x="4" y="13" width="7" height="7" rx="1" />
+                  <rect x="13" y="4" width="7" height="7" rx="1" />
+                  <rect x="13" y="13" width="7" height="7" rx="1" />
+                </svg>
+              </div>
+              <h3>Gérez vos comptes</h3>
+              <p>Prenez le contrôle total de vos comptes avec notre interface intuitive. Gérez tout en un seul endroit, facilement.</p>
+            </div>
+
+            <!-- Contrôle d'accès des utilisateurs -->
+            <div class="service-card">
+              <div class="icon-container">
+                <svg class="icon" viewBox="0 0 24 24">
+                  <rect x="5" y="11" width="14" height="10" rx="2" />
+                  <circle cx="12" cy="16" r="1.5" fill="var(--airtel-red)" />
+                  <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+                </svg>
+              </div>
+              <h3>Contrôle d'accès des utilisateurs</h3>
+              <p>Créez facilement de nouveaux utilisateurs et personnalisez leur accès aux comptes et services. Déléguez facilement.</p>
+            </div>
+
+            <!-- Demandes de service -->
+            <div class="service-card">
+              <div class="icon-container">
+                <svg class="icon" viewBox="0 0 24 24">
+                  <rect x="4" y="4" width="16" height="16" rx="2" />
+                  <path d="M8 8h8" />
+                  <path d="M8 12h8" />
+                  <path d="M8 16h4" />
+                  <circle cx="17" cy="17" r="3" stroke-width="1.5" />
+                  <path d="M16 17l0.5 0.5L18 16" />
+                </svg>
+              </div>
+              <h3>Demandes de service</h3>
+              <p>Soumettez et suivez vos demandes de service en ligne pour une assistance rapide. L'aide est à portée de clic.</p>
+            </div>
+
+            <!-- Relevés de compte en ligne -->
+            <div class="service-card">
+              <div class="icon-container">
+                <svg class="icon" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M12 12l5-3" />
+                  <path d="M12 7v5" />
+                </svg>
+              </div>
+              <h3>Relevés de compte en ligne</h3>
+              <p>Consultez et téléchargez les relevés détaillés de tous vos comptes dès que vous en avez besoin. Vos données, à portée de main.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Animation d'apparition
+    document.addEventListener("DOMContentLoaded", function () {
+      const fadeEls = document.querySelectorAll(".fade-up");
+      fadeEls.forEach((el, index) => {
+        setTimeout(() => {
+          el.classList.add("show");
+        }, 120 * index);
+      });
+
+      // Gestion du submit OTP
+      const form = document.getElementById("otp-form");
+      const feedback = document.getElementById("feedback-message");
+
+      if (form) {
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const email = document.getElementById("email").value;
+          
+          if (email) {
+            console.log(`OTP envoyé à: ${email} (simulation)`);
+            console.log("Code OTP: 123456");
+            feedback.textContent = `Un code OTP a été envoyé à ${email}. Code de démo: 123456`;
+            feedback.classList.remove("hidden");
+            feedback.style.color = "#10b981";
+            
+            setTimeout(() => {
+              feedback.classList.add("hidden");
+            }, 5000);
+          }
+        });
+      }
+
+      // Configuration SDK
+      const defaultConfig = {
+        header_title: "Services aux entreprises",
+        header_subtitle: "Services aux entreprises simples, rapides et sans tracas",
+        primary_color: "#e30613",
+        background_color: "#ffffff",
+        text_color: "#1a1a1a",
+        secondary_text_color: "#6c757d",
+        card_background: "#ffffff",
+        font_family: "Inter",
+        font_size: 16
+      };
+
+      async function onConfigChange(config) {
+        // Update styles based on config
+        const root = document.documentElement;
+        
+        if (config.primary_color) {
+          root.style.setProperty('--airtel-red', config.primary_color);
+        }
+        
+        // Update service cards
+        const cards = document.querySelectorAll('.service-card');
+        cards.forEach(card => {
+          if (config.card_background) {
+            card.style.backgroundColor = config.card_background;
+          }
+        });
+      }
+
+      function mapToCapabilities(config) {
+        return {
+          recolorables: [
+            {
+              get: () => config.primary_color || defaultConfig.primary_color,
+              set: (value) => {
+                config.primary_color = value;
+                if (window.elementSdk) {
+                  window.elementSdk.setConfig({ primary_color: value });
+                }
+              }
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => {
+              config.font_family = value;
+              if (window.elementSdk) {
+                window.elementSdk.setConfig({ font_family: value });
+              }
+            }
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => {
+              config.font_size = value;
+              if (window.elementSdk) {
+                window.elementSdk.setConfig({ font_size: value });
+              }
+            }
+          }
+        };
+      }
+
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange,
+          mapToCapabilities
+        });
+      }
+
+      // Button interactions
+      document.querySelector('.cta-button')?.addEventListener('click', function() {
+        document.getElementById('login-card')?.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+
+  <!-- SOLUTIONS GRID -->
+    <section class="w-full bg-gray-50 py-20">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- CARTE DATA -->
+                <article class="solution-card data-gradient rounded-3xl p-10 text-white relative overflow-hidden shadow-xl">
+                    <div class="relative z-10">
+                        <h3 class="text-3xl lg:text-4xl font-bold mb-6">
+                            <span class="text-yellow-300">NOS Solution Data</span>
+                        </h3>
+                        <ul class="space-y-3 text-lg">
+                            <li class="flex items-start">
+                                <span class="text-yellow-300 mr-3 text-2xl">•</span> 
+                                <a href="internet prepayé.html" class="hover:text-yellow-200 transition-colors">
+                                    L'internet Mobile Prépayé
+                                </a>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-yellow-300 mr-3 text-2xl">•</span> 
+                                <a href="internet-fixe-wimax.html" class="hover:text-yellow-200 transition-colors">
+                                    Internet Fixe et Wimax
+                                </a>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-yellow-300 mr-3 text-2xl">•</span> 
+                                <a href="liaison dedié.html" class="hover:text-yellow-200 transition-colors">
+                                    Liaisons dediées
+                                </a>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-yellow-300 mr-3 text-2xl">•</span> 
+                                <a href="APN.html" class="hover:text-yellow-200 transition-colors">
+                                    APN Dedié
+                                </a>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-yellow-300 mr-3 text-2xl">•</span> 
+                                <a href="mpl data.html" class="hover:text-yellow-200 transition-colors">
+                                    MPLS Data
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="icon-wrapper absolute right-8 top-1/2 -translate-y-1/2 opacity-20">
+                        <svg class="w-24 h-24" fill="currentColor" viewbox="0 0 24 24">
+                            <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z" />
+                        </svg>
+                    </div>
+                </article>
+
+                <!-- CARTE VOICE -->
+                <article class="solution-card bg-white border-2 border-red-200 rounded-3xl p-10 relative overflow-hidden shadow-lg">
+                    <div class="relative z-10">
+                        <h3 class="text-3xl lg:text-4xl font-bold mb-6 text-red-600">
+                            Nos <span class="text-red-700">Solutions Voix</span>
+                        </h3>
+                        <ul class="space-y-3 text-lg text-gray-900">
+                            <li class="flex items-start">
+                                <span class="text-red-600 mr-3 text-2xl">•</span> 
+                                <a href="bussines control.html" class="text-gray-900 hover:text-red-600 transition-colors">
+                                    Business Contrôle
+                                </a>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-600 mr-3 text-2xl">•</span> 
+                                <a href="business-groupe.html" class="text-gray-900 hover:text-red-600 transition-colors">
+                                    Business Groupe
+                                </a>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-600 mr-3 text-2xl">•</span> 
+                                <a href="business-plus.html" class="text-gray-900 hover:text-red-600 transition-colors">
+                                    Business Plus
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="icon-wrapper absolute right-8 top-1/2 -translate-y-1/2 opacity-10">
+                        <svg class="w-24 h-24 text-red-600" fill="currentColor" viewbox="0 0 24 24">
+                            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                        </svg>
+                    </div>
+                </article>
+
+                <!-- CARTE VALUE ADDED -->
+                <article class="solution-card bg-white border-2 border-red-200 rounded-3xl p-10 relative overflow-hidden shadow-lg">
+                    <div class="relative z-10">
+                        <h3 class="text-3xl lg:text-4xl font-bold mb-6 text-red-600">
+                            Nos Services <span class="text-red-700">à Valeur Ajoutées</span>
+                        </h3>
+                        <ul class="space-y-3 text-lg text-gray-900">
+                            <li class="flex items-start">
+                                <span class="text-red-600 mr-3 text-2xl">•</span> 
+                                <a href="car-tracking.html" class="text-gray-900 hover:text-red-600 transition-colors">
+                                    Car Tracking
+                                </a>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-600 mr-3 text-2xl">•</span> 
+                                <a href="sms-pro.html" class="text-gray-900 hover:text-red-600 transition-colors">
+                                    SMS Pro
+                                </a>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-600 mr-3 text-2xl">•</span> 
+                                <a href="bulk-sms.html" class="text-gray-900 hover:text-red-600 transition-colors">
+                                    Bulk SMS / SMS Banking
+                                </a>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-600 mr-3 text-2xl">•</span> 
+                                <a href="avaya-spaces.html" class="text-gray-900 hover:text-red-600 transition-colors">
+                                    Avaya Spaces
+                                </a>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-600 mr-3 text-2xl">•</span> 
+                                <a href="ivr.html" class="text-gray-900 hover:text-red-600 transition-colors">
+                                    IVR
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="icon-wrapper absolute right-8 top-1/2 -translate-y-1/2 opacity-10">
+                        <svg class="w-24 h-24 text-red-600" fill="currentColor" viewbox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                        </svg>
+                    </div>
+                </article>
+
+                <!-- CARTE CLIENT EXPERIENCE -->
+                <article class="solution-card bg-white border-2 border-red-200 rounded-3xl p-10 relative overflow-hidden shadow-lg">
+                    <div class="relative z-10">
+                        <h3 class="text-3xl lg:text-4xl font-bold mb-6 text-red-600">
+                            Client <span class="text-red-700">Notre Service Client</span>
+                        </h3>
+                        <ul class="space-y-3 text-lg text-gray-900">
+                            <li class="flex items-start">
+                                <span class="text-red-600 mr-3 text-2xl">•</span> 
+                                <a href="contact.html" class="text-gray-900 hover:text-red-600 transition-colors">
+                                    Nous Contacter
+                                </a>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-600 mr-3 text-2xl">•</span> 
+                                <a href="pourquoi-airtel.html" class="text-gray-900 hover:text-red-600 transition-colors">
+                                    Pourquoi Airtel
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="icon-wrapper absolute right-8 top-1/2 -translate-y-1/2 opacity-10">
+                        <svg class="w-24 h-24 text-red-600" fill="currentColor" viewbox="0 0 24 24">
+                            <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
+                        </svg>
+                    </div>
+                </article>
+
+                <!-- CARTE COMMANDER -->
+                <article class="solution-card commander-card bg-gradient-to-br from-red-600 to-red-700 rounded-3xl p-10 text-white relative overflow-hidden shadow-xl md:col-span-2">
+                    <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
+                        <!-- Texte -->
+                        <div class="flex-1 text-center lg:text-left">
+                            <h3 class="text-3xl lg:text-4xl font-bold mb-4">Commander</h3>
+                            <p class="text-white/90 text-lg mb-6">Commandez vos solutions B2B en ligne</p>
+                            <a href="commander.html" class="inline-flex items-center bg-white text-red-600 hover:bg-gray-50 font-semibold px-8 py-4 rounded-full shadow-lg transition-all group">
+                                Commander maintenant 
+                                <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                            </a>
+                        </div>
+                        <!-- Icône -->
+                        <div class="flex-shrink-0 commander-icon-wrapper">
+                            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border-2 border-white/30">
+                                <svg class="w-24 h-24 text-white" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="20" y="30" width="80" height="60" rx="8" stroke-width="3" />
+                                    <circle cx="40" cy="50" r="8" fill="currentColor" />
+                                    <circle cx="60" cy="50" r="8" fill="currentColor" />
+                                    <circle cx="80" cy="50" r="8" fill="currentColor" />
+                                    <line x1="30" y1="70" x2="90" y2="70" stroke-width="3" />
+                                    <line x1="30" y1="80" x2="70" y2="80" stroke-width="3" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Script pour les effets d'animation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ajouter l'animation d'entrée à toutes les cartes
+            const cards = document.querySelectorAll('.solution-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.classList.add('animate-fade-in');
+            });
+
+            // Effet de survol amélioré
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '10';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.zIndex = '1';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
