@@ -1186,32 +1186,32 @@
                 <ul class="nav-links" id="nav-links">
                     <!-- PAYEZ ET RECHARGEZ -->
                     <li>
-                        <a href="Payez.html" class="active">PAYEZ ET RECHARGEZ</a>
+                        <a href="" class="active">PAYEZ ET RECHARGEZ</a>
                         <ul class="dropdown-menu">
                             <!-- Postpayé avec sous-menu -->
                             <li class="has-submenu">
-                                <a href="#" data-section="postpaye">Postpayé <span class="arrow">›</span></a>
+                                <a href="#">Postpayé <span class="arrow">›</span></a>
                                 <ul class="sub-level">
-                                    <li><a href="#" data-section="postpaye" data-subsection="postpaye-payment">Paiement
-                                            de
-                                            facture en ligne</a></li>
+                                    <!-- CORRECTION : Lien vers la page de paiement -->
+                                    <li><a href="Payez.html">Paiement de facture en ligne</a></li>
                                 </ul>
                             </li>
 
                             <!-- Prépayé avec sous-menu -->
                             <li class="has-submenu">
-                                <a href="#" data-section="prepaye">Prépayé <span class="arrow">›</span></a>
+                                <a href="#">Prépayé <span class="arrow">›</span></a>
                                 <ul class="sub-level">
-                                    <li><a href="#" data-section="prepaye" data-subsection="prepaye-recharge">Rechargez
-                                            un
-                                            compte prépayé</a></li>
-                                    <li><a href="#" data-section="prepaye" data-subsection="prepaye-forfait">Activez un
-                                            forfait Internet</a></li>
+                                    <!-- CORRECTION : Lien vers la page de recharge -->
+                                    <li><a href="recharge.html">Rechargez un compte prépayé</a></li>
+                                    
+                                    <!-- CORRECTION : Lien vers la page d'activation forfait -->
+                                    <li><a href="forfait.html">Activez un forfait Internet</a></li>
                                 </ul>
                             </li>
 
                             <!-- Broadband (sans sous-menu) -->
-                            <li><a href="#" data-section="broadband">Broadband</a></li>
+                            <!-- CORRECTION : Lien vers la page broadband -->
+                            <li><a href="broadband.html">Broadband</a></li>
                         </ul>
                     </li>
 
@@ -1252,8 +1252,7 @@
                                     </li>
                                     <!-- Services à valeur ajoutée - Niveau 2 -->
                                     <li>
-                                        <a href="VAS.html">Services à valeur ajoutée <span class="arrow">›</span></a>
-
+                                        <a href="VAS.html">Services à valeur ajoutée</a>
                                     </li>
                                     <!-- Taxi Connect - Niveau 2 -->
                                     <li><a href="Taxi-connect.html">Taxi Connect</a></li>
@@ -1612,6 +1611,13 @@
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', function () {
                 document.getElementById('nav-links').classList.remove('active');
+            });
+        });
+
+        // Empêcher la fermeture des menus déroulants lors du clic sur un sous-menu
+        document.querySelectorAll('.dropdown-menu a, .sub-level a, .sub-dropdown a, .third-level a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.stopPropagation(); // Empêche la propagation de l'événement
             });
         });
 
