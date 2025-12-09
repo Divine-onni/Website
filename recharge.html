@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airtel Congo - Recharge en ligne</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .animate-slideDown {
+            animation: slideDown 0.4s ease-out;
+        }
+
+        .animate-slideUp {
+            animation: slideUp 0.3s ease-out;
+        }
+
+        /* Navigation Styles */
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #e30613;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 2rem;
+        }
+
+        .nav-links > li {
+            position: relative;
+        }
+
+        .nav-links > li > a {
+            text-decoration: none;
+            color: #374151;
+            font-weight: 500;
+            padding: 1rem 0;
+            display: block;
+            transition: color 0.3s;
+        }
+
+        .nav-links > li > a:hover,
+        .nav-links > li > a.active {
+            color: #dc2626;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 220px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 0.5rem 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .nav-links > li:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            color: #374151;
+            transition: all 0.3s;
+        }
+
+        .dropdown-menu a:hover {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        .arrow {
+            font-size: 0.875rem;
+            margin-left: 0.5rem;
+        }
+
+        .header-top {
+            background: white;
+            color: white;
+            padding: 0.5rem 0;
+            font-size: 0.875rem;
+        }
+
+        .header-top-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: right;
+            gap: 2rem;
+        }
+
+        .header-top-content a {
+            color: black;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .header-top-content a:hover {
+            color: #fca5a5;
+        }
+
+        /* Mobile menu button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            background: white;
+            padding: 60px 80px 30px;
+            margin-top: 4rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .footer-grid-section {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .footer-grid-column h5 {
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            color: #2c3e50;
+        }
+
+        .footer-grid-column ul {
+            list-style: none;
+        }
+
+        .footer-grid-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-grid-column ul li a {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-grid-column ul li a:hover {
+            color: #e30613;
+        }
+
+        .footer-bottom-section {
+            max-width: 1200px;
+            margin: 30px auto 0;
+            padding-top: 20px;
+        }
+
+        .footer-bottom-links-extended {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .footer-bottom-links-extended a {
+            color: #666;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+
+        .footer-bottom-links-extended a:hover {
+            color: #e30613;
+        }
+
+        .copyright-section {
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: #f8f9fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid #e0e0e0;
+        }
+
+        .social-link:hover {
+            background: #e30613;
+            color: white;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #e30613;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 20px;
+            box-shadow: 0 5px 20px rgba(227, 6, 19, 0.4);
+            transition: transform 0.3s;
+            z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                padding-left: 1rem;
+            }
+
+            .footer-grid-section {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            footer {
+                padding: 40px 20px 20px;
+            }
+
+            .footer-grid-section {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .footer-bottom-links-extended {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header Top -->
+    <div class="header-top">
+        <div class="header-top-content">
+            <a href="index.html">INDIVIDUEL</a>
+            <a href="entreprise.html">ENTREPRISE</a>
+            <a href="broadband.html">BROADBAND</a>
+            <a href="airtel-money.html">AIRTEL MONEY PORTAL</a>
+            <a href="about.html">À PROPOS DE NOUS</a>
+        </div>
+    </div>
+
+    <!-- Navigation Principale -->
+    <nav class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <!-- Logo Airtel -->
+                <span class="text-red-600 font-bold text-2xl">airtel</span>
+            </a>
+
+            <button class="mobile-menu-btn" id="mobile-menu-toggle">
+                <i data-lucide="menu"></i>
+            </button>
+
+            <ul class="nav-links" id="nav-links">
+                <!-- PAYEZ ET RECHARGEZ -->
+                <li>
+                    <a href="paiement-recharge.html" class="active">PAYEZ ET RECHARGEZ</a>
+                    <ul class="dropdown-menu">
+                        <!-- Postpayé -->
+                        <li>
+                            <a href="#" data-section="postpaye">Postpayé</a>
+                        </li>
+
+                        <!-- Prépayé -->
+                        <li>
+                            <a href="#" data-section="prepaye">Prépayé</a>
+                        </li>
+
+                        <!-- Broadband -->
+                        <li><a href="#" data-section="broadband">Broadband</a></li>
+                    </ul>
+                </li>
+
+                <!-- SERVICES -->
+                <li>
+                    <a href="services.html">SERVICES</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="appel-locaux.html">Appels locaux</a></li>
+                        <li><a href="SMS.html">SMS</a></li>
+                        <li><a href="forfait-internet.html">Forfaits internet</a></li>
+                        <li><a href="roaming.html">Roaming</a></li>
+                    </ul>
+                </li>
+
+                <!-- NOS AGENCES -->
+                <li>
+                    <a href="nos-agences.html">NOS AGENCES</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="airtel-shop.html">Airtel Shop</a></li>
+                        <li><a href="distributeurs.html">Distributeurs</a></li>
+                        <li><a href="couverture-reseau.html">Couverture réseau</a></li>
+                    </ul>
+                </li>
+
+                <!-- AIRTEL MONEY -->
+                <li>
+                    <a href="airtel-money.html">AIRTEL MONEY</a>
+                </li>
+
+                <!-- BESOIN D'AIDE -->
+                <li>
+                    <a href="aide.html">BESOIN D'AIDE</a>    
+                </li>
+
+                <!-- E-SIM -->
+                <li><a href="esim.html">E-SIM</a></li>
+
+                <!-- PROMOTIONS -->
+                <li>
+                    <a href="promotions.html">PROMO KELASI</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Section Recharge en ligne -->
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <div class="animate-fadeIn">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">Recharge en ligne</h1>
+            <p class="text-gray-600 mb-8">Rechargez votre compte prépayé en quelques clics</p>
+
+            <div class="bg-gradient-to-r from-red-700 to-red-600 rounded-lg p-8 shadow-lg">
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Numéro de mobile -->
+                    <div>
+                        <label class="text-white text-sm mb-2 block">Numéro de mobile</label>
+                        <div class="flex">
+                            <span class="bg-white bg-opacity-20 text-white px-4 py-3 rounded-l-lg">+242</span>
+                            <input type="text" 
+                                   id="prepaye-recharge-phone" 
+                                   placeholder="053974165"
+                                   class="flex-1 px-4 py-3 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-white" />
+                        </div>
+                        <div id="phone-error" class="hidden text-yellow-300 text-sm mt-2">
+                            <i data-lucide="alert-circle" class="inline w-4 h-4 mr-1"></i> 
+                            Le numéro doit commencer par 05 et avoir 9 chiffres
+                        </div>
+                    </div>
+
+                    <!-- Montant -->
+                    <div>
+                        <label class="text-white text-sm mb-2 block">Entrez le montant</label>
+                        <div class="flex">
+                            <span class="bg-white bg-opacity-20 text-white px-4 py-3 rounded-l-lg">CFA</span>
+                            <input type="number" 
+                                   id="prepaye-recharge-amount" 
+                                   placeholder="100"
+                                   min="100"
+                                   class="flex-1 px-4 py-3 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-white" />
+                        </div>
+                        <div id="amount-error" class="hidden text-yellow-300 text-sm mt-2">
+                            <i data-lucide="alert-circle" class="inline w-4 h-4 mr-1"></i> 
+                            Le montant minimum est de 100 CFA
+                        </div>
+                    </div>
+
+                    <!-- Bouton d'action -->
+                    <div class="flex items-end">
+                        <button id="recharge-btn"
+                            class="w-full bg-white text-red-600 py-3 rounded-lg font-semibold hover:bg-gray-100 transition transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed">
+                            ACHETER DU TEMPS D'APPEL
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Montants rapides -->
+            <div class="mt-8">
+                <h3 class="text-lg font-semibold text-gray-700 mb-4">Montants rapides :</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <button class="quick-amount-btn bg-white border border-gray-300 rounded-lg p-4 text-center hover:border-red-500 hover:bg-red-50 transition">
+                        <div class="text-xl font-bold text-gray-800">100 CFA</div>
+                        <div class="text-sm text-gray-600">Appel local</div>
+                    </button>
+                    <button class="quick-amount-btn bg-white border border-gray-300 rounded-lg p-4 text-center hover:border-red-500 hover:bg-red-50 transition">
+                        <div class="text-xl font-bold text-gray-800">500 CFA</div>
+                        <div class="text-sm text-gray-600">Appels + SMS</div>
+                    </button>
+                    <button class="quick-amount-btn bg-white border border-gray-300 rounded-lg p-4 text-center hover:border-red-500 hover:bg-red-50 transition">
+                        <div class="text-xl font-bold text-gray-800">1000 CFA</div>
+                        <div class="text-sm text-gray-600">Forfait 1 jour</div>
+                    </button>
+                    <button class="quick-amount-btn bg-white border border-gray-300 rounded-lg p-4 text-center hover:border-red-500 hover:bg-red-50 transition">
+                        <div class="text-xl font-bold text-gray-800">5000 CFA</div>
+                        <div class="text-sm text-gray-600">Forfait 30 jours</div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Informations supplémentaires -->
+            <div class="mt-12 bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Comment recharger ?</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="flex items-start gap-3">
+                        <div class="bg-red-100 p-3 rounded-lg">
+                            <i data-lucide="smartphone" class="text-red-600 w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-700 mb-1">1. Entrez votre numéro</h4>
+                            <p class="text-gray-600 text-sm">Saisissez votre numéro Airtel prépayé (commençant par 05)</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="bg-red-100 p-3 rounded-lg">
+                            <i data-lucide="dollar-sign" class="text-red-600 w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-700 mb-1">2. Choisissez le montant</h4>
+                            <p class="text-gray-600 text-sm">Sélectionnez le montant de recharge ou choisissez un montant rapide</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="bg-red-100 p-3 rounded-lg">
+                            <i data-lucide="credit-card" class="text-red-600 w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-700 mb-1">3. Confirmez et payez</h4>
+                            <p class="text-gray-600 text-sm">Confirmez la transaction et choisissez votre mode de paiement</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmation -->
+    <div id="confirmation-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4 animate-slideUp">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold text-gray-800">Confirmer la recharge</h3>
+                <button id="close-confirm-modal" class="text-gray-500 hover:text-gray-700">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+
+            <div class="space-y-4 mb-6">
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Numéro :</span>
+                    <span id="confirm-phone" class="font-semibold"></span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Montant :</span>
+                    <span id="confirm-amount" class="text-2xl font-bold text-red-600"></span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Frais de service :</span>
+                    <span class="font-semibold">0 CFA</span>
+                </div>
+                <div class="border-t pt-4">
+                    <div class="flex justify-between">
+                        <span class="text-gray-800 font-bold">Total :</span>
+                        <span id="confirm-total" class="text-2xl font-bold text-red-600"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-3">
+                <button id="confirm-recharge"
+                    class="w-full bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition">
+                    Confirmer et payer
+                </button>
+                <button id="cancel-recharge"
+                    class="w-full bg-gray-200 text-gray-800 py-3 rounded-lg font-semibold hover:bg-gray-300 transition">
+                    Annuler
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid-section">
+            <div class="footer-grid-column">
+                <h5>A propos d'Airtel</h5>
+                <ul>
+                    <li><a href="#">Accès rapide</a></li>
+                    <li><a href="#">Aide</a></li>
+                    <li><a href="#">Privacy</a></li>
+                </ul>
+            </div>
+            <div class="footer-grid-column">
+                <h5>Carrière</h5>
+                <ul>
+                    <li><a href="#">Actualités</a></li>
+                    <li><a href="#">Couverture</a></li>
+                    <li><a href="#">Chiffre Safety</a></li>
+                </ul>
+            </div>
+            <div class="footer-grid-column">
+                <h5>Media</h5>
+                <ul>
+                    <li><a href="#">Programmes sociaux/CSR</a></li>
+                    <li><a href="#">Nos Boutiques</a></li>
+                    <li><a href="#">Besoin de Suggestion</a></li>
+                </ul>
+            </div>
+            <div class="footer-grid-column">
+                <h5>Airtel Money</h5>
+                <ul>
+                    <li><a href="#">Catalogue d'interconnexion</a></li>
+                    <li><a href="#">Numéros utiles</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom-section">
+            <div class="footer-bottom-links-extended">
+                <a href="#">NOUS CONTRACTER</a>
+                <a href="#">DROITS D'AUTEUR</a>
+                <a href="#">TERMES ET CONDITIONS</a>
+                <a href="#">AU TERMES ET CONDITIONS GSM</a>
+                <a href="#">AVIS DE CONFIDENTIALITÉ</a>
+            </div>
+        </div>
+
+        <div class="copyright-section">
+            <p>© 2024 Airtel Africa. Tous les droits sont réservés.</p>
+            <p style="margin-top: 10px;">RETOUR AU SOMMET</p>
+        </div>
+
+        <div class="social-links">
+            <a href="#" class="social-link">
+                <i data-lucide="facebook" class="w-5 h-5"></i>
+            </a>
+            <a href="#" class="social-link">
+                <i data-lucide="twitter" class="w-5 h-5"></i>
+            </a>
+            <a href="#" class="social-link">
+                <i data-lucide="instagram" class="w-5 h-5"></i>
+            </a>
+            <a href="#" class="social-link">
+                <i data-lucide="youtube" class="w-5 h-5"></i>
+            </a>
+        </div>
+
+        <!-- Back to Top Button -->
+        <a href="#" class="back-to-top" id="back-to-top">
+            <i data-lucide="chevron-up"></i>
+        </a>
+    </footer>
+
+    <script>
+        // Initialiser les icônes Lucide
+        lucide.createIcons();
+
+        // Variables d'état
+        let currentPhone = '';
+        let currentAmount = '';
+
+        // Menu mobile
+        document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+            const navLinks = document.getElementById('nav-links');
+            navLinks.classList.toggle('active');
+            
+            // Changer l'icône
+            const icon = this.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.setAttribute('data-lucide', 'x');
+            } else {
+                icon.setAttribute('data-lucide', 'menu');
+            }
+            lucide.createIcons();
+        });
+
+        // Fermer le menu mobile en cliquant sur un lien
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    document.getElementById('nav-links').classList.remove('active');
+                    document.querySelector('#mobile-menu-toggle i').setAttribute('data-lucide', 'menu');
+                    lucide.createIcons();
+                }
+            });
+        });
+
+        // Back to top button
+        document.getElementById('back-to-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Afficher/masquer le bouton back-to-top
+        window.addEventListener('scroll', function() {
+            const backToTopButton = document.getElementById('back-to-top');
+            if (window.scrollY > 300) {
+                backToTopButton.style.display = 'flex';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+
+        // Écouteurs d'événements pour la recharge
+        document.addEventListener('DOMContentLoaded', function() {
+            // Validation en temps réel du numéro
+            document.getElementById('prepaye-recharge-phone').addEventListener('input', function(e) {
+                validatePhoneNumber(e.target.value);
+                updateRechargeButton();
+            });
+
+            // Validation en temps réel du montant
+            document.getElementById('prepaye-recharge-amount').addEventListener('input', function(e) {
+                validateAmount(e.target.value);
+                updateRechargeButton();
+            });
+
+            // Boutons de montants rapides
+            document.querySelectorAll('.quick-amount-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const amount = this.querySelector('.text-xl').textContent.replace(' CFA', '');
+                    document.getElementById('prepaye-recharge-amount').value = amount;
+                    validateAmount(amount);
+                    updateRechargeButton();
+                    
+                    // Feedback visuel
+                    document.querySelectorAll('.quick-amount-btn').forEach(btn => {
+                        btn.classList.remove('border-red-500', 'bg-red-50');
+                    });
+                    this.classList.add('border-red-500', 'bg-red-50');
+                });
+            });
+
+            // Bouton de recharge
+            document.getElementById('recharge-btn').addEventListener('click', function() {
+                if (validateForm()) {
+                    showConfirmationModal();
+                }
+            });
+
+            // Modal de confirmation
+            document.getElementById('close-confirm-modal').addEventListener('click', closeConfirmationModal);
+            document.getElementById('cancel-recharge').addEventListener('click', closeConfirmationModal);
+            document.getElementById('confirm-recharge').addEventListener('click', processRecharge);
+        });
+
+        // Fonctions de validation
+        function validatePhoneNumber(phone) {
+            const errorElement = document.getElementById('phone-error');
+            const phoneRegex = /^05\d{7}$/;
+            
+            if (!phone) {
+                errorElement.classList.add('hidden');
+                return false;
+            }
+
+            if (!phoneRegex.test(phone)) {
+                errorElement.classList.remove('hidden');
+                return false;
+            } else {
+                errorElement.classList.add('hidden');
+                currentPhone = phone;
+                return true;
+            }
+        }
+
+        function validateAmount(amount) {
+            const errorElement = document.getElementById('amount-error');
+            const minAmount = 100;
+            
+            if (!amount || amount < minAmount) {
+                errorElement.classList.remove('hidden');
+                return false;
+            } else {
+                errorElement.classList.add('hidden');
+                currentAmount = amount;
+                return true;
+            }
+        }
+
+        function validateForm() {
+            const phoneValid = validatePhoneNumber(document.getElementById('prepaye-recharge-phone').value);
+            const amountValid = validateAmount(document.getElementById('prepaye-recharge-amount').value);
+            
+            return phoneValid && amountValid;
+        }
+
+        function updateRechargeButton() {
+            const button = document.getElementById('recharge-btn');
+            const isValid = validateForm();
+            
+            button.disabled = !isValid;
+            if (isValid) {
+                button.classList.remove('disabled:opacity-50', 'disabled:cursor-not-allowed');
+                button.classList.add('hover:scale-105');
+            } else {
+                button.classList.add('disabled:opacity-50', 'disabled:cursor-not-allowed');
+                button.classList.remove('hover:scale-105');
+            }
+        }
+
+        // Fonctions pour le modal
+        function showConfirmationModal() {
+            const phone = document.getElementById('prepaye-recharge-phone').value;
+            const amount = document.getElementById('prepaye-recharge-amount').value;
+            
+            document.getElementById('confirm-phone').textContent = `+242 ${phone}`;
+            document.getElementById('confirm-amount').textContent = `${amount} CFA`;
+            document.getElementById('confirm-total').textContent = `${amount} CFA`;
+            
+            document.getElementById('confirmation-modal').classList.remove('hidden');
+            document.getElementById('confirmation-modal').classList.add('flex');
+            
+            // Bloquer le défilement
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeConfirmationModal() {
+            document.getElementById('confirmation-modal').classList.add('hidden');
+            document.getElementById('confirmation-modal').classList.remove('flex');
+            
+            // Rétablir le défilement
+            document.body.style.overflow = 'auto';
+        }
+
+        function processRecharge() {
+            const phone = document.getElementById('prepaye-recharge-phone').value;
+            const amount = document.getElementById('prepaye-recharge-amount').value;
+            
+            // Simulation d'un appel API avec animation
+            const confirmButton = document.getElementById('confirm-recharge');
+            const originalText = confirmButton.textContent;
+            
+            confirmButton.disabled = true;
+            confirmButton.innerHTML = '<i data-lucide="loader" class="w-5 h-5 animate-spin mx-auto"></i>';
+            lucide.createIcons();
+            
+            // Simuler un délai de traitement
+            setTimeout(() => {
+                // Afficher un message de succès
+                alert(`✅ Recharge de ${amount} CFA effectuée avec succès pour le numéro +242 ${phone}\n\nVotre crédit a été ajouté immédiatement.`);
+                
+                // Réinitialiser le formulaire
+                document.getElementById('prepaye-recharge-phone').value = '';
+                document.getElementById('prepaye-recharge-amount').value = '';
+                
+                // Réinitialiser les boutons rapides
+                document.querySelectorAll('.quick-amount-btn').forEach(btn => {
+                    btn.classList.remove('border-red-500', 'bg-red-50');
+                });
+                
+                // Restaurer le bouton
+                confirmButton.disabled = false;
+                confirmButton.textContent = originalText;
+                
+                closeConfirmationModal();
+                
+                // Réinitialiser la validation
+                document.getElementById('phone-error').classList.add('hidden');
+                document.getElementById('amount-error').classList.add('hidden');
+                updateRechargeButton();
+            }, 1500);
+        }
+
+        // Navigation des dropdowns au hover
+        document.querySelectorAll('.nav-links > li').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                if (window.innerWidth > 768) {
+                    this.querySelector('.dropdown-menu')?.classList.add('opacity-100', 'visible');
+                }
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                if (window.innerWidth > 768) {
+                    this.querySelector('.dropdown-menu')?.classList.remove('opacity-100', 'visible');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
