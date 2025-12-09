@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,7 +51,7 @@
 
         nav {
             background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -88,11 +89,11 @@
             align-items: center;
         }
 
-        .nav-links > li {
+        .nav-links>li {
             position: relative;
         }
 
-        .nav-links > li > a {
+        .nav-links>li>a {
             color: #333;
             text-decoration: none;
             font-weight: 500;
@@ -103,12 +104,12 @@
             white-space: nowrap;
         }
 
-        .nav-links > li > a:hover,
-        .nav-links > li > a.active {
+        .nav-links>li>a:hover,
+        .nav-links>li>a.active {
             color: #d32f2f;
         }
 
-        .nav-links > li > a.active::after {
+        .nav-links>li>a.active::after {
             content: '';
             position: absolute;
             bottom: 0;
@@ -124,7 +125,7 @@
             top: 100%;
             left: 0;
             background: white;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
             border-radius: 8px;
             min-width: 240px;
             opacity: 0;
@@ -135,7 +136,7 @@
             z-index: 1001;
         }
 
-        .nav-links > li:hover > .dropdown-menu {
+        .nav-links>li:hover>.dropdown-menu {
             opacity: 1;
             visibility: visible;
             margin-top: 0;
@@ -175,7 +176,7 @@
             left: 100%;
             top: 0;
             background: white;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
             border-radius: 8px;
             min-width: 220px;
             opacity: 0;
@@ -186,7 +187,7 @@
             z-index: 1002;
         }
 
-        .dropdown-menu li:hover > .sub-dropdown {
+        .dropdown-menu li:hover>.sub-dropdown {
             opacity: 1;
             visibility: visible;
             margin-left: 5px;
@@ -216,7 +217,7 @@
             left: 100%;
             top: 0;
             background: white;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
             border-radius: 8px;
             min-width: 200px;
             opacity: 0;
@@ -227,7 +228,7 @@
             z-index: 1003;
         }
 
-        .sub-dropdown li:hover > .third-level {
+        .sub-dropdown li:hover>.third-level {
             opacity: 1;
             visibility: visible;
             margin-left: 5px;
@@ -263,7 +264,7 @@
             position: relative;
         }
 
-        .dropdown-menu .has-submenu > a {
+        .dropdown-menu .has-submenu>a {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -423,25 +424,25 @@
             border-radius: 5px;
             display: inline-block;
             transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(230,0,0,0.4);
+            box-shadow: 0 5px 15px rgba(230, 0, 0, 0.4);
             width: fit-content;
         }
 
         .know-more-btn:hover {
             background-color: rgba(226, 12, 24);
             transform: translateY(-2px);
-            box-shadow: 0 7px 20px rgba(230,0,0,0.6);
+            box-shadow: 0 7px 20px rgba(230, 0, 0, 0.6);
         }
 
-        .image-section { 
-            padding: 20px; 
+        .image-section {
+            padding: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100%;
         }
 
-        .image-section.full { 
+        .image-section.full {
             padding: 0;
             position: absolute;
             width: 100%;
@@ -460,8 +461,8 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
 
-        .slide-image.full { 
-            border-radius: 0; 
+        .slide-image.full {
+            border-radius: 0;
             box-shadow: none;
         }
 
@@ -520,8 +521,13 @@
             z-index: 10;
         }
 
-        .arrow-btn.prev { left: 30px; }
-        .arrow-btn.next { right: 30px; }
+        .arrow-btn.prev {
+            left: 30px;
+        }
+
+        .arrow-btn.next {
+            right: 30px;
+        }
 
         .arrow-btn:hover {
             background: rgba(255, 255, 255, 0.3);
@@ -533,10 +539,17 @@
                 grid-template-columns: 1fr;
             }
 
-            .text-section { padding: 30px; }
+            .text-section {
+                padding: 30px;
+            }
 
-            .text-section h2 { font-size: 32px; }
-            .text-section p { font-size: 16px; }
+            .text-section h2 {
+                font-size: 32px;
+            }
+
+            .text-section p {
+                font-size: 16px;
+            }
 
             .arrow-btn {
                 width: 50px;
@@ -544,8 +557,13 @@
                 font-size: 24px;
             }
 
-            .arrow-btn.prev { left: 15px; }
-            .arrow-btn.next { right: 15px; }
+            .arrow-btn.prev {
+                left: 15px;
+            }
+
+            .arrow-btn.next {
+                right: 15px;
+            }
         }
 
         /* Section Recharge */
@@ -718,11 +736,23 @@
 
         .services-cards {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            max-width: 1200px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 35px;
+            max-width: 1500px;
             margin: 0 auto;
             position: relative;
+        }
+
+        @media (max-width: 1024px) {
+            .services-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .services-cards {
+                grid-template-columns: 1fr;
+            }
         }
 
         .service-card {
@@ -731,7 +761,7 @@
             padding: 40px 30px;
             text-align: center;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
             position: relative;
             overflow: hidden;
             border: 1px solid #f0f0f0;
@@ -749,7 +779,7 @@
 
         .service-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(230,0,0,0.2);
+            box-shadow: 0 15px 30px rgba(230, 0, 0, 0.2);
         }
 
         .service-card-icon {
@@ -835,7 +865,7 @@
             justify-content: space-between;
             align-items: center;
             transition: all 0.3s;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
             border: 1px solid rgba(230, 0, 0, 0.1);
             position: relative;
             overflow: hidden;
@@ -853,7 +883,7 @@
 
         .promo-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(230,0,0,0.15);
+            box-shadow: 0 15px 30px rgba(230, 0, 0, 0.15);
         }
 
         .promo-card.red {
@@ -861,7 +891,8 @@
             color: white;
         }
 
-        .promo-card.red h3, .promo-card.red .promo-card-link {
+        .promo-card.red h3,
+        .promo-card.red .promo-card-link {
             color: white;
         }
 
@@ -888,7 +919,7 @@
         }
 
         .promo-card.red .promo-card-content p {
-            color: rgba(255,255,255,0.9);
+            color: rgba(255, 255, 255, 0.9);
         }
 
         .promo-card-link {
@@ -908,7 +939,7 @@
         }
 
         .promo-card.red .promo-card-link:hover {
-            color: rgba(255,255,255,0.9);
+            color: rgba(255, 255, 255, 0.9);
         }
 
         .promo-card-icon {
@@ -1034,7 +1065,7 @@
             justify-content: center;
             text-decoration: none;
             font-size: 20px;
-            box-shadow: 0 5px 20px rgba(230,0,0,0.4);
+            box-shadow: 0 5px 20px rgba(230, 0, 0, 0.4);
             transition: transform 0.3s;
             z-index: 1000;
         }
@@ -1125,11 +1156,12 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Barre de navigation globale - NOUVELLE VERSION -->
     <div class="header-top">
         <div class="header-top-content">
-            <a href="index.html">INDIVIDUEL</a>
+            <a href="index.html">PARTICULIER</a>
             <a href="entreprise.html">ENTREPRISE</a>
             <a href="broadband.html">BROADBAND</a>
             <a href="airtel-money.html">AIRTEL MONEY PORTAL</a>
@@ -1137,184 +1169,189 @@
         </div>
     </div>
 
-   <!-- Navigation Principale -->
+    <!-- Navigation Principale -->
     <nav class="bg-white shadow-sm sticky top-0 z-40">
         <div class="nav-container">
             <a href="index.html" class="logo">
                 <!-- Logo Airtel -->
                 <a href="index.html" class="logo">
-                <img src="image/Airtel_Logo.jpg" alt="Airtel Congo" class="logo-img">
-                airtel
-            </a>
+                    <img src="image/Airtel_Logo.jpg" alt="Airtel Congo" class="logo-img">
+                    airtel
+                </a>
 
-            <button class="mobile-menu-btn" id="mobile-menu-toggle">
-                <i data-lucide="menu"></i>
-            </button>
+                <button class="mobile-menu-btn" id="mobile-menu-toggle">
+                    <i data-lucide="menu"></i>
+                </button>
 
-            <ul class="nav-links" id="nav-links">
-                <!-- PAYEZ ET RECHARGEZ -->
-                <li>
-                    <a href="Payez.html" class="active">PAYEZ ET RECHARGEZ</a>
-                    <ul class="dropdown-menu">
-                        <!-- Postpayé avec sous-menu -->
-                        <li class="has-submenu">
-                            <a href="#" data-section="postpaye">Postpayé <span class="arrow">›</span></a>
-                            <ul class="sub-level">
-                                <li><a href="#" data-section="postpaye" data-subsection="postpaye-payment">Paiement de
-                                        facture en ligne</a></li>
-                            </ul>
-                        </li>
+                <ul class="nav-links" id="nav-links">
+                    <!-- PAYEZ ET RECHARGEZ -->
+                    <li>
+                        <a href="Payez.html" class="active">PAYEZ ET RECHARGEZ</a>
+                        <ul class="dropdown-menu">
+                            <!-- Postpayé avec sous-menu -->
+                            <li class="has-submenu">
+                                <a href="#" data-section="postpaye">Postpayé <span class="arrow">›</span></a>
+                                <ul class="sub-level">
+                                    <li><a href="#" data-section="postpaye" data-subsection="postpaye-payment">Paiement
+                                            de
+                                            facture en ligne</a></li>
+                                </ul>
+                            </li>
 
-                        <!-- Prépayé avec sous-menu -->
-                        <li class="has-submenu">
-                            <a href="#" data-section="prepaye">Prépayé <span class="arrow">›</span></a>
-                            <ul class="sub-level">
-                                <li><a href="#" data-section="prepaye" data-subsection="prepaye-recharge">Rechargez un
-                                        compte prépayé</a></li>
-                                <li><a href="#" data-section="prepaye" data-subsection="prepaye-forfait">Activez un
-                                        forfait Internet</a></li>
-                            </ul>
-                        </li>
+                            <!-- Prépayé avec sous-menu -->
+                            <li class="has-submenu">
+                                <a href="#" data-section="prepaye">Prépayé <span class="arrow">›</span></a>
+                                <ul class="sub-level">
+                                    <li><a href="#" data-section="prepaye" data-subsection="prepaye-recharge">Rechargez
+                                            un
+                                            compte prépayé</a></li>
+                                    <li><a href="#" data-section="prepaye" data-subsection="prepaye-forfait">Activez un
+                                            forfait Internet</a></li>
+                                </ul>
+                            </li>
 
-                        <!-- Broadband (sans sous-menu) -->
-                        <li><a href="#" data-section="broadband">Broadband</a></li>
-                    </ul>
-                </li>
+                            <!-- Broadband (sans sous-menu) -->
+                            <li><a href="#" data-section="broadband">Broadband</a></li>
+                        </ul>
+                    </li>
 
-                <!-- SERVICES -->
-                 <li>
-                    <a href="services.html">SERVICES</a>
-                    <ul class="dropdown-menu">
-                        <!-- PREPAYÉ - Niveau 1 -->
-                        <li>
-                            <a href="#">Prepayé <span class="arrow">›</span></a>
-                            <ul class="sub-dropdown">
-                                <!-- Appels & SMS - Niveau 2 -->
-                                <li>
-                                    <a href="#">Appels & SMS <span class="arrow">›</span></a>
-                                    <ul class="third-level">
-                                        <li><a href="appel locaux.html">Appels locaux</a></li>
-                                      
-                                        <li><a href="SMS.html">SMS</a></li>
-                                    </ul>
-                                </li>
-                                <!-- Services Internet - Niveau 2 -->
-                                <li>
-                                    <a href="#" class="services-internet">Services Internet <span
-                                            class="arrow">›</span></a>
-                                    <ul class="third-level">
-                                        <li><a href="forfait internet.html">Forfaits internet</a></li>
-                                       
-                                    </ul>
-                                </li>
-                                <!-- Roaming - Niveau 2 -->
-                                <li>
-                                    <a href="#" class="roaming">Roaming <span class="arrow">›</span></a>
-                                    <ul class="third-level">
-                                        <li><a href="airtelworld.html">Airtel world</a></li>
-                                        <li><a href="one airtel.html">Réseau Unique</a></li>
-                                        <li><a href="free roaming.html">Free Roaming</a></li>
-                                    </ul>
-                                </li>
-                                <!-- Services à valeur ajoutée - Niveau 2 -->
-                                <li>
-                                    <a href="VAS.html">Services à valeur ajoutée <span class="arrow">›</span></a>
-                                    
-                                </li>
-                                <!-- Taxi Connect - Niveau 2 -->
-                                <li><a href="Taxi_connect.html">Taxi Connect</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
+                    <!-- SERVICES -->
+                    <li>
+                        <a href="services.html">SERVICES</a>
+                        <ul class="dropdown-menu">
+                            <!-- PREPAYÉ - Niveau 1 -->
+                            <li>
+                                <a href="#">Prepayé <span class="arrow">›</span></a>
+                                <ul class="sub-dropdown">
+                                    <!-- Appels & SMS - Niveau 2 -->
+                                    <li>
+                                        <a href="#">Appels & SMS <span class="arrow">›</span></a>
+                                        <ul class="third-level">
+                                            <li><a href="appel locaux.html">Appels locaux</a></li>
 
-                <!-- NOS AGENCES -->
-                <li>
-                    <a href="Nos Agences.html">NOS AGENCES</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="airtel-shop.html">Airtel Shop</a></li>
-                        <li><a href="distributeurs.html">Distributeurs</a></li>
-                        <li><a href="couverture-reseau.html">Couverture réseau</a></li>
-                    </ul>
-                </li>
+                                            <li><a href="SMS.html">SMS</a></li>
+                                        </ul>
+                                    </li>
+                                    <!-- Services Internet - Niveau 2 -->
+                                    <li>
+                                        <a href="#" class="services-internet">Services Internet <span
+                                                class="arrow">›</span></a>
+                                        <ul class="third-level">
+                                            <li><a href="forfait internet.html">Forfaits internet</a></li>
+                                            <li><a href="faq-internet.html">Foire aux questions</a></li>
+                                        </ul>
+                                    </li>
+                                    <!-- Roaming - Niveau 2 -->
+                                    <li>
+                                        <a href="#" class="roaming">Roaming <span class="arrow">›</span></a>
+                                        <ul class="third-level">
+                                            <li><a href="airtelworld.html">Airtel world</a></li>
+                                            <li><a href="one airtel.html">Réseau Unique</a></li>
+                                            <li><a href="free roaming.html">Free Roaming</a></li>
+                                        </ul>
+                                    </li>
+                                    <!-- Services à valeur ajoutée - Niveau 2 -->
+                                    <li>
+                                        <a href="VAS.html">Services à valeur ajoutée <span class="arrow">›</span></a>
 
-                <!-- AIRTEL MONEY -->
-                <li>
-                    <a href="airtel-money.html">AIRTEL MONEY</a>
-                </li>
+                                    </li>
+                                    <!-- Taxi Connect - Niveau 2 -->
+                                    <li><a href="Taxi-connect.html">Taxi Connect</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
 
-                <!-- BESOIN D'AIDE -->
-                <li>
-                    <a href="aide.html">BESOIN D'AIDE</a>    
-                </li>
+                    <!-- NOS AGENCES -->
+                    <li>
+                        <a href="Nos Agences.html">NOS AGENCES</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="airtel-shop.html">Airtel Shop</a></li>
+                            <li><a href="distributeurs.html">Distributeurs</a></li>
+                            <li><a href="couverture-reseau.html">Couverture réseau</a></li>
+                        </ul>
+                    </li>
 
-                <!-- E-SIM -->
-                <li><a href="esim.html">E-SIM</a></li>
+                    <!-- AIRTEL MONEY -->
+                    <li>
+                        <a href="airtel-money.html">AIRTEL MONEY</a>
+                    </li>
 
-                <!-- PROMOTIONS -->
-                <li>
-                    <a href="promotions.html">PROMO KELASI</a>
-                </li>
-            </ul>
+                    <!-- BESOIN D'AIDE -->
+                    <li>
+                        <a href="aide.html">BESOIN D'AIDE</a>
+                    </li>
+
+                    <!-- E-SIM -->
+                    <li><a href="esim.html">E-SIM</a></li>
+
+                    <!-- PROMOTIONS -->
+                    <li>
+                        <a href="promotions.html">PROMO KELASI</a>
+                    </li>
+                </ul>
         </div>
     </nav>
 
-    <!-- Le reste de votre contenu existant reste inchangé -->
-    <!-- SLIDER CORRIGÉ -->
+    <!-- SLIDER MODIFIÉ SELON VOS DEMANDES -->
     <div class="slider-container">
-        <!-- SLIDE 1 - TEXTE À GAUCHE, IMAGE À DROITE -->
+        <!-- SLIDE 1 - MY AIRTEL -->
         <div class="slide active" data-slide="0">
             <div class="slide-content">
                 <div class="text-section">
-                    <h2>FORFAITS YA NGONGA</h2>
-                    <p>DES BONS PLANS DATA POUR PLUS DE VOLUME, COMPOSEZ *121*4#</p>
-                    <a href="#" class="know-more-btn">En savoir plus</a>
+                    <h2>MY AIRTEL</h2>
+                    <p>Gérez votre compte Airtel en toute simplicité avec l'application My Airtel. Rechargez, activez des forfaits, suivez votre consommation et bien plus encore.</p>
+                    <a href="#" class="know-more-btn">Télécharger l'app</a>
                 </div>
                 <div class="image-section">
-                    <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                    <div class="slide-image"
+                        style="background-image: url('image/chatG.png');">
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 2 - TEXTE À GAUCHE, IMAGE À DROITE -->
+        <!-- SLIDE 2 - OFFRES DATA -->
         <div class="slide" data-slide="1">
             <div class="slide-content">
                 <div class="text-section">
-                    <h2>Protection Anti-Fraude Airtel</h2>
-                    <p>Vos communications sont protégées contre les appels et messages frauduleux</p>
-                    <a href="#" class="know-more-btn">En savoir plus</a>
+                    <h2>OFFRES DATA</h2>
+                    <p>Découvrez nos forfaits internet adaptés à tous vos besoins. De la data à volonté pour surfer, streamer et travailler où que vous soyez.</p>
+                    <a href="#" class="know-more-btn">Voir les offres</a>
                 </div>
                 <div class="image-section">
-                    <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                    <div class="slide-image"
+                        style="background-image: url('image/chatG1.png');">
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 3 - IMAGE PLEINE AVEC BOUTON (CORRIGÉ) -->
+        <!-- SLIDE 3 - GIMAC PAY -->
         <div class="slide" data-slide="2">
             <div class="slide-content full-image">
                 <div class="image-section full">
-                    <div class="slide-image full" style="background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');">
+                    <div class="slide-image full"
+                        style="background-image: url('image/Airtel_Money.png');">
                     </div>
                 </div>
                 <div class="text-section">
-                    <a href="#" class="know-more-btn">En savoir plus</a>
+                    <a href="#" class="know-more-btn">Découvrir GIMAC PAY</a>
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 4 - TEXTE À GAUCHE, IMAGE À DROITE -->
+        <!-- SLIDE 4 - ODU -->
         <div class="slide" data-slide="3">
             <div class="slide-content">
                 <div class="text-section">
-                    <h2>Offres Routeur</h2>
-                    <p>Profitez de nos offres spéciales sur les routeurs pour une connexion optimale</p>
+                    <h2>ODU</h2>
+                    <p>ODU, votre partenaire digital pour des solutions innovantes. Découvrez nos services adaptés à la transformation numérique de votre entreprise.</p>
                     <a href="#" class="know-more-btn">En savoir plus</a>
                 </div>
                 <div class="image-section">
-                    <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                    <div class="slide-image"
+                        style="background-image: url('images/odu.jpg');">
                     </div>
                 </div>
             </div>
@@ -1332,12 +1369,11 @@
         </div>
     </div>
 
-    <!-- Le reste de votre contenu reste exactement le même -->
     <!-- Section Recharge -->
     <section class="recharge-section">
         <div class="recharge-container">
             <h2>Rechargez et payez vos factures</h2>
-            
+
             <div class="recharge-form">
                 <div class="tab-buttons">
                     <button class="tab-btn active">
@@ -1352,7 +1388,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div style="display: flex; gap: 15px; margin-top: 15px; max-width: 700px; margin-left: auto;">
             <div class="phone-input-group" style="background: white; padding: 8px; border-radius: 5px;">
                 <div class="country-code">+242</div>
@@ -1388,20 +1424,44 @@
         </div>
     </section>
 
-    <!-- Section Découvrez nos services -->
+    <!-- Section Découvrez nos services - MODIFIÉE -->
     <section class="discover-section">
         <h2>Découvrez <span>nos services</span></h2>
         <div class="services-cards">
+            <!-- Ligne 1 : 4 premières cartes -->
             <div class="service-card">
-                <div class="service-card-icon">📶</div>
-                <h3>Promo Routeurs</h3>
-                <p>La connexion est mieux en famille. Profitez de nos offres sur les routeurs Wi-Fi pour connecter tous vos appareils.</p>
+                <div class="service-card-icon">🌐</div>
+                <h3>Internet</h3>
+                <p>Profitez de nos forfaits internet haut débit pour une connexion rapide et fiable partout au Congo.
+                </p>
                 <a href="#" class="service-card-link">Savoir plus →</a>
             </div>
             <div class="service-card">
+                <div class="service-card-icon">📞</div>
+                <h3>Appel</h3>
+                <p>Des forfaits d'appels avantageux pour communiquer avec vos proches au Congo et à l'international.</p>
+                <a href="#" class="service-card-link">Savoir plus →</a>
+            </div>
+            <div class="service-card">
+                <div class="service-card-icon">📡</div>
+                <h3>HBB</h3>
+                <p>Home BroadBand - La connexion internet fixe pour votre maison avec des offres adaptées à vos besoins.
+                </p>
+                <a href="#" class="service-card-link">Savoir plus →</a>
+            </div>
+            <div class="service-card">
+                <div class="service-card-icon">💳</div>
+                <h3>Airtel Money</h3>
+                <p>Envoyez et recevez de l'argent, payez vos factures et effectuez des achats en toute sécurité.</p>
+                <a href="#" class="service-card-link">Savoir plus →</a>
+            </div>
+
+            <!-- Ligne 2 : 4 dernières cartes -->
+            <div class="service-card">
                 <div class="service-card-icon">📱</div>
-                <h3>My Airtel</h3>
-                <p>Tous nos services à portée de main. Gérez votre compte, rechargez et suivez votre consommation facilement.</p>
+                <h3>My Airtel App</h3>
+                <p>Tous nos services à portée de main. Gérez votre compte, rechargez et suivez votre consommation
+                    facilement.</p>
                 <a href="#" class="service-card-link">Savoir plus →</a>
             </div>
             <div class="service-card">
@@ -1411,76 +1471,17 @@
                 <a href="#" class="service-card-link">Savoir plus →</a>
             </div>
             <div class="service-card">
-                <div class="service-card-icon">🏢</div>
-                <h3>Entreprise</h3>
-                <p>Des solutions sur mesure pour les professionnels. Forfaits, flottes et connectivité pour votre business.</p>
+                <div class="service-card-icon">✈️</div>
+                <h3>Roaming</h3>
+                <p>Restez connecté même à l'étranger avec nos offres roaming avantageuses dans de nombreux pays.</p>
                 <a href="#" class="service-card-link">Savoir plus →</a>
             </div>
             <div class="service-card">
-                <div class="service-card-icon">📞</div>
-                <h3>Nos forfaits d'appels</h3>
-                <p>Des forfaits décalés pour appeler tous les réseaux au Congo et à l'international.</p>
+                <div class="service-card-icon">📲</div>
+                <h3>Sim Airtel</h3>
+                <p>La meilleure SIM du marché. Passez à la 4G et profitez d'une connexion ultra rapide avec nos SIM
+                    Power.</p>
                 <a href="#" class="service-card-link">Savoir plus →</a>
-            </div>
-            <div class="service-card">
-                <div class="service-card-icon">💳</div>
-                <h3>SIM 4G Power</h3>
-                <p>La meilleure SIM du marché. Passez à la 4G et profitez d'une connexion ultra rapide.</p>
-                <a href="#" class="service-card-link">Savoir plus →</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section Promo Grid avec IMAGE DE FOND -->
-    <section class="promo-grid-section">
-        <div class="promo-grid">
-            <div class="promo-card red">
-                <div class="promo-card-content">
-                    <h3>PLUS D'AMIS, +DE DATA !</h3>
-                    <p>Parrainez vos amis et gagnez des gigas supplémentaires gratuitement.</p>
-                    <a href="#" class="promo-card-link">Savoir plus →</a>
-                </div>
-                <div class="promo-card-icon">👥</div>
-            </div>
-            <div class="promo-card">
-                <div class="promo-card-content">
-                    <h3>Téléchargement Express</h3>
-                    <p>Vivez l'expérience 4G - Tapez *121*4#</p>
-                    <a href="#" class="promo-card-link">Savoir plus →</a>
-                </div>
-                <div class="promo-card-icon">⚡</div>
-            </div>
-            <div class="promo-card red">
-                <div class="promo-card-content">
-                    <h3>METS TOI AU ROUGE</h3>
-                    <p>Échangez votre SIM 3G gratuitement contre une SIM 4G.</p>
-                    <a href="#" class="promo-card-link">Savoir plus →</a>
-                </div>
-                <div class="promo-card-icon">🔴</div>
-            </div>
-            <div class="promo-card">
-                <div class="promo-card-content">
-                    <h3>Besoin de vos suggestions</h3>
-                    <p>Aidez-nous à améliorer nos services avec vos retours.</p>
-                    <a href="#" class="promo-card-link">Savoir plus →</a>
-                </div>
-                <div class="promo-card-icon">💬</div>
-            </div>
-            <div class="promo-card">
-                <div class="promo-card-content">
-                    <h3>FAQ Airtel Money</h3>
-                    <p>Trouvez toutes les réponses à vos questions sur Airtel Money.</p>
-                    <a href="#" class="promo-card-link">Savoir plus →</a>
-                </div>
-                <div class="promo-card-icon">🎁</div>
-            </div>
-            <div class="promo-card">
-                <div class="promo-card-content">
-                    <h3>100% Bonus Airtel Money</h3>
-                    <p>Doublez vos bonus sur chaque dépôt Airtel Money.</p>
-                    <a href="#" class="promo-card-link">Savoir plus →</a>
-                </div>
-                <div class="promo-card-icon">💯</div>
             </div>
         </div>
     </section>
@@ -1489,34 +1490,36 @@
     <footer>
         <div class="footer-grid-section">
             <div class="footer-grid-column">
-                <h5>A propos d'Artiel</h5>
+                <h5>L'entreprise</h5>
                 <ul>
-                    <li><a href="#">Accès rapide</a></li>
-                    <li><a href="#">Aide</a></li>
-                    <li><a href="#">Privacy</a></li>
-                </ul>
-            </div>
-            <div class="footer-grid-column">
-                <h5>Carrière</h5>
-                <ul>
+                    <li><a href="#">À propos d'Airtel</a></li>
+                    <li><a href="#">Carrière</a></li>
                     <li><a href="#">Actualités</a></li>
-                    <li><a href="#">Couverture</a></li>
-                    <li><a href="#">Chiffre Safety</a></li>
+                    <li><a href="#">Responsabilité sociale (CSR)</a></li>
                 </ul>
             </div>
             <div class="footer-grid-column">
-                <h5>Media</h5>
+                <h5>Nos services</h5>
                 <ul>
-                    <li><a href="#">Programmes sociaux/CSR</a></li>
+                    <li><a href="#">Programmes</a></li>
+                    <li><a href="#">Airtel Money</a></li>
+                </ul>
+            </div>
+            <div class="footer-grid-column">
+                <h5>Support & Contact</h5>
+                <ul>
+                    <li><a href="#">Aide & Assistance</a></li>
+                    <li><a href="#">Numéros utiles</a></li>
+                    <li><a href="#">Couverture</a></li>
                     <li><a href="#">Nos Boutiques</a></li>
                     <li><a href="#">Besoin de Suggestion</a></li>
+                    <li><a href="#">Catalogue d'interconnexion</a></li>
                 </ul>
             </div>
             <div class="footer-grid-column">
-                <h5>Arnet Money</h5>
+                <h5>Privacy</h5>
                 <ul>
-                    <li><a href="#">Cataloger d'interconnexion</a></li>
-                    <li><a href="#">Numéros utiles</a></li>
+                    <li><a href="#">Online Safety</a></li>
                 </ul>
             </div>
         </div>
@@ -1547,43 +1550,67 @@
         // Initialiser les icônes Lucide
         lucide.createIcons();
 
-        // Script pour le nouveau slider
+        // Script pour le nouveau slider avec durées différentes
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const navDots = document.querySelectorAll('.nav-dot');
         const totalSlides = slides.length;
+        
+        // Configuration des durées pour chaque slide (en millisecondes)
+        // Slide 1: 8 secondes (8000 ms), autres slides: 5 secondes (5000 ms)
+        const slideDurations = [8000, 5000, 5000, 5000];
+        
+        // Variable pour le timer d'auto-play
+        let autoPlayTimer;
 
         function updateSlide(index) {
-            slides.forEach((slide,i)=>slide.classList.toggle('active', i === index));
-            navDots.forEach((dot,i)=>dot.classList.toggle('active', i === index));
+            // Arrêter le timer actuel
+            clearTimeout(autoPlayTimer);
+            
+            // Mettre à jour le slide
+            slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+            navDots.forEach((dot, i) => dot.classList.toggle('active', i === index));
             currentSlide = index;
+            
+            // Démarrer un nouveau timer avec la durée spécifique au slide
+            autoPlayTimer = setTimeout(() => {
+                updateSlide((currentSlide + 1) % totalSlides);
+            }, slideDurations[currentSlide]);
         }
 
-        document.querySelector('.arrow-btn.next').onclick = () => updateSlide((currentSlide + 1) % totalSlides);
-        document.querySelector('.arrow-btn.prev').onclick = () => updateSlide((currentSlide - 1 + totalSlides) % totalSlides);
+        // Navigation avec flèches
+        document.querySelector('.arrow-btn.next').onclick = () => {
+            updateSlide((currentSlide + 1) % totalSlides);
+        };
+        
+        document.querySelector('.arrow-btn.prev').onclick = () => {
+            updateSlide((currentSlide - 1 + totalSlides) % totalSlides);
+        };
 
-        navDots.forEach(dot=>{
+        // Navigation avec les points
+        navDots.forEach(dot => {
             dot.onclick = () => updateSlide(parseInt(dot.dataset.slide));
         });
 
-        document.addEventListener('keydown', e=>{
-            if(e.key==='ArrowRight') updateSlide((currentSlide+1)%totalSlides);
-            if(e.key==='ArrowLeft') updateSlide((currentSlide-1+totalSlides)%totalSlides);
+        // Navigation avec clavier
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowRight') updateSlide((currentSlide + 1) % totalSlides);
+            if (e.key === 'ArrowLeft') updateSlide((currentSlide - 1 + totalSlides) % totalSlides);
         });
 
-        // Auto-play carousel every 5 seconds
-        setInterval(() => {
+        // Démarrer l'auto-play avec la durée du premier slide
+        autoPlayTimer = setTimeout(() => {
             updateSlide((currentSlide + 1) % totalSlides);
-        }, 5000);
+        }, slideDurations[0]);
 
         // Menu mobile
-        document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+        document.getElementById('mobile-menu-toggle').addEventListener('click', function () {
             document.getElementById('nav-links').classList.toggle('active');
         });
 
         // Fermer le menu mobile quand on clique sur un lien
         document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', function() {
+            link.addEventListener('click', function () {
                 document.getElementById('nav-links').classList.remove('active');
             });
         });
@@ -1591,52 +1618,50 @@
         // SDK configuration (votre code existant)
         const defaultConfig = {
             main_title: "Airtel Congo",
-            slide1_title: "FORFAITS YA NGONGA",
-            slide1_text: "DES BONS PLANS DATA POUR PLUS DE VOLUME, COMPOSEZ *121*4#",
-            slide2_title: "Protection Anti-Fraude Airtel",
-            slide2_text: "Vos communications sont protégées contre les appels et messages frauduleux",
-            slide3_title: "Airtel Money",
-            slide3_text: "Envoyez de l'argent, payez vos factures et bien plus encore en toute sécurité",
-            slide4_title: "Voyagez avec Airtel Money",
-            slide4_text: "Votre voyage commence ici avec nos services de transfert internationaux",
+            slide1_title: "MY AIRTEL",
+            slide1_text: "Gérez votre compte Airtel en toute simplicité avec l'application My Airtel. Rechargez, activez des forfaits, suivez votre consommation et bien plus encore.",
+            slide2_title: "OFFRES DATA",
+            slide2_text: "Découvrez nos forfaits internet adaptés à tous vos besoins. De la data à volonté pour surfer, streamer et travailler où que vous soyez.",
+            slide3_title: "GIMAC PAY",
+            slide3_text: "Solution de paiement innovante pour faciliter vos transactions quotidiennes",
+            slide4_title: "ODU",
+            slide4_text: "ODU, votre partenaire digital pour des solutions innovantes. Découvrez nos services adaptés à la transformation numérique de votre entreprise.",
             background_color: "#000000",
             text_color: "#ffffff",
             accent_color: "#e60000"
         };
 
-        async function onConfigChange(config){
-            const fields=[["slide1-title","slide1_title"],["slide1-text","slide1_text"],
-                        ["slide2-title","slide2_title"],["slide2-text","slide2_text"],
-                        ["slide3-title","slide3_title"],["slide3-text","slide3_text"],
-                        ["slide4-title","slide4_title"],["slide4-text","slide4_text"]];
+        async function onConfigChange(config) {
+            const fields = [["slide1-title", "slide1_title"], ["slide1-text", "slide1_text"],
+            ["slide2-title", "slide2_title"], ["slide2-text", "slide2_text"],
+            ["slide3-title", "slide3_title"], ["slide3-text", "slide3_text"],
+            ["slide4-title", "slide4_title"], ["slide4-text", "slide4_text"]];
 
-            fields.forEach(([id,key])=>{
-                const el=document.getElementById(id);
-                if(el) el.textContent=config[key] || defaultConfig[key];
+            fields.forEach(([id, key]) => {
+                const el = document.getElementById(id);
+                if (el) el.textContent = config[key] || defaultConfig[key];
             });
 
-            const container=document.querySelector('.slider-container');
-            if(container) container.style.background=config.background_color || defaultConfig.background_color;
+            const container = document.querySelector('.slider-container');
+            if (container) container.style.background = config.background_color || defaultConfig.background_color;
 
-            document.querySelectorAll('.text-section').forEach(s=>{
-                s.style.color=config.text_color || defaultConfig.text_color;
+            document.querySelectorAll('.text-section').forEach(s => {
+                s.style.color = config.text_color || defaultConfig.text_color;
             });
         }
 
-        function mapToCapabilities(config){
-            return { recolorables:[], borderables:[], fontEditable:undefined, fontSizeable:undefined };
+        function mapToCapabilities(config) {
+            return { recolorables: [], borderables: [], fontEditable: undefined, fontSizeable: undefined };
         }
 
-        function mapToEditPanelValues(config){
+        function mapToEditPanelValues(config) {
             return new Map(Object.entries(config));
         }
 
-        if(window.elementSdk){
+        if (window.elementSdk) {
             window.elementSdk.init({ defaultConfig, onConfigChange, mapToCapabilities, mapToEditPanelValues });
         }
     </script>
 </body>
+
 </html>
-
-
-
