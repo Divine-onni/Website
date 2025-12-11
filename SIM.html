@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votre SIM 4G - Airtel Congo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+            font-family: Arial, sans-serif;
+            color: #444444;
+        }
+
+        .accent { color: #E30613; }
+        .accent-bg { background-color: #E30613; }
+
+        
+
+         .header-top {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 10px 0;
+        }
+
+        .header-top-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 30px;
+        }
+
+        .header-top-content a {
+            color: #666;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+
+        .header-top-content a:hover {
+            color: #d32f2f;
+        }
+
+        nav {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #e30613;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .nav-links>li {
+            position: relative;
+        }
+
+        .nav-links>li>a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            padding: 25px 0;
+            display: block;
+            transition: color 0.3s;
+            white-space: nowrap;
+        }
+
+        .nav-links>li>a:hover,
+        .nav-links>li>a.active {
+            color: #d32f2f;
+        }
+
+        .nav-links>li>a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #d32f2f;
+        }
+
+        /* Styles pour les menus déroulants de la nouvelle navigation */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            min-width: 240px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            margin-top: 10px;
+            padding: 8px 0;
+            z-index: 1001;
+        }
+
+        .nav-links>li:hover>.dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            margin-top: 0;
+        }
+
+        .dropdown-menu a {
+            padding: 12px 20px;
+            border-bottom: none;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .dropdown-menu a:hover {
+            background: rgba(211, 47, 47, 0.05);
+            color: #d32f2f;
+        }
+
+        .dropdown-menu .arrow {
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        /* Sous-menu de second niveau */
+        .sub-dropdown {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background: white;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            margin-left: 10px;
+            padding: 8px 0;
+            z-index: 1002;
+        }
+
+        .dropdown-menu li:hover>.sub-dropdown {
+            opacity: 1;
+            visibility: visible;
+            margin-left: 5px;
+        }
+
+        .sub-dropdown a {
+            padding: 10px 20px;
+            font-size: 13px;
+            display: block;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .sub-dropdown a:hover {
+            background: rgba(211, 47, 47, 0.05);
+            color: #d32f2f;
+        }
+
+        /* Menu à 3 niveaux */
+        .sub-dropdown li {
+            position: relative;
+        }
+
+        .third-level {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background: white;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            margin-left: 10px;
+            padding: 8px 0;
+            z-index: 1003;
+        }
+
+        .sub-dropdown li:hover>.third-level {
+            opacity: 1;
+            visibility: visible;
+            margin-left: 5px;
+        }
+
+        .third-level a {
+            padding: 10px 20px;
+            font-size: 13px;
+            display: block;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .third-level a:hover {
+            background: rgba(211, 47, 47, 0.05);
+            color: #d32f2f;
+        }
+
+        /* Styles pour les éléments spéciaux en rouge */
+        .services-internet {
+            color: #d32f2f !important;
+            font-weight: bold;
+        }
+
+        .roaming {
+            color: #d32f2f !important;
+            font-weight: bold;
+        }
+
+        /* Styles pour les sous-menus supplémentaires */
+        .dropdown-menu .has-submenu {
+            position: relative;
+        }
+
+        .dropdown-menu .has-submenu>a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dropdown-menu .sub-level {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background: white;
+            min-width: 220px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 0.5rem 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-menu .has-submenu:hover .sub-level {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        /* Animation pour l'indicateur de sous-menu */
+        .arrow {
+            font-size: 0.875rem;
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .has-submenu:hover .arrow {
+            transform: rotate(90deg);
+        }
+
+        /* Mobile menu button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                padding-left: 1rem;
+            }
+
+            .sub-dropdown,
+            .third-level {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                padding-left: 1rem;
+            }
+        }
+
+
+         /* Footer */
+        footer {
+            background: white;
+            color: white;
+            padding: 60px 80px 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #333;
+        }
+
+        .footer-brand p {
+            color: black;
+            font-size: 14px;
+            line-height: 1.8;
+            margin: 20px 0 25px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .social-link:hover {
+            background: rgba(226, 12, 24);
+        }
+
+        .footer-column h4 {
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            color: black;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul li a {
+            color: #999;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: rgba(226, 12, 24);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 30px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+
+        .footer-bottom p {
+            color: #666;
+            font-size: 13px;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .footer-bottom-links a {
+            color: #666;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+
+        .footer-bottom-links a:hover {
+            color: #e60000;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #e60000;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 20px;
+            box-shadow: 0 5px 20px rgba(230, 0, 0, 0.4);
+            transition: transform 0.3s;
+            z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Styles spécifiques pour le footer selon l'image */
+        .footer-logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: rgba(226, 12, 24);
+            margin-bottom: 15px;
+        }
+
+        .footer-contact-info {
+            color: black;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        .copyright-section {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: black;
+            font-size: 13px;
+        }
+
+        .footer-grid-section {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-grid-column h5 {
+            color: black;
+            font-size: 14px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .footer-grid-column ul {
+            list-style: none;
+        }
+
+        .footer-grid-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-grid-column ul li a {
+            color: black;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+
+        .footer-grid-column ul li a:hover {
+            color: rgba(226, 12, 24);
+        }
+
+        .footer-bottom-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-bottom-links-extended {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .footer-bottom-links-extended a {
+            color: black;
+            text-decoration: none;
+            font-size: 12px;
+            transition: color 0.3s;
+        }
+
+        .footer-bottom-links-extended a:hover {
+            color: rgba(226, 12, 24);
+        }
+
+        /* Animations conservées */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in-up { animation: fadeInUp .8s ease-out forwards; opacity: 0; }
+
+        /* Footer réduit */
+        footer {
+           
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        footer p, footer a { color: #cccccc; }
+        footer a:hover { color: #E30613; }
+    </style>
+</head>
+
+<body class="h-full">
+
+   <!-- Barre de navigation globale - NOUVELLE VERSION -->
+    <div class="header-top">
+        <div class="header-top-content">
+            <a href="index.html">PARTICULIER</a>
+            <a href="entreprise.html">ENTREPRISE</a>
+            <a href="broadband.html">BROADBAND</a>
+            <a href="airtel-money.html">AIRTEL MONEY PORTAL</a>
+            <a href="about.html">À PROPOS DE NOUS</a>
+        </div>
+    </div>
+
+    <!-- Navigation Principale -->
+    <nav class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <!-- Logo Airtel -->
+                <a href="index.html" class="logo">
+                    <img src="image/Airtel_Logo.jpg" alt="Airtel Congo" class="logo-img">
+                    airtel
+                </a>
+
+                <button class="mobile-menu-btn" id="mobile-menu-toggle">
+                    <i data-lucide="menu"></i>
+                </button>
+
+                <ul class="nav-links" id="nav-links">
+                    <!-- PAYEZ ET RECHARGEZ -->
+                    <li>
+                        <a href="" class="active">PAYEZ ET RECHARGEZ</a>
+                        <ul class="dropdown-menu">
+                            <!-- Postpayé avec sous-menu -->
+                            <li class="has-submenu">
+                                <a href="#">Postpayé <span class="arrow">›</span></a>
+                                <ul class="sub-level">
+                                    <!-- CORRECTION : Lien vers la page de paiement -->
+                                    <li><a href="Payez.html">Paiement de facture en ligne</a></li>
+                                </ul>
+                            </li>
+
+                            <!-- Prépayé avec sous-menu -->
+                            <li class="has-submenu">
+                                <a href="#">Prépayé <span class="arrow">›</span></a>
+                                <ul class="sub-level">
+                                    <!-- CORRECTION : Lien vers la page de recharge -->
+                                    <li><a href="recharge.html">Rechargez un compte prépayé</a></li>
+                                    
+                                    <!-- CORRECTION : Lien vers la page d'activation forfait -->
+                                    <li><a href="forfait.html">Activez un forfait Internet</a></li>
+                                </ul>
+                            </li>
+
+                            <!-- Broadband (sans sous-menu) -->
+                            <!-- CORRECTION : Lien vers la page broadband -->
+                            <li><a href="broadband.html">Broadband</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- SERVICES -->
+                    <li>
+                        <a href="services.html">SERVICES</a>
+                        <ul class="dropdown-menu">
+                            <!-- PREPAYÉ - Niveau 1 -->
+                            <li>
+                                <a href="#">Prepayé <span class="arrow">›</span></a>
+                                <ul class="sub-dropdown">
+                                    <!-- Appels & SMS - Niveau 2 -->
+                                    <li>
+                                        <a href="#">Appels & SMS <span class="arrow">›</span></a>
+                                        <ul class="third-level">
+                                            <li><a href="appel locaux.html">Appels locaux</a></li>
+
+                                            <li><a href="SMS.html">SMS</a></li>
+                                        </ul>
+                                    </li>
+                                    <!-- Services Internet - Niveau 2 -->
+                                    <li>
+                                        <a href="#" class="services-internet">Services Internet <span
+                                                class="arrow">›</span></a>
+                                        <ul class="third-level">
+                                            <li><a href="forfait internet.html">Forfaits internet</a></li>
+                                            <li><a href="faq-internet.html">Foire aux questions</a></li>
+                                        </ul>
+                                    </li>
+                                    <!-- Roaming - Niveau 2 -->
+                                    <li>
+                                        <a href="#" class="roaming">Roaming <span class="arrow">›</span></a>
+                                        <ul class="third-level">
+                                            <li><a href="airtelworld.html">Airtel world</a></li>
+                                            <li><a href="one airtel.html">Réseau Unique</a></li>
+                                            <li><a href="free roaming.html">Free Roaming</a></li>
+                                        </ul>
+                                    </li>
+                                    <!-- Services à valeur ajoutée - Niveau 2 -->
+                                    <li>
+                                        <a href="VAS.html">Services à valeur ajoutée</a>
+                                    </li>
+                                    <!-- Taxi Connect - Niveau 2 -->
+                                    <li><a href="Taxi-connect.html">Taxi Connect</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- NOS AGENCES -->
+                    <li>
+                        <a href="Nos Agences.html">NOS AGENCES</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="airtel-shop.html">Airtel Shop</a></li>
+                            <li><a href="distributeurs.html">Distributeurs</a></li>
+                            <li><a href="couverture-reseau.html">Couverture réseau</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- AIRTEL MONEY -->
+                    <li>
+                        <a href="airtel-money.html">AIRTEL MONEY</a>
+                    </li>
+
+                    <!-- BESOIN D'AIDE -->
+                    <li>
+                        <a href="aide.html">BESOIN D'AIDE</a>
+                    </li>
+
+                    <!-- E-SIM -->
+                    <li><a href="esim.html">E-SIM</a></li>
+
+                    <!-- PROMOTIONS -->
+                    <li>
+                        <a href="promotions.html">PROMO KELASI</a>
+                    </li>
+                </ul>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="max-w-7xl mx-auto px-6 py-16 fade-in-up">
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+            <div class="flex-1">
+                <h1 class="text-6xl lg:text-7xl font-black accent mb-4">Votre SIM 4G</h1>
+                <div class="h-2 w-32 rounded-full mb-6 accent-bg"></div>
+                <p class="text-xl text-gray-700 max-w-xl">
+                    Découvrez la puissance de la 4G avec Airtel Congo. Des offres exclusives, une couverture optimale et des bonus exceptionnels.
+                </p>
+                <button class="mt-8 px-8 py-3 rounded-full font-bold text-white accent-bg">
+                    Commander maintenant
+                </button>
+            </div>
+
+            <div class="flex-1 flex justify-center">
+                <svg class="w-64 h-64 lg:w-80 lg:h-80" viewBox="0 0 200 200">
+                    <defs>
+                        <linearGradient id="simGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#E30613" />
+                            <stop offset="100%" stop-color="#ff4757" />
+                        </linearGradient>
+                    </defs>
+                    <rect x="50" y="30" width="100" height="140" rx="10" fill="url(#simGradient)" />
+                    <path d="M 70 50 L 70 70 L 90 70 L 90 50 Z M 110 50 L 110 70 L 130 70 L 130 50 Z" fill="white" opacity="0.9" />
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- POURQUOI CHOISIR -->
+    <section class="max-w-7xl mx-auto px-6 py-12 fade-in">
+    <div class="bg-white rounded-3xl p-10 shadow-md border border-gray-100">
+
+        <div class="grid lg:grid-cols-2 gap-10">
+
+            <!-- Texte -->
+            <div>
+                <h2 class="text-3xl font-bold accent mb-8">Pourquoi choisir Airtel Congo ?</h2>
+
+                <ul class="space-y-6">
+                    <li class="flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-full flex items-center justify-center accent-bg">
+                            <svg class="w-6 h-6" fill="white" viewBox="0 0 20 20">
+                                <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                            </svg>
+                        </div>
+                        <p><strong>100% de bonus</strong> sur les forfaits internet 7 et 30 jours dès 500 FCFA.</p>
+                    </li>
+
+                    <li class="flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-full flex items-center justify-center accent-bg">
+                            <svg class="w-6 h-6" fill="white" viewBox="0 0 20 20">
+                                <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                            </svg>
+                        </div>
+                        <p>Les <strong>meilleurs forfaits data et appels</strong> tous réseaux.</p>
+                    </li>
+
+                    <li class="flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-full flex items-center justify-center accent-bg">
+                            <svg class="w-6 h-6" fill="white" viewBox="0 0 20 20">
+                                <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                            </svg>
+                        </div>
+                        <p>Des <strong>offres SMS</strong> tous réseaux à prix accessibles.</p>
+                    </li>
+                </ul>
+
+                <p class="text-center text-2xl font-bold accent mt-10">
+                    Avec Airtel, reste dans le mood.
+                </p>
+            </div>
+
+            <!-- Image -->
+            <div class="flex justify-center items-center">
+                <img 
+                    src="image/How to Find Your airtel number.jpeg"
+                    alt="Couverture réseau Airtel"
+                    class="rounded-3xl shadow-lg w-full max-w-md"
+                >
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+    <!-- Section Image avec Informations (REDUITE) -->
+    <section class="max-w-7xl mx-auto px-6 py-8 fade-in-up">
+        <div class="bg-white rounded-2xl overflow-hidden shadow-lg">
+            <div class="flex flex-col lg:flex-row">
+                <!-- Contenu texte -->
+                <div class="lg:w-1/2 p-6 lg:p-8">
+                    <h2 class="text-2xl font-bold accent mb-4">Smartphone + 60GB Offerts</h2>
+                    <div class="space-y-3">
+                        <div class="flex items-start">
+                            <div class="w-6 h-6 rounded-full flex items-center justify-center accent-bg mr-3 flex-shrink-0">
+                                <svg class="w-4 h-4" fill="white" viewBox="0 0 20 20">
+                                    <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                                </svg>
+                            </div>
+                            <p class="text-gray-700 text-base">Obtenez <strong>60GB de data gratuits</strong> avec l'achat de tout smartphone</p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-6 h-6 rounded-full flex items-center justify-center accent-bg mr-3 flex-shrink-0">
+                                <svg class="w-4 h-4" fill="white" viewBox="0 0 20 20">
+                                    <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                                </svg>
+                            </div>
+                            <p class="text-gray-700 text-base">5GB chaque semaine pendant 3 mois</p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-6 h-6 rounded-full flex items-center justify-center accent-bg mr-3 flex-shrink-0">
+                                <svg class="w-4 h-4" fill="white" viewBox="0 0 20 20">
+                                    <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                                </svg>
+                            </div>
+                            <p class="text-gray-700 text-base">Bonus additionnel de 100% sur les forfaits internet</p>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <p class="text-lg font-bold accent mb-3">Pour s'enrôler :</p>
+                        <div class="inline-block bg-gray-100 text-gray-800 px-4 py-2 rounded-lg font-mono text-base">
+                            *121*20#
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Image -->
+                <div class="lg:w-1/2 bg-gray-50 p-6 lg:p-8 flex items-center justify-center">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                             alt="Smartphone avec SIM Airtel" 
+                             class="rounded-xl shadow-md w-full max-w-xs">
+                        <div class="absolute -bottom-2 -right-2 bg-red-600 text-white px-4 py-1 rounded-full font-bold text-sm">
+                            OFFRE EXCLUSIVE
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="max-w-7xl mx-auto px-6 py-12 text-center fade-in-up">
+        <p class="text-xl font-bold">RENDEZ-VOUS DANS TOUS LES SHOPS TECHNO ET ITEL PARTENAIRES</p>
+    </section>
+
+     <!-- Footer -->
+    <footer>
+        <div class="footer-grid-section">
+            <div class="footer-grid-column">
+                <h5>L'entreprise</h5>
+                <ul>
+                    <li><a href="#">À propos d'Airtel</a></li>
+                    <li><a href="#">Carrière</a></li>
+                    <li><a href="#">Actualités</a></li>
+                    <li><a href="#">Responsabilité sociale (CSR)</a></li>
+                </ul>
+            </div>
+            <div class="footer-grid-column">
+                <h5>Nos services</h5>
+                <ul>
+                    <li><a href="#">Programmes</a></li>
+                    <li><a href="#">Airtel Money</a></li>
+                </ul>
+            </div>
+            <div class="footer-grid-column">
+                <h5>Support & Contact</h5>
+                <ul>
+                    <li><a href="#">Aide & Assistance</a></li>
+                    <li><a href="#">Numéros utiles</a></li>
+                    <li><a href="#">Couverture</a></li>
+                    <li><a href="#">Nos Boutiques</a></li>
+                    <li><a href="#">Besoin de Suggestion</a></li>
+                    <li><a href="#">Catalogue d'interconnexion</a></li>
+                </ul>
+            </div>
+            <div class="footer-grid-column">
+                <h5>Privacy</h5>
+                <ul>
+                    <li><a href="#">Online Safety</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom-section">
+            <div class="footer-bottom-links-extended">
+                <a href="#">NOUS CONTRACTER</a>
+                <a href="#">DROITS D'AUTEUR</a>
+                <a href="#">TERMES ET CONDITIONS</a>
+                <a href="#">AU TERMES ET CONDITIONS GSM</a>
+                <a href="#">AVIS DE CONFIDENTIALITÉ</a>
+            </div>
+        </div>
+
+        <div class="copyright-section">
+            <p>© 2024 Arnet Africa. Tous les droits sont réservés.</p>
+            <p style="margin-top: 10px;">RETOUR AU SOMMET</p>
+        </div>
+
+        <div class="social-links" style="justify-content: center; margin-top: 20px;">
+            <a href="#" class="social-link">T</a>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top">↑</a>
+
+</body>
+</html>
