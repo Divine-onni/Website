@@ -9,6 +9,7 @@
     <script src="/_sdk/data_sdk.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
+     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
         * {
@@ -18,7 +19,9 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+           
+    font-family: 'Poppins', sans-serif;
+
             background-color: #f5f5f5;
             color: #333;
         }
@@ -758,7 +761,7 @@
         .service-card {
             background: white;
             border-radius: 20px;
-            padding: 40px 30px;
+            padding: 60px 30px;
             text-align: center;
             transition: all 0.3s ease;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
@@ -782,19 +785,7 @@
             box-shadow: 0 15px 30px rgba(230, 0, 0, 0.2);
         }
 
-        .service-card-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 25px;
-            background: #fff5f5;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-            color: rgba(226, 12, 24);
-        }
-
+        
         .service-card h3 {
             font-size: 20px;
             color: rgba(226, 12, 24);
@@ -803,12 +794,6 @@
             font-weight: bold;
         }
 
-        .service-card p {
-            font-size: 14px;
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
 
         .service-card-link {
             color: rgba(226, 12, 24);
@@ -1423,68 +1408,89 @@
         </div>
     </section>
 
-    <!-- Section Découvrez nos services - MODIFIÉE -->
-    <section class="discover-section">
-        <h2>Découvrez <span>nos services</span></h2>
-        <div class="services-cards">
-            <!-- Ligne 1 : 4 premières cartes -->
-            <div class="service-card">
-                <div class="service-card-icon">🌐</div>
-                <h3>Internet</h3>
-                <p>Profitez de nos forfaits internet haut débit pour une connexion rapide et fiable partout au Congo.
-                </p>
-                <a href="#" class="service-card-link">Savoir plus →</a>
-            </div>
-            <div class="service-card">
-                <div class="service-card-icon">📞</div>
-                <h3>Appel</h3>
-                <p>Des forfaits d'appels avantageux pour communiquer avec vos proches au Congo et à l'international.</p>
-                <a href="#" class="service-card-link">Savoir plus →</a>
-            </div>
-            <div class="service-card">
-                <div class="service-card-icon">📡</div>
-                <h3>HBB</h3>
-                <p>Home BroadBand - La connexion internet fixe pour votre maison avec des offres adaptées à vos besoins.
-                </p>
-                <a href="#" class="service-card-link">Savoir plus →</a>
-            </div>
-            <div class="service-card">
-                <div class="service-card-icon">💳</div>
-                <h3>Airtel Money</h3>
-                <p>Envoyez et recevez de l'argent, payez vos factures et effectuez des achats en toute sécurité.</p>
-                <a href="#" class="service-card-link">Savoir plus →</a>
-            </div>
+    <!-- Section Découvrez nos services -->
+<div class="discover-section">
+    <h2> <span> Nos services</span></h2>
 
-            <!-- Ligne 2 : 4 dernières cartes -->
-            <div class="service-card">
-                <div class="service-card-icon">📱</div>
-                <h3>My Airtel App</h3>
-                <p>Tous nos services à portée de main. Gérez votre compte, rechargez et suivez votre consommation
-                    facilement.</p>
-                <a href="#" class="service-card-link">Savoir plus →</a>
-            </div>
-            <div class="service-card">
-                <div class="service-card-icon">🎵</div>
-                <h3>Services à valeur ajoutée</h3>
-                <p>Musique, jeux, actualités et bien plus encore. Découvrez tous nos services de divertissement.</p>
-                <a href="#" class="service-card-link">Savoir plus →</a>
-            </div>
-            <div class="service-card">
-                <div class="service-card-icon">✈️</div>
-                <h3>Roaming</h3>
-                <p>Restez connecté même à l'étranger avec nos offres roaming avantageuses dans de nombreux pays.</p>
-                <a href="#" class="service-card-link">Savoir plus →</a>
-            </div>
-            <div class="service-card">
-                <div class="service-card-icon">📲</div>
-                <h3>Sim Airtel</h3>
-                <p>La meilleure SIM du marché. Passez à la 4G et profitez d'une connexion ultra rapide avec nos SIM
-                    Power.</p>
-                <a href="#" class="service-card-link">Savoir plus →</a>
-            </div>
+    <div class="services-cards">
+
+        <!-- SERVICE 1 -->
+        <div class="service-card">
+            <a href="forfait internet.html">
+                <img src="image/Transfert inter Afrique .jpeg" alt="Service 1" class="w-full h-64 object-cover rounded-lg mb-4">
+            </a>
+            
+            <h3>Forfaits Internet</h3>
+            <a href="forfait internet.html" class="service-card-link">En savoir plus →</a>
         </div>
-    </section>
 
+        <!-- SERVICE 2 -->
+        <div class="service-card">
+            <a href="appel locaux.html">
+                <img src="image/My Airtel App2.jpeg" alt="Service 2" class="w-full h-64 object-cover rounded-lg mb-4">
+            </a>
+           
+            <h3>Forfaits Appel</h3>
+            <a href="appel locaux.html" class="service-card-link">En savoir plus →</a>
+        </div>
+
+        <!-- SERVICE 3 -->
+        <div class="service-card">
+            <a href="https://www.airtel.cg/broadband-discover-new">
+                <img src="image/Offre Routeur3.jpeg" alt="Service 3" class="w-full h-64 object-cover rounded-lg mb-4">
+            </a>
+            
+            <h3>HBB</h3>
+            <a href="https://www.airtel.cg/broadband-discover-new" class="service-card-link">En savoir plus →</a>
+        </div>
+
+        <!-- SERVICE 4 -->
+        <div class="service-card">
+            <a href="airtel-money.html">
+                <img src="image/Airtel_Money.png" alt="Service 4" class="w-full h-64 object-cover rounded-lg mb-4">
+            </a>
+            <h3>Airtel Money</h3>
+            <a href="airtel-money.html" class="service-card-link">En savoir plus →</a>
+        </div>
+
+        <!-- SERVICE 5 -->
+        <div class="service-card">
+            <a href="https://play.google.com/store/apps/details?id=com.airtel.africa.selfcare&hl=fr">
+                <img src="image/1.png" alt="Service 5" class="w-full h-64 object-cover rounded-lg mb-4">
+            </a>
+            <h3>My Airtel App</h3>
+            <a href="https://play.google.com/store/apps/details?id=com.airtel.africa.selfcare&hl=fr" class="service-card-link">En savoir plus →</a>
+        </div>
+
+        <!-- SERVICE 6 -->
+        <div class="service-card">
+            <a href="VAS.html">
+                <img src="image/Airtel Money voyage2.jpeg" alt="Service 6" class="w-full h-64 object-cover rounded-lg mb-4">
+            </a>
+            <h3>Services à Valeur Ajouter </h3>
+            <a href="VAS.html" class="service-card-link">En savoir plus →</a>
+        </div>
+
+        <!-- SERVICE 7 -->
+        <div class="service-card">
+            <a href="airtelworld.html">
+                <img src="image/Airtel_Money.png" alt="Service 7" class="w-full h-64 object-cover rounded-lg mb-4">
+            </a>
+            <h3>Roaming</h3>
+            <a href="airtelworld.html" class="service-card-link">En savoir plus →</a>
+        </div>
+
+        <!-- SERVICE 8 -->
+        <div class="service-card">
+            <a href="service8.html">
+                <img src="image/sim.webp" alt="Service 8" class="w-full h-64 object-cover rounded-lg mb-4">
+            </a>
+            <h3>Sim Airtel</h3>
+            <a href="service8.html" class="service-card-link">En savoir plus →</a>
+        </div>
+
+    </div>
+</div>
     <!-- Footer -->
     <footer>
         <div class="footer-grid-section">
